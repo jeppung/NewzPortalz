@@ -27,6 +27,10 @@
       "userId": 2,
       "title": "Lorem ipsum dolor amet",
       "slug": "lorem-ipsum-dolor-amet",
+      "description": "This is a lorem description",
+      "body": "Lorem ipsum dolor amet Lorem ipsum dolor amet Lorem ipsum dolor amet Lorem ipsum dolor amet Lorem ipsum dolor amet Lorem ipsum dolor amet Lorem ipsum dolor amet ",
+      "likes": 0,
+      "shares": 0,
       "isPremium": false
     }
   ]
