@@ -1,3 +1,4 @@
+import { setCookie } from 'cookies-next'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
@@ -37,7 +38,8 @@ const Login = () => {
             const data = await res.json() as IUser[]
             if (data.length === 0) return setError({ status: true, message: "Email/password is invalid" })
 
-            router.push("/")
+            setCookie("userData", data[0])
+            data[0].isAdmin ? router.push("/admin") : router.push("/")
         } catch (e) {
             return setError({ status: true, message: "An error occured" })
         }
