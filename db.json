@@ -7,6 +7,7 @@
             "password": "admin123",
             "address": "Jl. somewhere M4/13",
             "phone": 123123123123,
+            "subscription": "premium",
             "isAdmin": true
         },
         {
@@ -16,6 +17,7 @@
             "password": "joshua123",
             "address": "Jl. somewhere only me know M7/17",
             "phone": 6281381237654,
+            "subscription": "free",
             "isAdmin": false
         }
     ],
