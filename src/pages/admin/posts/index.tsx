@@ -3,7 +3,7 @@ import PostModal from '@/components/postModal'
 import { IUser } from '@/pages/login'
 import React, { useEffect, useState } from 'react'
 
-interface IPost {
+export interface IPost {
     id?: number
     userId: number
     title: string
@@ -53,6 +53,7 @@ const AdminPosts = () => {
         }
     }
 
+
     useEffect(() => {
         getPostsData()
     }, [])
@@ -60,7 +61,10 @@ const AdminPosts = () => {
     return (
         <>
             {
-                isModal && <PostModal onClose={() => setIsModal(false)}/>
+                isModal && <PostModal onClose={() => setIsModal(false)} onSuccess={() => {
+                    setIsModal(false)
+                    getPostsData()
+                }}/>
             }
             <Navbar />
             <main className='max-w-7xl mx-auto pt-10'>
