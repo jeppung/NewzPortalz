@@ -1,4 +1,5 @@
 import Navbar from '@/components/navbar'
+import PostModal from '@/components/postModal'
 import { IUser } from '@/pages/login'
 import React, { useEffect, useState } from 'react'
 
@@ -7,6 +8,10 @@ interface IPost {
     userId: number
     title: string
     slug: string
+    description: string
+    body: string
+    likes: number
+    shares: number
     isPremium: boolean
     user: IUser
 }
@@ -14,7 +19,8 @@ interface IPost {
 const AdminPosts = () => {
 
     const [posts, setPosts] = useState<IPost[]>([])
-
+    const [isModal, setIsModal] = useState<boolean>(false)
+    
     const getPostsData = async () => {
         try {
             const res = await fetch("http://localhost:6969/posts?_expand=user")
@@ -53,19 +59,21 @@ const AdminPosts = () => {
 
     return (
         <>
+            {
+                isModal && <PostModal onClose={() => setIsModal(false)}/>
+            }
             <Navbar />
             <main className='max-w-7xl mx-auto pt-10'>
                 <div className='flex justify-between'>
                     <h1 className='text-3xl'>Posts</h1>
-                    <button className='bg-yellow-500 py-1 px-2 rounded-lg text-white text-sm'>Create Post</button>
+                    <button onClick={() => setIsModal(true)} className='bg-yellow-500 py-1 px-2 rounded-lg text-white text-sm'>Create Post</button>
                 </div>
-
                 <section className='mt-5 '>
                     <table className='w-full table border border-collapse'>
                         <thead className='bg-green-500 text-white'>
                             <tr>
                                 <th className='p-2 text-start'>No</th>
-                                <th className='p-2 text-start'>Post</th>
+                                <th className='p-2 text-start'>Title</th>
                                 <th className='p-2 text-start'>Slug</th>
                                 <th className='p-2 text-start'>Author</th>
                                 <th className='p-2 text-start'>Actions</th>
