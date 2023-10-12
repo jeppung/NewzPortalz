@@ -15,7 +15,7 @@ export interface IUser {
     password: string
     address: string
     phone: number
-    referral: number
+    subscription: string
     isAdmin: boolean
 }
 
