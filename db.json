@@ -7,8 +7,25 @@
             "password": "admin123",
             "address": "Jl. somewhere M4/13",
             "phone": 123123123123,
-            "referral": "onlyadmin",
             "isAdmin": true
+        },
+        {
+            "id": 2,
+            "name":  "Joshua",
+            "email": "joshua@mail.com",
+            "password": "joshua123",
+            "address": "Jl. somewhere only me know M7/17",
+            "phone": 6281381237654,
+            "isAdmin": false
+        }
+    ],
+    "posts": [
+        {
+            "id": 1,
+            "userId": 2,
+            "title": "Lorem ipsum dolor amet",
+            "slug": "lorem-ipsum-dolor-amet",
+            "isPremium": false
         }
     ]
 }
