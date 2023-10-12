@@ -1,0 +1,14 @@
+{
+    "users": [
+        {
+            "id": 1,
+            "name":  "Admin",
+            "email": "admin@mail.com",
+            "password": "admin123",
+            "address": "Jl. somewhere M4/13",
+            "phone": 123123123123,
+            "referral": "onlyadmin",
+            "isAdmin": true
+        }
+    ]
+}

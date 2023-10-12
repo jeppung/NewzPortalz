@@ -1,0 +1,4 @@
+{
+    "/auth/login?email=:email&password=:password": "/users?email=:email&password=:password",
+    "/auth/user/:id": "/users/:id"
+}
