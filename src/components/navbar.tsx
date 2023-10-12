@@ -23,7 +23,7 @@ const Navbar = () => {
     }
 
     return (
-        <header className='bg-red-500 py-2 max-w-7xl mx-auto flex justify-between items-center'>
+        <header className='py-2 max-w-7xl mx-auto flex justify-between items-center'>
             <h1 className='text-3xl font-bold'>NewzPortalz</h1>
             <div>
                 <nav className='flex space-x-5'>

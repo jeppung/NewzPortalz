@@ -1,33 +1,33 @@
 {
-    "users": [
-        {
-            "id": 1,
-            "name":  "Admin",
-            "email": "admin@mail.com",
-            "password": "admin123",
-            "address": "Jl. somewhere M4/13",
-            "phone": 123123123123,
-            "subscription": "premium",
-            "isAdmin": true
-        },
-        {
-            "id": 2,
-            "name":  "Joshua",
-            "email": "joshua@mail.com",
-            "password": "joshua123",
-            "address": "Jl. somewhere only me know M7/17",
-            "phone": 6281381237654,
-            "subscription": "free",
-            "isAdmin": false
-        }
-    ],
-    "posts": [
-        {
-            "id": 1,
-            "userId": 2,
-            "title": "Lorem ipsum dolor amet",
-            "slug": "lorem-ipsum-dolor-amet",
-            "isPremium": false
-        }
-    ]
+  "users": [
+    {
+      "id": 1,
+      "name": "Admin",
+      "email": "admin@mail.com",
+      "password": "admin123",
+      "address": "Jl. somewhere M4/13",
+      "phone": 123123123123,
+      "subscription": "free",
+      "isAdmin": true
+    },
+    {
+      "id": 2,
+      "name": "Joshua",
+      "email": "joshua@mail.com",
+      "password": "joshua123",
+      "address": "Jl. somewhere only me know M7/17",
+      "phone": 6281381237654,
+      "subscription": "free",
+      "isAdmin": false
+    }
+  ],
+  "posts": [
+    {
+      "id": 1,
+      "userId": 2,
+      "title": "Lorem ipsum dolor amet",
+      "slug": "lorem-ipsum-dolor-amet",
+      "isPremium": false
+    }
+  ]
 }

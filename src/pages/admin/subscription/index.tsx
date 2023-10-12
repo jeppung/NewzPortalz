@@ -1,5 +1,6 @@
 import Navbar from '@/components/navbar'
 import { IUser } from '@/pages/login'
+import { error } from 'console'
 import React, { useEffect, useState } from 'react'
 
 const AdminSubscription = () => {
@@ -19,10 +20,36 @@ const AdminSubscription = () => {
         }
     }
 
+    const deactiveHandler = async (user: IUser) => {
+        let isConfirm = confirm(`Are you sure to deactivate subscription for ${user.name} ?`)
+        if(isConfirm) {
+            try{
+                const res = await fetch(`http://localhost:6969/users/${user.id}`, {
+                    method: "PATCH",
+                    body: JSON.stringify({
+                        subscription: "free"
+                    }),
+                    headers: {
+                        "Content-type": "application/json"
+                    }
+                })
+                if(!res.ok){
+                    return alert("An error has occured")
+                }
+                let relatedUser = users.find((data) => data.id === user.id)
+                relatedUser!.subscription = "free"
+                setUsers([...users])
+                return
+            }catch(e){
+                return alert("An error has occured")
+            }
+        }
+        return
+    }
+
     useEffect(() => {
         getUserData()
     }, [])
-
 
     return (
         <>
@@ -33,17 +60,24 @@ const AdminSubscription = () => {
                 <section className='mt-5 '>
                     <table className='w-full table border border-collapse'>
                         <thead className='bg-green-500 text-white'>
-                            <td className='p-2'><th>Name</th></td>
-                            <td className='p-2'><th>Subscription</th></td>
-                            <td className='p-2'><th>Actions</th></td>
+                            <tr>
+                                <th className='p-2 text-start'>No</th>
+                                <th className='p-2 text-start'>Name</th>
+                                <th className='p-2 text-start'>Subscription</th>
+                                <th className='p-2 text-start'>Actions</th>
+                            </tr>
                         </thead>
                         <tbody>
                             {
-                                users.map(user => {
+                                users.map((user, i) => {
                                     return (
-                                        <tr>
+                                        <tr key={i} className='border'>
+                                            <td className='p-2'>{i+1}</td>
                                             <td className='p-2'>{user.name}</td>
                                             <td className='p-2'>{user.subscription}</td>
+                                            {
+                                                user.subscription === "premium" && <td><button onClick={() => deactiveHandler(user)} className='bg-red-500 py-1 px-2 rounded-lg text-white text-sm'>Deactive</button></td>
+                                            }
                                         </tr>
                                     )
                                 })
