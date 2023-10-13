@@ -46,6 +46,7 @@ const PostModal = ({ onClose, onSuccess, type, initialData }: IPostModalProps) =
 
     const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
+        console.log(body)
         let thumbnailUrl = ""
 
         try {

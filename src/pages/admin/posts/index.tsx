@@ -1,6 +1,7 @@
 import Navbar from '@/components/navbar'
 import PostModal from '@/components/postModal'
 import { IUser } from '@/pages/login'
+import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 
 export interface IPost {
@@ -101,7 +102,7 @@ const AdminPosts = () => {
                                             <td className='p-2'>{post.user.name}</td>
                                             <td>
                                                 <div className='flex justify-around'>
-                                                    <button>see</button>
+                                                    <Link href={`/posts/${post.slug}`}>See</Link>
                                                     <button onClick={() => setModal({ isModal: true, type: 'edit', initialData: post })}>edit</button>
                                                     <button onClick={() => deleteHandler(post)}>del</button>
                                                 </div>
