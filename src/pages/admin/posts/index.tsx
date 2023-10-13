@@ -9,6 +9,7 @@ export interface IPost {
     title: string
     slug: string
     description: string
+    thumbnail: string
     body: string
     likes: number
     shares: number

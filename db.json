@@ -33,6 +33,18 @@
       "likes": 0,
       "shares": 0,
       "isPremium": false
+    },
+    {
+      "userId": 1,
+      "title": "Crazy Little Thing Called Love",
+      "description": "This is a story about me and you",
+      "thumbnail": "http://res.cloudinary.com/dylzfyn4b/image/upload/v1697171084/jiu7yhkenenhfmizsynb.jpg",
+      "body": "<p>Lorem&nbsp;</p>\n<p>&nbsp;</p>\n<p><strong>Ipsum</strong></p>\n<p>Dolor</p>\n<p><em>Amet</em></p>",
+      "isPremium": true,
+      "likes": 0,
+      "shares": 0,
+      "slug": "crazy-little-thing-called-love",
+      "id": 2
     }
   ]
 }

@@ -8,6 +8,10 @@ interface IPostModalProps {
     onSuccess: (data: Omit<IPost, "user">) => void
 }
 
+interface IUploadImage {
+    url: string
+}
+
 const PostModal = ({ onClose, onSuccess }: IPostModalProps) => {
     const [body, setBody] = useState("")
     const [title, setTitle] = useState<string>("")
@@ -19,13 +23,41 @@ const PostModal = ({ onClose, onSuccess }: IPostModalProps) => {
         return title.toLowerCase().split(" ").join("-")
     }
 
+    const photoUploadHandler = async (): Promise<IUploadImage> => {
+        const formData = new FormData()
+        formData.append("file", image!)
+        formData.append("upload_preset", "zcjxhynp")
+
+        try {
+            const res = await fetch("https://api.cloudinary.com/v1_1/dylzfyn4b/upload", {
+                method: "POST",
+                body: formData
+            })
+            if (!res.ok) {
+                throw new Error("An error has occured")
+            }
+            return res.json()
+        } catch (e) {
+            throw new Error("An error has occured")
+        }
+    }
+
     const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
+        let thumbnailUrl = ""
+
+        try {
+            thumbnailUrl = (await photoUploadHandler()).url
+        } catch (e) {
+            return alert("Error uploading thumbnail")
+        }
+
 
         let data: Omit<IPost, "user"> = {
             userId: 1,
             title: title,
             description: description,
+            thumbnail: thumbnailUrl,
             body: body,
             isPremium: type === "premium" ? true : false,
             likes: 0,
@@ -43,7 +75,6 @@ const PostModal = ({ onClose, onSuccess }: IPostModalProps) => {
             })
             if (!res.ok) return alert("An error has occured")
 
-            console.log(data, "success")
             onSuccess(data)
         } catch (e) {
             return alert("An error has occured")
