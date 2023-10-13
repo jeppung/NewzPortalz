@@ -23,16 +23,18 @@ const Navbar = () => {
     }
 
     return (
-        <header className='py-2 max-w-7xl mx-auto flex justify-between items-center'>
+        <header className='bg-[#112D4E]'>
+            <div className='bg-[#112D4E] text-white py-4 max-w-7xl mx-auto flex justify-between items-center'>
             <h1 className='text-3xl font-bold'>NewzPortalz</h1>
             <div>
-                <nav className='flex space-x-5'>
+                <nav className='flex gap-x-7'>
                     {
                         userData ? userData.isAdmin ? <>
                             <NavAdmin />
                             <Link href="/" onClick={logoutHandler}>Logout</Link>
                         </> : <>
                             <NavUser />
+                            <Link href="/posts">Profile</Link>
                             <Link href="/" onClick={logoutHandler}>Logout</Link>
                         </> : <>
                             <NavUser />
@@ -41,6 +43,7 @@ const Navbar = () => {
                     }
                 </nav>
             </div>
+        </div>
         </header>
     )
 }
