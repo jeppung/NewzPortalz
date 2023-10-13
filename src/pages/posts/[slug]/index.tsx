@@ -4,7 +4,6 @@ import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import parse from 'html-react-parser';
 import { HTMLReactParserOptions, Element } from 'html-react-parser';
-import { attributesToProps } from 'html-react-parser';
 
 const PostDetail = ({ }) => {
     const [post, setPost] = useState<IPost | null>(null)
