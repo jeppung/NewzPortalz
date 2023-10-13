@@ -7,7 +7,7 @@ import { HTMLReactParserOptions, Element } from 'html-react-parser';
 import { attributesToProps } from 'html-react-parser';
 
 const PostDetail = ({ }) => {
-    const [post, setPost] = useState<IPost>()
+    const [post, setPost] = useState<IPost | null>(null)
     const router = useRouter()
 
     const getPostDetail = async () => {
@@ -23,8 +23,6 @@ const PostDetail = ({ }) => {
         }
     }
 
-
-
     const options: HTMLReactParserOptions = {
         replace: (domNode) => {
             if (domNode instanceof Element && domNode.attribs) {
@@ -37,7 +35,7 @@ const PostDetail = ({ }) => {
 
     useEffect(() => {
         getPostDetail()
-    }, [])
+    }, [router])
 
     return (
         <>
@@ -57,6 +55,16 @@ const PostDetail = ({ }) => {
                 </section>
                 <section className='mt-10 content-wrapper'>
                     {post && parse(post.body, options)}
+                </section>
+                <section className='flex gap-x-5 justify-end mt-16'>
+                    <div className='flex gap-x-2'>
+                        <p>{post?.likes}</p>
+                        <button>Like</button>
+                    </div>
+                    <div className='flex gap-x-2'>
+                        <p>{post?.shares}</p>
+                        <button>Share</button>
+                    </div>
                 </section>
             </main>
         </>

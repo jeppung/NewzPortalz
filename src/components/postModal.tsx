@@ -134,7 +134,7 @@ const PostModal = ({ onClose, onSuccess, type, initialData }: IPostModalProps) =
                                 menubar: false,
                                 resize: false,
                                 placeholder: "Write your content here...",
-
+                                toolbar: "undo redo | h1 h2 | bold italic underline | blockquote | aligncenter alignjustify alignleft alignright "
                             }}
                             onEditorChange={(content) => {
                                 setBody(content)
