@@ -4,20 +4,22 @@ import { Editor } from '@tinymce/tinymce-react'
 import React, { useState } from 'react'
 
 interface IPostModalProps {
+    type: "create" | "edit"
     onClose: () => void,
     onSuccess: (data: Omit<IPost, "user">) => void
+    initialData?: IPost
 }
 
 interface IUploadImage {
     url: string
 }
 
-const PostModal = ({ onClose, onSuccess }: IPostModalProps) => {
-    const [body, setBody] = useState("")
-    const [title, setTitle] = useState<string>("")
-    const [description, setDescription] = useState<string>("")
-    const [type, setType] = useState<string>("free")
-    const [image, setImage] = useState<File>()
+const PostModal = ({ onClose, onSuccess, type, initialData }: IPostModalProps) => {
+    const [body, setBody] = useState(initialData ? initialData.body : "")
+    const [title, setTitle] = useState<string>(initialData ? initialData.title : "")
+    const [description, setDescription] = useState<string>(initialData ? initialData.description : "")
+    const [postType, setPostType] = useState<string>(initialData ? initialData.isPremium ? "premium" : "free" : "free")
+    const [image, setImage] = useState<File | string | undefined>(initialData && initialData.thumbnail)
 
     const slugHandler = () => {
         return title.toLowerCase().split(" ").join("-")
@@ -47,7 +49,7 @@ const PostModal = ({ onClose, onSuccess }: IPostModalProps) => {
         let thumbnailUrl = ""
 
         try {
-            thumbnailUrl = (await photoUploadHandler()).url
+            thumbnailUrl = typeof image === "string" ? initialData!.thumbnail : (await photoUploadHandler()).url
         } catch (e) {
             return alert("Error uploading thumbnail")
         }
@@ -58,16 +60,16 @@ const PostModal = ({ onClose, onSuccess }: IPostModalProps) => {
             title: title,
             description: description,
             thumbnail: thumbnailUrl,
-            body: body,
-            isPremium: type === "premium" ? true : false,
+            body: body!,
+            isPremium: postType === "premium" ? true : false,
             likes: 0,
             shares: 0,
             slug: slugHandler()
         }
 
         try {
-            const res = await fetch("http://localhost:6969/posts", {
-                method: "POST",
+            const res = await fetch(type === "create" ? "http://localhost:6969/posts" : `http://localhost:6969/posts/${initialData?.id}`, {
+                method: type === "create" ? "POST" : "PATCH",
                 body: JSON.stringify(data),
                 headers: {
                     "Content-type": "application/json"
@@ -90,11 +92,11 @@ const PostModal = ({ onClose, onSuccess }: IPostModalProps) => {
         <dialog open className='w-full h-full bg-slate-500/50 justify-center items-center flex'>
             <div className='bg-white w-[60%] h-[90%] rounded-md p-16 relative overflow-auto'>
                 <button onClick={() => onClose()} className='absolute right-5 top-3'>X</button>
-                <h1 className='text-3xl font-bold'>Create new post</h1>
+                <h1 className='text-3xl font-bold'>{type === "create" ? "Create new post" : "Edit post"}</h1>
                 <form action="#" className='mt-7 flex flex-col gap-y-3 ' onSubmit={(e) => submitHandler(e)}>
                     <div className='flex flex-col gap-y-2'>
                         <label htmlFor="title" className='text-lg'>Title</label>
-                        <input onChange={(e) => setTitle(e.target.value)} type="text" name="title" id="title" className='border-2 p-2 rounded-md' placeholder='Post title' required />
+                        <input onChange={(e) => setTitle(e.target.value)} value={title} type="text" name="title" id="title" className='border-2 p-2 rounded-md' placeholder='Post title' required />
                     </div>
                     <div className='flex flex-col gap-y-2'>
                         <label htmlFor="slug" className='text-lg'>Slug</label>
@@ -102,34 +104,36 @@ const PostModal = ({ onClose, onSuccess }: IPostModalProps) => {
                     </div>
                     <div className='flex flex-col gap-y-2'>
                         <label htmlFor="description" className='text-lg'>Description</label>
-                        <input onChange={(e) => setDescription(e.target.value)} type="text" name="description" id="description" className='border-2 p-2 rounded-md' placeholder='Post description' required />
+                        <input onChange={(e) => setDescription(e.target.value)} value={description} type="text" name="description" id="description" className='border-2 p-2 rounded-md' placeholder='Post description' required />
                     </div>
                     <div className='flex justify-between'>
                         <div className='flex flex-col gap-y-2'>
                             <label htmlFor="thumbnail" className='text-lg'>Thumbnail</label>
-                            <input type="file" name="thumbnail" id="thumbnail" required onChange={(e) => e.target.files?.length === 1 && imageHandler(e.target.files)} />
+                            <input type="file" name="thumbnail" id="thumbnail" onChange={(e) => e.target.files?.length === 1 && imageHandler(e.target.files)} />
                         </div>
                         {
                             image && <div>
-                                <img src={URL.createObjectURL(image!)} className='h-52' alt="" />
+                                <img src={typeof image === "string" ? image : URL.createObjectURL(image)} className='h-52' alt="" />
                             </div>
                         }
 
                     </div>
                     <div className='flex flex-col gap-y-2'>
                         <label htmlFor="type" className='text-lg'>Type</label>
-                        <select className='border-2 p-2 rounded-md bg-white' onChange={(e) => setType(e.target.value)} value={type}>
+                        <select className='border-2 p-2 rounded-md bg-white' onChange={(e) => setPostType(e.target.value)} value={postType}>
                             <option value="free">Free</option>
                             <option value="premium">Premium</option>
                         </select>
                     </div>
                     <div className='mt-2 flex-1'>
                         <Editor
+                            initialValue={initialData?.body}
                             init={{
                                 max_height: 250,
                                 menubar: false,
                                 resize: false,
-                                placeholder: "Write your content here..."
+                                placeholder: "Write your content here...",
+
                             }}
                             onEditorChange={(content) => {
                                 setBody(content)

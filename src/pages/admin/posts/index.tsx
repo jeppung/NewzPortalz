@@ -17,10 +17,16 @@ export interface IPost {
     user: IUser
 }
 
+interface IModalPost {
+    isModal: boolean
+    type: "create" | "edit"
+    initialData?: IPost
+}
+
 const AdminPosts = () => {
 
     const [posts, setPosts] = useState<IPost[]>([])
-    const [isModal, setIsModal] = useState<boolean>(false)
+    const [modal, setModal] = useState<IModalPost>({ isModal: false, type: "create" })
 
     const getPostsData = async () => {
         try {
@@ -62,16 +68,16 @@ const AdminPosts = () => {
     return (
         <>
             {
-                isModal && <PostModal onClose={() => setIsModal(false)} onSuccess={() => {
-                    setIsModal(false)
+                modal.isModal && <PostModal type={modal.type} onClose={() => setModal({ ...modal, isModal: false })} onSuccess={() => {
+                    setModal({ ...modal, isModal: false })
                     getPostsData()
-                }} />
+                }} initialData={modal.initialData} />
             }
             <Navbar />
             <main className='max-w-7xl mx-auto pt-10'>
                 <div className='flex justify-between'>
                     <h1 className='text-3xl'>Posts</h1>
-                    <button onClick={() => setIsModal(true)} className='bg-yellow-500 py-1 px-2 rounded-lg text-white text-sm'>Create Post</button>
+                    <button onClick={() => setModal({ isModal: true, type: "create" })} className='bg-yellow-500 py-1 px-2 rounded-lg text-white text-sm'>Create Post</button>
                 </div>
                 <section className='mt-5 '>
                     <table className='w-full table border border-collapse'>
@@ -96,7 +102,7 @@ const AdminPosts = () => {
                                             <td>
                                                 <div className='flex justify-around'>
                                                     <button>see</button>
-                                                    <button>edit</button>
+                                                    <button onClick={() => setModal({ isModal: true, type: 'edit', initialData: post })}>edit</button>
                                                     <button onClick={() => deleteHandler(post)}>del</button>
                                                 </div>
                                             </td>

@@ -36,14 +36,14 @@
     },
     {
       "userId": 1,
-      "title": "Crazy Little Thing Called Love",
-      "description": "This is a story about me and you",
-      "thumbnail": "http://res.cloudinary.com/dylzfyn4b/image/upload/v1697171084/jiu7yhkenenhfmizsynb.jpg",
-      "body": "<p>Lorem&nbsp;</p>\n<p>&nbsp;</p>\n<p><strong>Ipsum</strong></p>\n<p>Dolor</p>\n<p><em>Amet</em></p>",
+      "title": "Crazy Little Thing Called Love Edited",
+      "description": "This is a story about me and you edited",
+      "thumbnail": "http://res.cloudinary.com/dylzfyn4b/image/upload/v1697176493/etssovmimtgr1ny1z1xh.jpg",
+      "body": "<p>Test</p>\n<p>123</p>\n<p>123</p>\n<p>123</p>",
       "isPremium": true,
       "likes": 0,
       "shares": 0,
-      "slug": "crazy-little-thing-called-love",
+      "slug": "crazy-little-thing-called-love-edited",
       "id": 2
     }
   ]
