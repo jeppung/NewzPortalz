@@ -28,21 +28,11 @@
       "title": "Lorem ipsum dolor amet",
       "slug": "lorem-ipsum-dolor-amet",
       "description": "This is a lorem description",
+      "thumbnail": "https://picsum.photos/600/400",
       "body": "Lorem ipsum dolor amet Lorem ipsum dolor amet Lorem ipsum dolor amet Lorem ipsum dolor amet Lorem ipsum dolor amet Lorem ipsum dolor amet Lorem ipsum dolor amet ",
       "likes": 0,
       "shares": 0,
       "isPremium": false
-    },
-    {
-      "userId": 1,
-      "title": "Crazy Little Thing Called Love",
-      "description": "this is a story about me and you ",
-      "body": "<h3>This is my first story</h3>\n<p>Its always about you</p>\n<blockquote>\n<p>I always pray for you to comeback</p>\n</blockquote>\n<p>&nbsp;</p>\n<p>May God grant my wish :)</p>",
-      "isPremium": false,
-      "likes": 0,
-      "shares": 0,
-      "slug": "crazy-little-thing-called-love",
-      "id": 2
     }
   ]
 }

@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "start:db": "json-server --watch db.json --routes routes.json -p 6969"
   },
   "dependencies": {
     "@tinymce/tinymce-react": "^4.3.0",

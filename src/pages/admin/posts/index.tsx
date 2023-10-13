@@ -20,7 +20,7 @@ const AdminPosts = () => {
 
     const [posts, setPosts] = useState<IPost[]>([])
     const [isModal, setIsModal] = useState<boolean>(false)
-    
+
     const getPostsData = async () => {
         try {
             const res = await fetch("http://localhost:6969/posts?_expand=user")
@@ -37,17 +37,17 @@ const AdminPosts = () => {
     const deleteHandler = async (post: IPost) => {
         let isConfirm = confirm("Are you sure to delete this post?")
 
-        if(isConfirm) {
-            try{
+        if (isConfirm) {
+            try {
                 const res = await fetch(`http://localhost:6969/posts/${post.id}`, {
                     method: "DELETE",
                 })
-                if(!res.ok){
+                if (!res.ok) {
                     return alert("An error has occured")
                 }
                 setPosts([...posts.filter((data) => data.id !== post.id)])
                 return
-            }catch(e){
+            } catch (e) {
                 return alert("An error has occured")
             }
         }
@@ -64,7 +64,7 @@ const AdminPosts = () => {
                 isModal && <PostModal onClose={() => setIsModal(false)} onSuccess={() => {
                     setIsModal(false)
                     getPostsData()
-                }}/>
+                }} />
             }
             <Navbar />
             <main className='max-w-7xl mx-auto pt-10'>
@@ -86,9 +86,9 @@ const AdminPosts = () => {
                         <tbody>
                             {
                                 posts.map((post, i) => {
-                                    return(
+                                    return (
                                         <tr key={i} className='border'>
-                                            <td className='p-2'>{i+1}</td>
+                                            <td className='p-2'>{i + 1}</td>
                                             <td className='p-2'>{post.title}</td>
                                             <td className='p-2'>{post.slug}</td>
                                             <td className='p-2'>{post.user.name}</td>
