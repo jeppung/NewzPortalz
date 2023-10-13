@@ -1,20 +1,45 @@
 import Link from 'next/link'
 import React, { useState } from 'react'
-import { IUser } from '../login'
+import { IError, IUser } from '../login'
+import { setCookie } from 'cookies-next'
+import { useRouter } from 'next/router'
 
 
 
 const Register = () => {
     const [user, setUser] = useState<Partial<IUser>>({})
+    const [error, setError] = useState<IError | null>(null)
+    const router = useRouter()
 
-    const registerHandler = (e: React.FormEvent<HTMLFormElement>) => {
+    const registerHandler = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
+        user.subscription = "free"
+        user.isAdmin = false
+
+        try{
+            const res = await fetch("http://localhost:6969/users", {
+                method: "POST",
+                body: JSON.stringify(user),
+                headers: {
+                    "Content-type": "application/json"
+                }
+            })
+            if(!res.ok) return alert("An error has occured")
+
+            const data = await res.json()
+            setCookie("userData", data)
+
+            router.push("/")
+        }catch(e){
+            return alert("An error has occured")
+        }
     }
 
     const checkPassword = (passwordC: string) => {
         if (passwordC !== user.password) {
-            console.log("Not Matched", passwordC, user.password)
+            return setError({status: true, message: "Password not match"})
         }
+        return setError(null)
     }
 
     return (
@@ -45,8 +70,8 @@ const Register = () => {
                         <label htmlFor="passwordC">Password Confirmation</label>
                         <input onChange={(e) => checkPassword(e.target.value)} type="password" name="passwordC" id="passwordC" className='p-2 rounded-lg border-2' placeholder='************' required />
                     </div>
-                    <button type='submit' className='bg-green-500 w-full py-2 rounded-full'>Register</button>
-
+                    <button type='submit' className={`${error?.status ? "bg-slate-400" : "bg-green-500"} w-full py-2 rounded-full`} disabled={error?.status}>Register</button>
+                    {error?.status && <p className='text-center text-sm'>{error.message}</p>}
                 </form>
                 <p className='text-center mt-10 text-sm'>Not registered yet? <Link href="/login" className='font-bold'>Login Here</Link></p>
             </div>

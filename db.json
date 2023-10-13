@@ -19,6 +19,16 @@
       "phone": 6281381237654,
       "subscription": "free",
       "isAdmin": false
+    },
+    {
+      "name": "Kevin Pulung",
+      "phone": 123123123,
+      "address": "JL. Somewhere only me know M7/12",
+      "email": "kevin.pulung@mail.com",
+      "password": "kevin123",
+      "subscription": "free",
+      "isAdmin": false,
+      "id": 3
     }
   ],
   "posts": [

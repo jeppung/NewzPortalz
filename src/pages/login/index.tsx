@@ -15,7 +15,7 @@ export interface IUser {
     password: string
     address: string
     phone: number
-    subscription: string
+    subscription: "free" | "premium"
     isAdmin: boolean
 }
 
