@@ -4,14 +4,23 @@ import { IUser } from "./pages/login";
 export function middleware(req: NextRequest) {
     const userData = req.cookies.get("userData")
 
-    if (userData !== undefined) {
-        const user: IUser = JSON.parse(userData.value)
-        return user.isAdmin ? NextResponse.next() : NextResponse.redirect(new URL("/", req.url))
-    } else {
-        return NextResponse.redirect(new URL("/", req.url))
+    if(req.nextUrl.pathname.startsWith("/admin")) {
+        if (userData !== undefined) {
+            const user: IUser = JSON.parse(userData.value)
+            return user.isAdmin ? NextResponse.next() : NextResponse.redirect(new URL("/", req.url))
+        } else {
+            return NextResponse.redirect(new URL("/", req.url))
+        }
     }
-}
 
-export const config = {
-    matcher: '/admin/:path*',
+    if(req.nextUrl.pathname.startsWith("/login") || req.nextUrl.pathname.startsWith("/register")) {
+        if (userData !== undefined) {
+            const user: IUser = JSON.parse(userData.value)
+            return user.isAdmin ? NextResponse.redirect(new URL("/admin", req.url)) : NextResponse.redirect(new URL("/", req.url))
+        } else {
+            return NextResponse.next()
+        }
+    }
+
+    
 }
