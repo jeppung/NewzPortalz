@@ -1,11 +1,68 @@
 import Navbar from "@/components/navbar";
+import { getCookie } from "cookies-next";
 import Image from "next/image";
+import { IUser } from "./login";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import TrendingCard from "@/components/trendingCard";
+import { IPost } from "./admin/posts";
 
 
 export default function Home() {
+  const [user, setUser] = useState<IUser | undefined>()
+  const [posts, setPosts] = useState<IPost[]>([])
+  const userData = getCookie("userData")
+  const router = useRouter()
+
+  const getCurrWeek = (date: number) => {
+    const currDate = date
+    const startOfTheDate = new Date(new Date().getFullYear(), 0, 1).getTime()
+    const msInDay = 24 * 3600 * 1000
+    const days = Math.floor((currDate-startOfTheDate) / (msInDay))
+    const currWeek = Math.ceil(days / 7)
+
+    return currWeek
+  }
+
+  const getTrendingPostWeek = ()  => {
+    let currWeek = getCurrWeek(new Date().getTime())
+
+    let postOfTheWeek = posts.filter((post) => {
+      const postDate = new Date(post.createdAt).getTime()
+      if(getCurrWeek(postDate) === currWeek){
+        return post
+      }
+    })
+
+    postOfTheWeek.sort((post1,post2) => post2.likes - post1.likes)
+    return postOfTheWeek.slice(0,5).map((post, i) => {
+      return <TrendingCard key={i} title={post.title} description={post.description} slug={post.slug} thumbnail={post.thumbnail} premium={post.isPremium}/>
+    })
+  }
+
+  const getPostsData = async () => {
+        try {
+            const res = await fetch("http://localhost:6969/posts?_expand=user")
+            if (!res.ok) {
+                console.log(res.statusText)
+            }
+            const data = await res.json()
+            setPosts(data)
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+  useEffect(() => {
+    if(userData !== undefined) {
+      setUser(JSON.parse(userData!) as IUser)
+    }
+    getPostsData()
+  }, [])
+  
   return (
     <>
-      <Navbar />
+      <Navbar onRefresh={() => router.reload()} />
       <main>
         <section className="bg-[#112D4E] w-full pt-[50px] pb-[80px]">
          <div className="max-w-7xl mx-auto flex justify-around">
@@ -13,7 +70,7 @@ export default function Home() {
           <div className="text-white text-5xl font-bold flex flex-col justify-around">
             <div >
               <h1>Good Morning,</h1>
-              <h1>Joshua</h1>
+              <h1>{user?.name.split(" ")[0]}</h1>
             </div>
             <div>
               <h1>Let's read some news!</h1>
@@ -25,49 +82,9 @@ export default function Home() {
           <div className="max-w-7xl mx-auto">
             <h1 className="text-3xl font-bold">Trending post of this week 🔥</h1>
             <div id="card-wrapper" className="mt-[60px] flex gap-x-20 flex-wrap justify-center gap-y-12">
-              <div className="bg-[#FDF0F0] shadow-xl  w-[350px] rounded-2xl relative">
-                <Image src="/premium_tag.svg" className="absolute right-[-30px] top-[-30px]" width={100} height={100} alt="terserah"/>
-                <Image src="https://picsum.photos/600/400" className="rounded-tl-2xl rounded-tr-2xl" width={600} height={500} alt="terserah"/>
-                <div className="p-4 flex flex-col">
-                  <h2 className="text-xl font-bold">Lorem ipsum dolor amet</h2>
-                  <p className="text-xs">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna.  ltrices mauris. Maecenas vitae mattis tellus.</p>
-                  <button className="mt-2 bg-[#132043] text-white text-xs rounded-md py-[5px] px-[15px] self-end">See more</button>
-                </div>
-              </div>
-              <div className="bg-[#FDF0F0] shadow-xl  w-[350px] rounded-2xl overflow-hidden">
-                <Image src="https://picsum.photos/600/400" width={600} height={500} alt="terserah"/>
-                <div className="p-4 flex flex-col">
-                  <h2 className="text-xl font-bold">Lorem ipsum dolor amet</h2>
-                  <p className="text-xs">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna.  ltrices mauris. Maecenas vitae mattis tellus.</p>
-                  <button className="mt-2 bg-[#132043] text-white text-xs rounded-md py-[5px] px-[15px] self-end">See more</button>
-                </div>
-              </div>
-              <div className="bg-[#FDF0F0] shadow-xl  w-[350px] rounded-2xl relative">
-                <Image src="/premium_tag.svg" className="absolute right-[-30px] top-[-30px]" width={100} height={100} alt="terserah"/>
-                <Image src="https://picsum.photos/600/400" className="rounded-tl-2xl rounded-tr-2xl" width={600} height={500} alt="terserah"/>
-                <div className="p-4 flex flex-col">
-                  <h2 className="text-xl font-bold">Lorem ipsum dolor amet</h2>
-                  <p className="text-xs">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna.  ltrices mauris. Maecenas vitae mattis tellus.</p>
-                  <button className="mt-2 bg-[#132043] text-white text-xs rounded-md py-[5px] px-[15px] self-end">See more</button>
-                </div>
-              </div>
-              <div className="bg-[#FDF0F0] shadow-xl  w-[350px] rounded-2xl overflow-hidden">
-                <Image src="https://picsum.photos/600/400" width={600} height={500} alt="terserah"/>
-                <div className="p-4 flex flex-col">
-                  <h2 className="text-xl font-bold">Lorem ipsum dolor amet</h2>
-                  <p className="text-xs">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna.  ltrices mauris. Maecenas vitae mattis tellus.</p>
-                  <button className="mt-2 bg-[#132043] text-white text-xs rounded-md py-[5px] px-[15px] self-end">See more</button>
-                </div>
-              </div>
-              <div className="bg-[#FDF0F0] shadow-xl  w-[350px] rounded-2xl overflow-hidden">
-                <Image src="https://picsum.photos/600/400" width={600} height={500} alt="terserah"/>
-                <div className="p-4 flex flex-col">
-                  <h2 className="text-xl font-bold">Lorem ipsum dolor amet</h2>
-                  <p className="text-xs">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna.  ltrices mauris. Maecenas vitae mattis tellus.</p>
-                  <button className="mt-2 bg-[#132043] text-white text-xs rounded-md py-[5px] px-[15px] self-end">See more</button>
-                </div>
-              </div>
-              
+              {
+                getTrendingPostWeek()
+              }
             </div>
           </div>
         </section>
@@ -100,44 +117,50 @@ export default function Home() {
             <div id="posts-wrapper" className="mt-10 grid grid-cols-2 gap-x-20 gap-y-5">
               <div className="flex bg-[#1F4172] rounded-md overflow-hidden shadow-lg">
                 <Image src="https://picsum.photos/600/400" width={150} height={150} alt="terserah"/>
-                <div className="text-white p-4">
+                <div className="text-white p-4 flex flex-col">
                   <h1 className="font-bold">Lorem Ipsum Dolor Amet</h1>
                   <p className="text-xs mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna.  ltrices mauris. Maecenas vitae mattis tellus.</p>
+                  <p className="mt-6 self-end text-xs">20 August 2023 11:23</p>
+                </div>
+              </div>
+             <div className="flex bg-[#1F4172] rounded-md overflow-hidden shadow-lg">
+                <Image src="https://picsum.photos/600/400" width={150} height={150} alt="terserah"/>
+                <div className="text-white p-4 flex flex-col">
+                  <h1 className="font-bold">Lorem Ipsum Dolor Amet</h1>
+                  <p className="text-xs mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna.  ltrices mauris. Maecenas vitae mattis tellus.</p>
+                  <p className="mt-6 self-end text-xs">20 August 2023 11:23</p>
                 </div>
               </div>
               <div className="flex bg-[#1F4172] rounded-md overflow-hidden shadow-lg">
                 <Image src="https://picsum.photos/600/400" width={150} height={150} alt="terserah"/>
-                <div className="text-white p-4">
+                <div className="text-white p-4 flex flex-col">
                   <h1 className="font-bold">Lorem Ipsum Dolor Amet</h1>
                   <p className="text-xs mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna.  ltrices mauris. Maecenas vitae mattis tellus.</p>
+                  <p className="mt-6 self-end text-xs">20 August 2023 11:23</p>
                 </div>
               </div>
               <div className="flex bg-[#1F4172] rounded-md overflow-hidden shadow-lg">
                 <Image src="https://picsum.photos/600/400" width={150} height={150} alt="terserah"/>
-                <div className="text-white p-4">
+                <div className="text-white p-4 flex flex-col">
                   <h1 className="font-bold">Lorem Ipsum Dolor Amet</h1>
                   <p className="text-xs mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna.  ltrices mauris. Maecenas vitae mattis tellus.</p>
+                  <p className="mt-6 self-end text-xs">20 August 2023 11:23</p>
                 </div>
               </div>
               <div className="flex bg-[#1F4172] rounded-md overflow-hidden shadow-lg">
                 <Image src="https://picsum.photos/600/400" width={150} height={150} alt="terserah"/>
-                <div className="text-white p-4">
+                <div className="text-white p-4 flex flex-col">
                   <h1 className="font-bold">Lorem Ipsum Dolor Amet</h1>
                   <p className="text-xs mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna.  ltrices mauris. Maecenas vitae mattis tellus.</p>
+                  <p className="mt-6 self-end text-xs">20 August 2023 11:23</p>
                 </div>
               </div>
               <div className="flex bg-[#1F4172] rounded-md overflow-hidden shadow-lg">
                 <Image src="https://picsum.photos/600/400" width={150} height={150} alt="terserah"/>
-                <div className="text-white p-4">
+                <div className="text-white p-4 flex flex-col">
                   <h1 className="font-bold">Lorem Ipsum Dolor Amet</h1>
                   <p className="text-xs mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna.  ltrices mauris. Maecenas vitae mattis tellus.</p>
-                </div>
-              </div>
-              <div className="flex bg-[#1F4172] rounded-md overflow-hidden shadow-lg">
-                <Image src="https://picsum.photos/600/400" width={150} height={150} alt="terserah"/>
-                <div className="text-white p-4">
-                  <h1 className="font-bold">Lorem Ipsum Dolor Amet</h1>
-                  <p className="text-xs mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna.  ltrices mauris. Maecenas vitae mattis tellus.</p>
+                  <p className="mt-6 self-end text-xs">20 August 2023 11:23</p>
                 </div>
               </div>
             </div>

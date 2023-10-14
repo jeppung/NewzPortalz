@@ -4,9 +4,15 @@ import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 import NavAdmin from './navAdmin'
 import NavUser from './navUser'
+import { useRouter } from 'next/router'
 
-const Navbar = () => {
+interface INavbarProps {
+    onRefresh?: () => void
+}
+
+const Navbar = ({onRefresh}:INavbarProps) => {
     const [userData, setUserData] = useState<IUser | undefined>(undefined)
+    const router = useRouter()
 
     useEffect(() => {
         const cookieUser = getCookie("userData")
@@ -20,6 +26,9 @@ const Navbar = () => {
     const logoutHandler = () => {
         deleteCookie("userData")
         setUserData(undefined)
+        if(router.pathname === "/") {
+            onRefresh!()
+        }
     }
 
     return (
@@ -34,10 +43,9 @@ const Navbar = () => {
                             <Link href="/" onClick={logoutHandler}>Logout</Link>
                         </> : <>
                             <NavUser />
-                            <Link href="/posts">Profile</Link>
                             <Link href="/" onClick={logoutHandler}>Logout</Link>
                         </> : <>
-                            <NavUser />
+                            <Link href="/posts">Posts</Link>
                             <Link href="/login">Login</Link>
                         </>
                     }
