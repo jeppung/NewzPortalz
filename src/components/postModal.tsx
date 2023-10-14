@@ -1,5 +1,5 @@
 
-import { IPost } from '@/pages/admin/posts'
+import { IPost, PostCategory } from '@/pages/admin/posts'
 import { Editor } from '@tinymce/tinymce-react'
 import React, { useState } from 'react'
 
@@ -19,8 +19,9 @@ const PostModal = ({ onClose, onSuccess, type, initialData }: IPostModalProps) =
     const [title, setTitle] = useState<string>(initialData ? initialData.title : "")
     const [description, setDescription] = useState<string>(initialData ? initialData.description : "")
     const [postType, setPostType] = useState<string>(initialData ? initialData.isPremium ? "premium" : "free" : "free")
+    const [category, setCategory] = useState<PostCategory>(initialData ? initialData.category : "technology")
     const [image, setImage] = useState<File | string | undefined>(initialData && initialData.thumbnail)
-
+    
     const slugHandler = () => {
         return title.toLowerCase().split(" ").join("-")
     }
@@ -46,7 +47,6 @@ const PostModal = ({ onClose, onSuccess, type, initialData }: IPostModalProps) =
 
     const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        console.log(body)
         let thumbnailUrl = ""
 
         try {
@@ -64,7 +64,7 @@ const PostModal = ({ onClose, onSuccess, type, initialData }: IPostModalProps) =
             thumbnail: thumbnailUrl,
             body: body!,
             isPremium: postType === "premium" ? true : false,
-            category: 'others',
+            category: category,
             likes: 0,
             shares: 0,
             slug: slugHandler(),
@@ -113,7 +113,7 @@ const PostModal = ({ onClose, onSuccess, type, initialData }: IPostModalProps) =
                     </div>
                     <div className='flex flex-col gap-y-2'>
                         <label htmlFor="category" className='text-lg'>Category</label>
-                        <select name="category" id="category" className='border-2 p-2 rounded-md' required>
+                        <select onChange={(e) => setCategory(e.target.value as PostCategory)} value={category} name="category" id="category" className='border-2 p-2 rounded-md' required>
                             <option value="technology">Technology</option>
                             <option value="entertainment">Entertainment</option>
                             <option value="politics">Politics</option>

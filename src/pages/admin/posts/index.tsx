@@ -4,6 +4,7 @@ import { IUser } from '@/pages/login'
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 
+export type PostCategory = "technology" | "entertainment" | "politics" | "sports" | "others"
 export interface IPost {
     id?: number
     userId: number
@@ -14,7 +15,7 @@ export interface IPost {
     body: string
     likes: number
     shares: number
-    category: "technology" | "entertainment" | "politics" | "sports" | "others"
+    category: PostCategory
     isPremium: boolean
     user: IUser
     createdAt: string

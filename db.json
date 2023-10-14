@@ -34,18 +34,18 @@
   "posts": [
     {
       "id": 1,
-      "userId": 2,
+      "userId": 1,
       "title": "Lorem ipsum dolor amet",
       "slug": "lorem-ipsum-dolor-amet",
       "description": "This is a lorem description",
-      "category": "others",
+      "category": "entertainment",
       "thumbnail": "https://picsum.photos/600/400",
-      "body": "Lorem ipsum dolor amet Lorem ipsum dolor amet Lorem ipsum dolor amet Lorem ipsum dolor amet Lorem ipsum dolor amet Lorem ipsum dolor amet Lorem ipsum dolor amet ",
+      "body": "<p>Lorem ipsum dolor amet Lorem ipsum dolor amet Lorem ipsum dolor amet Lorem ipsum dolor amet Lorem ipsum dolor amet Lorem ipsum dolor amet Lorem ipsum dolor amet</p>",
       "likes": 0,
       "shares": 0,
       "isPremium": false,
       "createdAt": "2023-10-10T04:04:31.651Z",
-      "updatedAt": "2023-10-10T04:04:31.651Z"
+      "updatedAt": "2023-10-14T04:27:30.508Z"
     },
     {
       "userId": 1,
@@ -61,6 +61,21 @@
       "createdAt": "2023-10-13T04:06:53.299Z",
       "updatedAt": "2023-10-13T04:06:53.299Z",
       "id": 2
+    },
+    {
+      "userId": 1,
+      "title": "Lorem Digust Amet Alor",
+      "description": "used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form",
+      "thumbnail": "http://res.cloudinary.com/dylzfyn4b/image/upload/v1697257360/gygnrufl9c2iq5ksoxva.png",
+      "body": "<h1><strong>Contrary to popular belief,</strong></h1>\n<p>Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \"Lorem ipsum dolor sit amet..\", comes from a line in section 1.10.32.</p>\n<p>&nbsp;</p>\n<h1><strong>The standard chunk of Lorem Ipsum</strong></h1>\n<p>used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>",
+      "isPremium": false,
+      "category": "politics",
+      "likes": 0,
+      "shares": 0,
+      "slug": "lorem-digust-amet-alor",
+      "createdAt": "2023-10-14T04:22:40.590Z",
+      "updatedAt": "2023-10-14T04:27:18.235Z",
+      "id": 3
     }
   ]
 }
