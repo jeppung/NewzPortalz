@@ -74,47 +74,70 @@ export default function Home() {
         <section className="bg-[#112D4E] pt-[50px] pb-[80px]">
           <div className="max-w-7xl mx-auto">
             <h1 className="text-3xl font-bold text-white">All Posts</h1>
+            <div className="mt-10 flex justify-between">
+              <div className="flex gap-x-2">
+                <input type="text" className="p-2 rounded-md text-sm w-[318px]" name="search" id="search" placeholder="Search..." />
+                <select name="category" id="category" className="p-2 rounded-md text-sm">
+                  <option value="1">Technology</option>
+                  <option value="1">Entertainment</option>
+                  <option value="1">Politics</option>
+                  <option value="1">Sports</option>
+                </select>
+                <select name="type" id="type" className="p-2 rounded-md text-sm">
+                  <option value="free">Free</option>
+                  <option value="premium">Premium</option>
+                </select>
+              </div>
+              <div className="flex gap-x-2">
+                <input type="date" name="date" id="date" className="p-2 rounded-md text-sm"/>
+                
+                <select name="sort" id="sort" className="p-2 rounded-md text-sm">
+                  <option value="asc">Ascending</option>
+                  <option value="desc">Descending</option>
+                </select>
+              </div>
+            </div>
             <div id="posts-wrapper" className="mt-10 grid grid-cols-2 gap-x-20 gap-y-5">
               <div className="flex bg-[#1F4172] rounded-md overflow-hidden shadow-lg">
                 <Image src="https://picsum.photos/600/400" width={150} height={150} alt="terserah"/>
                 <div className="text-white p-4">
                   <h1 className="font-bold">Lorem Ipsum Dolor Amet</h1>
-                  <p className="text-xs">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna.  ltrices mauris. Maecenas vitae mattis tellus.</p>
+                  <p className="text-xs mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna.  ltrices mauris. Maecenas vitae mattis tellus.</p>
                 </div>
               </div>
               <div className="flex bg-[#1F4172] rounded-md overflow-hidden shadow-lg">
                 <Image src="https://picsum.photos/600/400" width={150} height={150} alt="terserah"/>
                 <div className="text-white p-4">
                   <h1 className="font-bold">Lorem Ipsum Dolor Amet</h1>
-                  <p className="text-xs">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna.  ltrices mauris. Maecenas vitae mattis tellus.</p>
+                  <p className="text-xs mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna.  ltrices mauris. Maecenas vitae mattis tellus.</p>
                 </div>
               </div>
               <div className="flex bg-[#1F4172] rounded-md overflow-hidden shadow-lg">
                 <Image src="https://picsum.photos/600/400" width={150} height={150} alt="terserah"/>
                 <div className="text-white p-4">
                   <h1 className="font-bold">Lorem Ipsum Dolor Amet</h1>
-                  <p className="text-xs">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna.  ltrices mauris. Maecenas vitae mattis tellus.</p>
+                  <p className="text-xs mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna.  ltrices mauris. Maecenas vitae mattis tellus.</p>
                 </div>
               </div>
               <div className="flex bg-[#1F4172] rounded-md overflow-hidden shadow-lg">
                 <Image src="https://picsum.photos/600/400" width={150} height={150} alt="terserah"/>
                 <div className="text-white p-4">
                   <h1 className="font-bold">Lorem Ipsum Dolor Amet</h1>
-                  <p className="text-xs">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna.  ltrices mauris. Maecenas vitae mattis tellus.</p>
+                  <p className="text-xs mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna.  ltrices mauris. Maecenas vitae mattis tellus.</p>
                 </div>
               </div>
               <div className="flex bg-[#1F4172] rounded-md overflow-hidden shadow-lg">
                 <Image src="https://picsum.photos/600/400" width={150} height={150} alt="terserah"/>
                 <div className="text-white p-4">
                   <h1 className="font-bold">Lorem Ipsum Dolor Amet</h1>
-                  <p className="text-xs">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna.  ltrices mauris. Maecenas vitae mattis tellus.</p>
+                  <p className="text-xs mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna.  ltrices mauris. Maecenas vitae mattis tellus.</p>
                 </div>
               </div>
               <div className="flex bg-[#1F4172] rounded-md overflow-hidden shadow-lg">
                 <Image src="https://picsum.photos/600/400" width={150} height={150} alt="terserah"/>
                 <div className="text-white p-4">
                   <h1 className="font-bold">Lorem Ipsum Dolor Amet</h1>
-                  <p className="text-xs">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna.  ltrices mauris. Maecenas vitae mattis tellus.</p>
+                  <p className="text-xs mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna.  ltrices mauris. Maecenas vitae mattis tellus.</p>
                 </div>
               </div>
             </div>
