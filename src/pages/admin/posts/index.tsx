@@ -14,8 +14,11 @@ export interface IPost {
     body: string
     likes: number
     shares: number
+    category: "technology" | "entertainment" | "politics" | "sports" | "others"
     isPremium: boolean
     user: IUser
+    createdAt: string
+    updatedAt: string
 }
 
 interface IModalPost {

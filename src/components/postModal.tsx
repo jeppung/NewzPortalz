@@ -55,6 +55,7 @@ const PostModal = ({ onClose, onSuccess, type, initialData }: IPostModalProps) =
             return alert("Error uploading thumbnail")
         }
 
+        const currentDate = new Date()
 
         let data: Omit<IPost, "user"> = {
             userId: 1,
@@ -63,9 +64,12 @@ const PostModal = ({ onClose, onSuccess, type, initialData }: IPostModalProps) =
             thumbnail: thumbnailUrl,
             body: body!,
             isPremium: postType === "premium" ? true : false,
+            category: 'others',
             likes: 0,
             shares: 0,
-            slug: slugHandler()
+            slug: slugHandler(),
+            createdAt: type === "create" ? currentDate.toISOString() : initialData!.createdAt,
+            updatedAt: currentDate.toISOString()
         }
 
         try {
@@ -106,6 +110,16 @@ const PostModal = ({ onClose, onSuccess, type, initialData }: IPostModalProps) =
                     <div className='flex flex-col gap-y-2'>
                         <label htmlFor="description" className='text-lg'>Description</label>
                         <input onChange={(e) => setDescription(e.target.value)} value={description} type="text" name="description" id="description" className='border-2 p-2 rounded-md' placeholder='Post description' required />
+                    </div>
+                    <div className='flex flex-col gap-y-2'>
+                        <label htmlFor="category" className='text-lg'>Category</label>
+                        <select name="category" id="category" className='border-2 p-2 rounded-md' required>
+                            <option value="technology">Technology</option>
+                            <option value="entertainment">Entertainment</option>
+                            <option value="politics">Politics</option>
+                            <option value="sports">Sports</option>
+                            <option value="others">Others</option>
+                        </select>
                     </div>
                     <div className='flex justify-between'>
                         <div className='flex flex-col gap-y-2'>
