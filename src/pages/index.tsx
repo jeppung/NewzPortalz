@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import TrendingCard from "@/components/trendingCard";
 import { IPost } from "./admin/posts";
+import PostCard from "@/components/postCard";
 
 
 export default function Home() {
@@ -115,54 +116,13 @@ export default function Home() {
               </div>
             </div>
             <div id="posts-wrapper" className="mt-10 grid grid-cols-2 gap-x-20 gap-y-5">
-              <div className="flex bg-[#1F4172] rounded-md overflow-hidden shadow-lg">
-                <Image src="https://picsum.photos/600/400" width={150} height={150} alt="terserah"/>
-                <div className="text-white p-4 flex flex-col">
-                  <h1 className="font-bold">Lorem Ipsum Dolor Amet</h1>
-                  <p className="text-xs mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna.  ltrices mauris. Maecenas vitae mattis tellus.</p>
-                  <p className="mt-6 self-end text-xs">20 August 2023 11:23</p>
-                </div>
-              </div>
-             <div className="flex bg-[#1F4172] rounded-md overflow-hidden shadow-lg">
-                <Image src="https://picsum.photos/600/400" width={150} height={150} alt="terserah"/>
-                <div className="text-white p-4 flex flex-col">
-                  <h1 className="font-bold">Lorem Ipsum Dolor Amet</h1>
-                  <p className="text-xs mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna.  ltrices mauris. Maecenas vitae mattis tellus.</p>
-                  <p className="mt-6 self-end text-xs">20 August 2023 11:23</p>
-                </div>
-              </div>
-              <div className="flex bg-[#1F4172] rounded-md overflow-hidden shadow-lg">
-                <Image src="https://picsum.photos/600/400" width={150} height={150} alt="terserah"/>
-                <div className="text-white p-4 flex flex-col">
-                  <h1 className="font-bold">Lorem Ipsum Dolor Amet</h1>
-                  <p className="text-xs mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna.  ltrices mauris. Maecenas vitae mattis tellus.</p>
-                  <p className="mt-6 self-end text-xs">20 August 2023 11:23</p>
-                </div>
-              </div>
-              <div className="flex bg-[#1F4172] rounded-md overflow-hidden shadow-lg">
-                <Image src="https://picsum.photos/600/400" width={150} height={150} alt="terserah"/>
-                <div className="text-white p-4 flex flex-col">
-                  <h1 className="font-bold">Lorem Ipsum Dolor Amet</h1>
-                  <p className="text-xs mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna.  ltrices mauris. Maecenas vitae mattis tellus.</p>
-                  <p className="mt-6 self-end text-xs">20 August 2023 11:23</p>
-                </div>
-              </div>
-              <div className="flex bg-[#1F4172] rounded-md overflow-hidden shadow-lg">
-                <Image src="https://picsum.photos/600/400" width={150} height={150} alt="terserah"/>
-                <div className="text-white p-4 flex flex-col">
-                  <h1 className="font-bold">Lorem Ipsum Dolor Amet</h1>
-                  <p className="text-xs mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna.  ltrices mauris. Maecenas vitae mattis tellus.</p>
-                  <p className="mt-6 self-end text-xs">20 August 2023 11:23</p>
-                </div>
-              </div>
-              <div className="flex bg-[#1F4172] rounded-md overflow-hidden shadow-lg">
-                <Image src="https://picsum.photos/600/400" width={150} height={150} alt="terserah"/>
-                <div className="text-white p-4 flex flex-col">
-                  <h1 className="font-bold">Lorem Ipsum Dolor Amet</h1>
-                  <p className="text-xs mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna.  ltrices mauris. Maecenas vitae mattis tellus.</p>
-                  <p className="mt-6 self-end text-xs">20 August 2023 11:23</p>
-                </div>
-              </div>
+              {
+                posts.map((post, i) => {
+                  return(
+                    <PostCard key={i} title={post.title} slug={post.slug} description={post.description} thumbnail={post.thumbnail} createdAt={post.createdAt}/>
+                  )
+                })
+              }
             </div>
           </div>
         </section>

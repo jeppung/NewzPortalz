@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { title } from 'process'
 import React from 'react'
 
-interface ITrendingCardProps {
+export interface ITrendingCardProps {
     premium: boolean
     thumbnail: string
     title: string
