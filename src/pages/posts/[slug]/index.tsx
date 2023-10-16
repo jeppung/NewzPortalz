@@ -23,16 +23,6 @@ const PostDetail = ({ }) => {
         }
     }
 
-    const options: HTMLReactParserOptions = {
-        replace: (domNode) => {
-            if (domNode instanceof Element && domNode.attribs) {
-                if (domNode.name === "h1") {
-                    console.log(domNode.attributes)
-                }
-            }
-        }
-    };
-
     useEffect(() => {
         getPostDetail()
     }, [router])
@@ -54,7 +44,7 @@ const PostDetail = ({ }) => {
                     <img src={post?.thumbnail} className='object-cover' width={400} />
                 </section>
                 <section className='mt-10 content-wrapper'>
-                    {post && parse(post.body, options)}
+                    {post && parse(post.body)}
                 </section>
                 <section className='flex gap-x-5 justify-between mt-16'>
                     <div>
