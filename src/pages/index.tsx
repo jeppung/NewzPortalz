@@ -161,7 +161,7 @@ export default function Home() {
               {
                 filteredPosts.map((post, i) => {
                   return (
-                    <PostCard key={i} title={post.title} slug={post.slug} description={post.description} thumbnail={post.thumbnail} createdAt={post.createdAt} />
+                    <PostCard key={i} data={post} />
                   )
                 })
               }
