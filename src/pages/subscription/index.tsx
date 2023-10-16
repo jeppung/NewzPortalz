@@ -6,9 +6,9 @@ const Subscription = () => {
     return (
         <div className='flex flex-col h-screen w-full'>
             <Navbar />
-            <main className='bg-[#112D4E] flex-1 py-[50px]'>
+            <main className='bg-[#112D4E] flex-1 pt-[50px]'>
                 <section className='max-w-7xl mx-auto'>
-                    <div className='bg-[#F9F7F7] h-[738px] w-full rounded-2xl py-[100px] px-[50px] flex'>
+                    <div className='bg-[#F9F7F7]  w-full rounded-2xl py-[80px] px-[50px] flex'>
                         <div className='w-full flex flex-col justify-center gap-y-3'>
                             <Image src="/group-team.png" alt='group-team' width={500} height={0} />
                             <div className=''>
