@@ -37,7 +37,7 @@ export const decrypt = (cipher: string): object => {
 const Subscription = () => {
     const [userData, setUserData] = useState<IUser | null>()
     const [transactionLink, setTransactionLink] = useState<string>()
-    const [isModal, setIsModal] = useState<boolean>(true)
+    const [isModal, setIsModal] = useState<boolean>(false)
 
     const subscriptionHandler = async (duration: "yearly" | "monthly") => {
         let currDate = new Date()
@@ -94,20 +94,22 @@ const Subscription = () => {
                                 <div className='bg-[#DEDEDE] w-[277px] h-[413px] p-[28px] rounded-2xl flex flex-col mt-[40px] shadow-lg border border-black'>
                                     <div className='flex-1'>
                                         <h1 className='text-[36px]'>Monthly</h1>
-                                        <h1 className='text-5xl mt-[10px] px-[28px] font-bold'>25000<span className='text-sm'>/month</span></h1>
+                                        <h1 className='text-5xl mt-[10px] font-bold'>25000<span className='text-sm'>/month</span></h1>
+                                        <div className='mt-5 h-[1px] w-full bg-black'></div>
                                     </div>
-                                    <div className='flex-1'>
-                                        <p className='font-bold'>v Unlock premium post</p>
+                                    <div className='flex-1 px-5 text-sm'>
+                                        <p className='font-bold'>✓ Unlock premium post</p>
                                     </div>
                                     <button onClick={() => subscriptionHandler('monthly')} className='text-center bg-[#112D4E] py-[8px] text-white font-bold rounded-md'>I want this</button>
                                 </div>
                                 <div className='bg-[#DEDEDE] w-[277px] h-[413px] p-[28px] rounded-2xl flex flex-col mt-[40px] shadow-lg border border-black'>
                                     <div className='flex-1'>
                                         <h1 className='text-[36px]'>Yearly</h1>
-                                        <h1 className='text-5xl mt-[10px] px-[20px] font-bold'>225000<span className='text-sm'>/year</span></h1>
+                                        <h1 className='text-5xl mt-[10px] font-bold'>225000<span className='text-sm'>/year</span></h1>
+                                        <div className='mt-5 h-[1px] w-full bg-black'></div>
                                     </div>
-                                    <div className='flex-1'>
-                                        <p className='font-bold'>v Unlock premium post</p>
+                                    <div className='flex-1 px-5 text-sm'>
+                                        <p className='font-bold'>✓ Unlock premium post</p>
                                     </div>
                                     <button onClick={() => subscriptionHandler('yearly')} className='text-center bg-[#112D4E] py-[8px] text-white font-bold rounded-md'>I want this</button>
                                 </div>

@@ -65,11 +65,11 @@
     {
       "userId": 3,
       "type": "premium",
-      "price": 25000,
-      "duration": "monthly",
+      "price": 225000,
+      "duration": "yearly",
       "status": "pending",
-      "createdAt": "2023-10-16T09:52:53.966Z",
-      "updatedAt": "2023-10-16T09:52:53.966Z",
+      "createdAt": "2023-10-16T12:35:32.082Z",
+      "updatedAt": "2023-10-16T12:35:32.082Z",
       "id": 4
     }
   ],
