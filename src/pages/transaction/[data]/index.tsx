@@ -41,7 +41,7 @@ const Transaction = () => {
                         </div>
                         <div>
                             <h1 className='font-bold text-lg'>Subscription Duration</h1>
-                            <p className='text-sm'>{moment().add(1, "month").format("DD MMMM YYYY")}</p>
+                            <p className='text-sm'>{moment().add(1, transaction?.duration === "monthly" ? "month" : "year").format("DD MMMM YYYY")}</p>
                         </div>
                     </div>
                     <div className='flex justify-between mt-10'>
