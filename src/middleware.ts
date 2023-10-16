@@ -37,5 +37,13 @@ export function middleware(req: NextRequest) {
         }
     }
 
+    if (req.nextUrl.pathname.startsWith("/subscription") || req.nextUrl.pathname.startsWith("/profile")) {
+        if (userData !== undefined) {
+            return NextResponse.next()
+        } else {
+            return NextResponse.redirect(new URL("/", req.url))
+        }
+    }
+
 
 }

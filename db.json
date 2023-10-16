@@ -41,56 +41,6 @@
       "status": "pending",
       "createdAt": "2023-10-10T04:04:31.651Z",
       "updatedAt": "2023-10-14T04:27:30.508Z"
-    },
-    {
-      "userId": 3,
-      "type": "premium",
-      "price": 25000,
-      "duration": "monthly",
-      "status": "pending",
-      "createdAt": "2023-10-16T09:52:42.386Z",
-      "updatedAt": "2023-10-16T09:52:42.386Z",
-      "id": 2
-    },
-    {
-      "userId": 3,
-      "type": "premium",
-      "price": 225000,
-      "duration": "yearly",
-      "status": "waiting payment",
-      "createdAt": "2023-10-16T09:52:47.399Z",
-      "updatedAt": "2023-10-16T09:52:47.399Z",
-      "id": 3
-    },
-    {
-      "userId": 3,
-      "type": "premium",
-      "price": 225000,
-      "duration": "yearly",
-      "status": "pending",
-      "createdAt": "2023-10-16T12:35:32.082Z",
-      "updatedAt": "2023-10-16T12:35:32.082Z",
-      "id": 4
-    },
-    {
-      "userId": 3,
-      "type": "premium",
-      "price": 25000,
-      "duration": "monthly",
-      "status": "waiting payment",
-      "createdAt": "2023-10-16T12:59:48.650Z",
-      "updatedAt": "2023-10-16T12:59:48.650Z",
-      "id": 5
-    },
-    {
-      "userId": 3,
-      "type": "premium",
-      "price": 25000,
-      "duration": "monthly",
-      "status": "pending",
-      "createdAt": "2023-10-16T13:02:34.709Z",
-      "updatedAt": "2023-10-16T13:02:34.709Z",
-      "id": 6
     }
   ],
   "posts": [
