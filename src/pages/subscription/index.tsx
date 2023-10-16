@@ -14,7 +14,7 @@ export interface ISubsTransaction {
     type: "free" | "premium"
     duration: "monthly" | "yearly" | null
     price: number
-    status: "pending" | "accepted" | "rejected"
+    status: "pending" | "completed" | "cancelled" | "waiting payment"
     createdAt: string
     updatedAt: string
     user?: IUser
@@ -50,7 +50,7 @@ const Subscription = () => {
             type: "premium",
             price: duration === "monthly" ? 25000 : 225000,
             duration: duration,
-            status: 'pending',
+            status: "waiting payment",
             createdAt: currDate.toISOString(),
             updatedAt: currDate.toISOString()
         }
