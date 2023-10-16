@@ -22,8 +22,8 @@ const AdminSubscription = () => {
 
     const deactiveHandler = async (user: IUser) => {
         let isConfirm = confirm(`Are you sure to deactivate subscription for ${user.name} ?`)
-        if(isConfirm) {
-            try{
+        if (isConfirm) {
+            try {
                 const res = await fetch(`http://localhost:6969/users/${user.id}`, {
                     method: "PATCH",
                     body: JSON.stringify({
@@ -33,14 +33,14 @@ const AdminSubscription = () => {
                         "Content-type": "application/json"
                     }
                 })
-                if(!res.ok){
+                if (!res.ok) {
                     return alert("An error has occured")
                 }
                 let relatedUser = users.find((data) => data.id === user.id)
                 relatedUser!.subscription = "free"
                 setUsers([...users])
                 return
-            }catch(e){
+            } catch (e) {
                 return alert("An error has occured")
             }
         }
@@ -72,7 +72,7 @@ const AdminSubscription = () => {
                                 users.map((user, i) => {
                                     return (
                                         <tr key={i} className='border'>
-                                            <td className='p-2'>{i+1}</td>
+                                            <td className='p-2'>{i + 1}</td>
                                             <td className='p-2'>{user.name}</td>
                                             <td className='p-2'>{user.subscription}</td>
                                             {

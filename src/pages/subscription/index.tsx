@@ -4,6 +4,7 @@ import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 import { IUser } from '../login'
 import { useRouter } from 'next/router'
+import SubsModal from '@/components/subsModal'
 
 
 
@@ -35,7 +36,8 @@ export const decrypt = (cipher: string): object => {
 
 const Subscription = () => {
     const [userData, setUserData] = useState<IUser | null>()
-    const router = useRouter()
+    const [transactionLink, setTransactionLink] = useState<string>()
+    const [isModal, setIsModal] = useState<boolean>(true)
 
     const subscriptionHandler = async (duration: "yearly" | "monthly") => {
         let currDate = new Date()
@@ -59,8 +61,8 @@ const Subscription = () => {
             })
             const resData = await res.json() as ISubsTransaction
             const cipher = encrypt(resData)
-
-            router.push(`/transaction/${btoa(cipher)}`)
+            setTransactionLink(`/transaction/${btoa(cipher)}`)
+            setIsModal(true)
         } catch (e) {
             alert("An error has occured")
         }
@@ -72,7 +74,9 @@ const Subscription = () => {
 
     return (
         <div className='flex flex-col h-screen w-full'>
-
+            {
+                isModal && transactionLink && <SubsModal onClose={() => setIsModal(false)} link={transactionLink} />
+            }
             <Navbar />
             <main className='bg-[#112D4E] flex-1 pt-[50px]'>
                 <section className='max-w-7xl mx-auto'>
