@@ -5,7 +5,7 @@ const NavAdmin = () => {
     return (
         <>
             <Link href="/admin/posts">Posts</Link>
-            <Link href="/admin/subscription">Subscription</Link>
+            <Link href="/admin/subscriptions">Subscriptions</Link>
             <Link href="/admin/transactions">Transactions</Link>
         </>
     )

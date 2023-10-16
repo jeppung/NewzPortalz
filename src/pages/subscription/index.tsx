@@ -17,6 +17,7 @@ export interface ISubsTransaction {
     status: "pending" | "accepted" | "rejected"
     createdAt: string
     updatedAt: string
+    user?: IUser
 }
 
 
@@ -42,7 +43,7 @@ const Subscription = () => {
     const subscriptionHandler = async (duration: "yearly" | "monthly") => {
         const isConfirm = confirm("Are you sure to buy this subscription plan ?")
         if(!isConfirm) return
-        
+
         const currDate = new Date()
         const data: ISubsTransaction = {
             userId: userData?.id!,

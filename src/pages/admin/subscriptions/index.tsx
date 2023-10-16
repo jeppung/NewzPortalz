@@ -55,7 +55,7 @@ const AdminSubscription = () => {
         <>
             <Navbar />
             <main className='max-w-7xl mx-auto pt-10'>
-                <h1 className='text-3xl'>Subscription</h1>
+                <h1 className='text-3xl'>Subscriptions</h1>
 
                 <section className='mt-5 '>
                     <table className='w-full table border border-collapse'>
