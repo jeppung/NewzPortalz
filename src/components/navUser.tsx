@@ -4,7 +4,7 @@ import React from 'react'
 const NavUser = () => {
     return (
         <>
-            <Link href="/posts">Posts</Link>
+            <Link href="/#posts">Posts</Link>
             <Link href="/subscription">Subscription</Link>
             <Link href="/posts">Profile</Link>
         </>

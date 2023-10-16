@@ -124,7 +124,7 @@ export default function Home() {
             </div>
           </div>
         </section>
-        <section className="bg-[#112D4E] pt-[50px] pb-[80px]">
+        <section className="bg-[#112D4E] pt-[50px] pb-[80px]" id="posts">
           <div className="max-w-7xl mx-auto">
             <h1 className="text-3xl font-bold text-white">All Posts</h1>
             <div className="mt-10 flex justify-between">

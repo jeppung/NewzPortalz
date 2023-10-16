@@ -10,7 +10,7 @@ interface INavbarProps {
     onRefresh?: () => void
 }
 
-const Navbar = ({onRefresh}:INavbarProps) => {
+const Navbar = ({ onRefresh }: INavbarProps) => {
     const [userData, setUserData] = useState<IUser | undefined>(undefined)
     const router = useRouter()
 
@@ -26,7 +26,7 @@ const Navbar = ({onRefresh}:INavbarProps) => {
     const logoutHandler = () => {
         deleteCookie("userData")
         setUserData(undefined)
-        if(router.pathname === "/") {
+        if (router.pathname === "/") {
             onRefresh!()
         }
     }
@@ -34,24 +34,24 @@ const Navbar = ({onRefresh}:INavbarProps) => {
     return (
         <header className='bg-[#112D4E]'>
             <div className='bg-[#112D4E] text-white py-4 max-w-7xl mx-auto flex justify-between items-center'>
-            <h1 className='text-3xl font-bold'>NewzPortalz</h1>
-            <div>
-                <nav className='flex gap-x-7'>
-                    {
-                        userData ? userData.isAdmin ? <>
-                            <NavAdmin />
-                            <Link href="/" onClick={logoutHandler}>Logout</Link>
-                        </> : <>
-                            <NavUser />
-                            <Link href="/" onClick={logoutHandler}>Logout</Link>
-                        </> : <>
-                            <Link href="/posts">Posts</Link>
-                            <Link href="/login">Login</Link>
-                        </>
-                    }
-                </nav>
+                <h1 className='text-3xl font-bold'>NewzPortalz</h1>
+                <div>
+                    <nav className='flex gap-x-7'>
+                        {
+                            userData ? userData.isAdmin ? <>
+                                <NavAdmin />
+                                <Link href="/" onClick={logoutHandler}>Logout</Link>
+                            </> : <>
+                                <NavUser />
+                                <Link href="/" onClick={logoutHandler}>Logout</Link>
+                            </> : <>
+                                <Link href="/#posts">Posts</Link>
+                                <Link href="/login">Login</Link>
+                            </>
+                        }
+                    </nav>
+                </div>
             </div>
-        </div>
         </header>
     )
 }
