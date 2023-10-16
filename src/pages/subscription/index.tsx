@@ -40,8 +40,11 @@ const Subscription = () => {
     const [isModal, setIsModal] = useState<boolean>(false)
 
     const subscriptionHandler = async (duration: "yearly" | "monthly") => {
-        let currDate = new Date()
-        let data: ISubsTransaction = {
+        const isConfirm = confirm("Are you sure to buy this subscription plan ?")
+        if(!isConfirm) return
+        
+        const currDate = new Date()
+        const data: ISubsTransaction = {
             userId: userData?.id!,
             type: "premium",
             price: duration === "monthly" ? 25000 : 225000,
