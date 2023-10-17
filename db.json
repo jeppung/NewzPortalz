@@ -61,6 +61,16 @@
       "createdAt": "2023-10-17T05:35:51.410Z",
       "updatedAt": "2023-10-17T05:56:05.499Z",
       "id": 3
+    },
+    {
+      "userId": 3,
+      "type": "premium",
+      "price": 225000,
+      "duration": "yearly",
+      "status": "waiting payment",
+      "createdAt": "2023-10-17T07:10:19.043Z",
+      "updatedAt": "2023-10-17T07:10:19.043Z",
+      "id": 4
     }
   ],
   "posts": [
