@@ -86,7 +86,7 @@ const AdminTransaction = () => {
                       <td className='p-2'>{transaction.user?.name}</td>
                       <td className='p-2'>{transaction.status}</td>
                       <td className='p-2'>{moment(transaction.createdAt).format("MM-DD-YYYY HH:mm")}</td>
-                      <td className='p-2'>{moment(transaction.updatedAt).format("MM-DD-YYYY HH:mm")}</td>
+                      <td className='p-2'>{moment(transaction.updatedAt).format("MM-DD-YYYY HH:mm:ss")}</td>
                       {
                         transaction.status === "waiting payment" || transaction.status === "pending" && <td className='p-2'>
                           <div className='flex gap-x-2'>

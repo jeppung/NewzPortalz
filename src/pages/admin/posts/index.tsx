@@ -93,7 +93,7 @@ const AdminPosts = () => {
                                 <th className='p-2 text-start'>Title</th>
                                 <th className='p-2 text-start'>Slug</th>
                                 <th className='p-2 text-start'>Author</th>
-                                <th className='p-2 text-start'>Category</th>                                
+                                <th className='p-2 text-start'>Category</th>
                                 <th className='p-2 text-start'>Created At</th>
                                 <th className='p-2 text-start'>Updated At</th>
                                 <th className='p-2 text-start'>Actions</th>
@@ -109,9 +109,9 @@ const AdminPosts = () => {
                                             <td className='p-2'>{post.slug}</td>
                                             <td className='p-2'>{post.user.name}</td>
                                             <td className='p-2'>{post.category}</td>
-                                            <td className='p-2'>{moment(post.createdAt).format("MM-DD-YYYY HH:mm")}</td>
-                                            <td className='p-2'>{moment(post.updatedAt).format("MM-DD-YYYY HH:mm")}</td>
-                                        
+                                            <td className='p-2'>{moment(post.createdAt).format("MM-DD-YYYY HH:mm:ss")}</td>
+                                            <td className='p-2'>{moment(post.updatedAt).format("MM-DD-YYYY HH:mm:ss")}</td>
+
                                             <td>
                                                 <div className='flex justify-around'>
                                                     <Link href={`/posts/${post.slug}`}>See</Link>
