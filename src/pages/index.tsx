@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import TrendingCard from "@/components/trendingCard";
 import { IPost, PostCategory } from "./admin/posts";
 import PostCard from "@/components/postCard";
+import moment from "moment";
 
 
 type PostFilterOrder = "desc" | "asc"
@@ -16,7 +17,8 @@ interface IPostsFilter {
   type: string
   sort: "createdAt"
   order: PostFilterOrder
-  category: PostCategory | string
+  category: PostCategory | string,
+  date: string
 }
 
 export default function Home() {
@@ -25,7 +27,8 @@ export default function Home() {
     sort: "createdAt",
     order: "desc",
     type: "",
-    category: ""
+    category: "",
+    date: ""
   }
 
   const [user, setUser] = useState<IUser | undefined>()
@@ -71,7 +74,7 @@ export default function Home() {
 
   const getPostsData = async () => {
     try {
-      const res = await fetch(`http://localhost:6969/posts?_expand=user&title_like=${filter.search}&category_like=${filter.category}&isPremium_like=${filter.type}&_sort=${filter.sort}&_order=${filter.order}`)
+      const res = await fetch(`http://localhost:6969/posts?_expand=user&title_like=${filter.search}&category_like=${filter.category}&isPremium_like=${filter.type}&createdAt_like=${filter.date}&_sort=${filter.sort}&_order=${filter.order}`)
       if (!res.ok) {
         alert("Error get post data")
       }
@@ -144,12 +147,10 @@ export default function Home() {
                 </select>
               </div>
               <div className="flex gap-x-2">
-                <select name="date" id="date" className="p-2 rounded-md text-sm">
-                  <option value="latest">Latest posts</option>
-                  <option value="this_week">This week</option>
-                  <option value="last_month">Last month</option>
-                  <option value="last_year">Last year</option>
-                </select>
+                <input className="p-2 rounded-md" type="date" name="date" id="date" onChange={(e) => {
+                  if (e.target.valueAsDate === null) return setFilter({ ...filter, date: "" })
+                  return setFilter({ ...filter, date: moment(e.target.valueAsDate).format("YYYY-MM-DD").toString() })
+                }} />
 
                 <select name="order" id="order" className="p-2 rounded-md text-sm" value={filter.order} onChange={(e) => setFilter({ ...filter, order: e.target.value as PostFilterOrder })}>
                   <option value="asc">Ascending</option>
