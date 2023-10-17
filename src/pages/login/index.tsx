@@ -13,6 +13,15 @@ interface ISubscription {
     expiredAt: string | null
 }
 
+export interface IReadHistory {
+    id?: number
+    slug: string
+    isLike: boolean
+    isShare: boolean
+    createdAt: string
+    updatedAt: string
+}
+
 export interface IUser {
     id?: number
     name: string
@@ -21,6 +30,7 @@ export interface IUser {
     address: string
     phone: number
     subscription: ISubscription
+    readHistory: IReadHistory[] | null
     isAdmin: boolean
 }
 

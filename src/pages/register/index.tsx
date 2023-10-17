@@ -18,6 +18,7 @@ const Register = () => {
             expiredAt: null
         }
         user.isAdmin = false
+        user.readHistory = null
 
         try {
             const res = await fetch("http://localhost:6969/users", {

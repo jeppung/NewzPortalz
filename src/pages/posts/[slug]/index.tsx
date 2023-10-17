@@ -6,6 +6,8 @@ import parse from 'html-react-parser';
 import moment from 'moment';
 import {AiFillHeart, AiOutlineHeart, AiOutlineShareAlt} from "react-icons/ai"
 import {CopyToClipboard} from 'react-copy-to-clipboard';
+import { getCookie, setCookie } from 'cookies-next';
+import { IReadHistory, IUser } from '@/pages/login';
 
 
 const PostDetail = ({ }) => {
@@ -39,11 +41,64 @@ const PostDetail = ({ }) => {
         setIsLike(!isLike)
     }
 
+    const updateUserHistory = async (data: IReadHistory[], user: IUser) => {
+        try{
+            const res = await fetch(`http://localhost:6969/users/${user.id}`, {
+                method: "PATCH",
+                body: JSON.stringify({
+                    readHistory: data
+                } as IUser),
+                headers: {
+                    "Content-type": "application/json"
+                }
+            })
+            if(!res.ok) return alert("Error adding post to history")
+            const newUserData = await res.json()
+            setCookie("userData", newUserData)
+        }catch(e){
+            return alert("Error adding post to history")
+        }
+    }
+
+    const addToHistory = async () => {
+        const cookie = getCookie("userData")
+        if(cookie !== undefined){
+            const user = JSON.parse(cookie) as IUser
+            const date = new Date().toISOString()  
+            
+            let data: IReadHistory = {
+                id: 1,
+                slug: router.query.slug as string,
+                isLike: false,
+                isShare: false,
+                createdAt: "",
+                updatedAt: ""
+            }
+
+            if(user.readHistory == null) {   
+                data.createdAt = date
+                data.updatedAt = date    
+                updateUserHistory([data], user)
+            }else{
+                const isExistIndex = user.readHistory.findIndex((data) => data.slug === router.query.slug)
+                if(isExistIndex === -1) {
+                    data.id = user.readHistory.length + 1
+                    data.createdAt = date
+                    data.updatedAt = date    
+                    updateUserHistory([...user.readHistory, data], user)
+                }else{
+                    user.readHistory[isExistIndex].updatedAt = date
+                    updateUserHistory([...user.readHistory], user)
+                }
+            }
+        }
+    }
 
 
     useEffect(() => {
         if(router.query.slug !== undefined){
             getPostDetail()
+            addToHistory()
         }
     }, [router])
 
