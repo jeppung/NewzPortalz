@@ -3,8 +3,8 @@ import { IPost } from '@/pages/admin/posts'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import parse from 'html-react-parser';
-import { HTMLReactParserOptions, Element } from 'html-react-parser';
 import moment from 'moment';
+import {AiFillHeart, AiOutlineHeart, AiOutlineShareAlt} from "react-icons/ai"
 
 const PostDetail = ({ }) => {
     const [post, setPost] = useState<IPost | null>(null)
@@ -51,13 +51,13 @@ const PostDetail = ({ }) => {
                         <p>Created at: {moment(post?.createdAt).format("MMMM DD YYYY HH:mm")}</p>
                     </div>
                     <div className='flex gap-x-5'>
-                        <div className='flex gap-x-2'>
+                        <div className='flex gap-x-1'>
                             <p>{post?.likes}</p>
-                            <button>Like</button>
+                            <button><AiOutlineHeart/></button>
                         </div>
-                        <div className='flex gap-x-2'>
+                        <div className='flex gap-x-1'>
                             <p>{post?.shares}</p>
-                            <button>Share</button>
+                            <button><AiOutlineShareAlt/></button>
                         </div>
                     </div>
                 </section>
