@@ -1,4 +1,5 @@
 import Navbar from '@/components/navbar'
+import { IUser } from '@/pages/login'
 import { ISubsTransaction } from '@/pages/subscription'
 import moment from 'moment'
 import React, { useEffect, useState } from 'react'
@@ -34,6 +35,30 @@ const AdminTransaction = () => {
     }
   }
 
+  const updateUserData = async (transaction: ISubsTransaction) => {
+    try {
+      const res = await fetch(`http://localhost:6969/users/${transaction.userId}`, {
+        method: "PATCH",
+        body: JSON.stringify({
+          subscription: {
+            type: "premium",
+            expiredAt: transaction.user?.subscription.expiredAt == null ? moment().add(1, transaction.duration === "yearly" ? "year" : "month").toISOString() : moment(transaction.user?.subscription.expiredAt).add(1, transaction.duration === "yearly" ? "year" : "month").toISOString()
+          }
+        } as IUser),
+        headers: {
+          "Content-type": "application/json"
+        }
+      })
+      if (!res.ok) {
+        return alert(`An error occured while updating user data ${res.statusText}`)
+      }
+      const data = await res.json()
+      console.log(data, "success")
+    } catch (e) {
+      return alert("An error occured while updating user data")
+    }
+  }
+
   const actionHandler = async (transaction: ISubsTransaction, action: string) => {
     const isConfirm = confirm(`Are you sure to ${action} this transaction ?`)
     if (!isConfirm) return
@@ -51,18 +76,21 @@ const AdminTransaction = () => {
       })
 
       if (!res.ok) {
-        return alert(res.statusText)
+        return alert(`An error occured when updating transaction (${res.statusText})`)
+      }
+
+      if (action === "accept") {
+        updateUserData(transaction)
       }
 
       const data = await res.json() as ISubsTransaction
-
       let dataIndex = transactions?.findIndex((transaction) => transaction.id === data.id)
       transactions![dataIndex!].status = data.status
       transactions![dataIndex!].updatedAt = data.updatedAt
 
       setTransactions([...transactions!])
     } catch (e) {
-      return alert("An error has occured")
+      return alert(`An error occured when updating transaction`)
     }
   }
 
