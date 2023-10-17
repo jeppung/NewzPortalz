@@ -5,9 +5,14 @@ import React, { useEffect, useState } from 'react'
 import parse from 'html-react-parser';
 import moment from 'moment';
 import {AiFillHeart, AiOutlineHeart, AiOutlineShareAlt} from "react-icons/ai"
+import {CopyToClipboard} from 'react-copy-to-clipboard';
+
 
 const PostDetail = ({ }) => {
     const [post, setPost] = useState<IPost | null>(null)
+    const [isLike, setIsLike] = useState<boolean>(false)
+    const [likesCounter, setLikesCounter] = useState<number>(0)
+    const [sharesCounter, setSharesCounter] = useState<number>(0)
     const router = useRouter()
 
     const getPostDetail = async () => {
@@ -18,13 +23,28 @@ const PostDetail = ({ }) => {
             }
             const data = await res.json() as IPost[]
             setPost(data[0])
+            setLikesCounter(data[0].likes)
+            setSharesCounter(data[0].shares)
         } catch (e) {
-            return alert("Error fetching post detail data")
+            return alert(`Error fetching post detail data ${e}`)
         }
     }
 
+    const likeHandler = async () => {
+        if(isLike) {
+            setLikesCounter(likesCounter - 1)
+        }else{
+            setLikesCounter(likesCounter + 1)
+        }
+        setIsLike(!isLike)
+    }
+
+
+
     useEffect(() => {
-        getPostDetail()
+        if(router.query.slug !== undefined){
+            getPostDetail()
+        }
     }, [router])
 
     return (
@@ -52,13 +72,15 @@ const PostDetail = ({ }) => {
                     </div>
                     <div className='flex gap-x-5'>
                         <div className='flex gap-x-1'>
-                            <p>{post?.likes}</p>
-                            <button><AiOutlineHeart/></button>
+                            <p>{likesCounter}</p>
+                            <button onClick={likeHandler}>{isLike ? <AiFillHeart color="red"/> : <AiOutlineHeart/>}</button>
                         </div>
-                        <div className='flex gap-x-1'>
-                            <p>{post?.shares}</p>
-                            <button><AiOutlineShareAlt/></button>
-                        </div>
+                        <CopyToClipboard text={`http://localhost:3000/posts/${router.query.slug}`} onCopy={() => alert("Link copied")}>
+                           <div className='flex gap-x-1'>
+                                <p>{sharesCounter}</p>
+                                <button onClick={() => setSharesCounter(sharesCounter+1)}><AiOutlineShareAlt/></button>
+                           </div>
+                        </CopyToClipboard>
                     </div>
                 </section>
             </main>
