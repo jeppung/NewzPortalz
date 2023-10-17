@@ -11,6 +11,14 @@
         "type": "premium",
         "expiredAt": null
       },
+      "readHistory": [
+        {
+          "id": 1,
+          "postId": 2,
+          "isLike": false,
+          "isShare": false
+        }
+      ],
       "isAdmin": true
     },
     {
@@ -24,6 +32,14 @@
         "type": "free",
         "expiredAt": null
       },
+      "readHistory": [
+        {
+          "id": 1,
+          "postId": 2,
+          "isLike": false,
+          "isShare": false
+        }
+      ],
       "isAdmin": false
     },
     {
@@ -36,6 +52,14 @@
         "type": "premium",
         "expiredAt": "2025-12-17T12:11:10.019Z"
       },
+      "readHistory": [
+        {
+          "id": 1,
+          "postId": 2,
+          "isLike": true,
+          "isShare": true
+        }
+      ],
       "isAdmin": false,
       "id": 3
     }
