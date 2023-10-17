@@ -27,8 +27,11 @@ const AdminSubscription = () => {
                 const res = await fetch(`http://localhost:6969/users/${user.id}`, {
                     method: "PATCH",
                     body: JSON.stringify({
-                        subscription: "free"
-                    }),
+                        subscription: {
+                            type: "free",
+                            expiredAt: null
+                        }
+                    } as IUser),
                     headers: {
                         "Content-type": "application/json"
                     }

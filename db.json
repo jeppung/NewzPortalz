@@ -34,7 +34,7 @@
       "password": "kevin123",
       "subscription": {
         "type": "premium",
-        "expiredAt": "2024-10-17T08:59:25.643Z"
+        "expiredAt": "2025-11-17T12:11:10.019Z"
       },
       "isAdmin": false,
       "id": 3
@@ -80,6 +80,56 @@
       "createdAt": "2023-10-17T07:10:19.043Z",
       "updatedAt": "2023-10-17T08:59:25.626Z",
       "id": 4
+    },
+    {
+      "userId": 3,
+      "type": "premium",
+      "price": 225000,
+      "duration": "yearly",
+      "status": "cancelled",
+      "createdAt": "2023-10-17T12:08:15.228Z",
+      "updatedAt": "2023-10-17T12:11:34.421Z",
+      "id": 5
+    },
+    {
+      "userId": 3,
+      "type": "premium",
+      "price": 225000,
+      "duration": "yearly",
+      "status": "cancelled",
+      "createdAt": "2023-10-17T12:09:19.641Z",
+      "updatedAt": "2023-10-17T12:11:32.698Z",
+      "id": 6
+    },
+    {
+      "userId": 3,
+      "type": "premium",
+      "price": 225000,
+      "duration": "yearly",
+      "status": "completed",
+      "createdAt": "2023-10-17T12:09:53.683Z",
+      "updatedAt": "2023-10-17T12:11:10.008Z",
+      "id": 7
+    },
+    {
+      "userId": 3,
+      "type": "premium",
+      "price": 225000,
+      "duration": "yearly",
+      "status": "completed",
+      "createdAt": "2023-10-17T12:13:59.210Z",
+      "updatedAt": "2023-10-17T12:14:44.154Z",
+      "id": 8
+    },
+    {
+      "userId": 3,
+      "type": "premium",
+      "price": 25000,
+      "duration": "monthly",
+      "status": "completed",
+      "createdAt": "2023-10-17T12:14:54.463Z",
+      "updatedAt": "2023-10-17T12:15:16.094Z",
+      "id": 9
     }
   ],
   "posts": [
