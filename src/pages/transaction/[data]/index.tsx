@@ -59,7 +59,7 @@ const Transaction = () => {
     return (
         <div className='bg-[#112D4E] w-screen h-screen flex justify-center items-center'>
             {
-                isModal && <Modal onClose={() => setIsModal(false)} component={<TransactionAlert status={isSuccess!} data={isSuccess ? transaction : undefined} onOk={(status) => status ? router.push("/") : setIsModal(false)} />} data={{}} />
+                isModal && <Modal onClose={() => setIsModal(false)} component={<TransactionAlert status={isSuccess!} data={isSuccess ? transaction : undefined} onOk={(status) => status ? router.replace("/") : setIsModal(false)} />} data={{}} />
             }
             <div >
                 <h1 className='text-3xl text-white font-bold text-center'>Payment Process</h1>
