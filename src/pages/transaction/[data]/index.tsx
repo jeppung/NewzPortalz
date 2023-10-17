@@ -78,7 +78,7 @@ const Transaction = () => {
                             <p className='text-sm'>{transaction?.duration?.split("").map((x, i) => i === 0 ? x.toUpperCase() : x)}</p>
                         </div>
                         <div>
-                            <h1 className='font-bold text-lg'>Subscription Duration</h1>
+                            <h1 className='font-bold text-lg'>Subscription Expire</h1>
                             <p className='text-sm'>{moment().add(1, transaction?.duration === "monthly" ? "month" : "year").format("DD MMMM YYYY")}</p>
                         </div>
                     </div>
