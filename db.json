@@ -9,7 +9,7 @@
       "phone": 123123123123,
       "subscription": {
         "type": "premium",
-        "duration": null
+        "expiredAt": null
       },
       "isAdmin": true
     },
@@ -22,7 +22,7 @@
       "phone": 6281381237654,
       "subscription": {
         "type": "free",
-        "duration": null
+        "expiredAt": null
       },
       "isAdmin": false
     },
@@ -34,7 +34,7 @@
       "password": "kevin123",
       "subscription": {
         "type": "free",
-        "duration": null
+        "expiredAt": null
       },
       "isAdmin": false,
       "id": 3
