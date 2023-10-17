@@ -8,6 +8,11 @@ export interface IError {
     status: boolean
 }
 
+interface ISubscription {
+    type: "free" | "premium"
+    expiredAt: string | null
+}
+
 export interface IUser {
     id?: number
     name: string
@@ -15,7 +20,7 @@ export interface IUser {
     password: string
     address: string
     phone: number
-    subscription: "free" | "premium"
+    subscription: ISubscription
     isAdmin: boolean
 }
 

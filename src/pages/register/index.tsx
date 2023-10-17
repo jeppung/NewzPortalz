@@ -13,10 +13,13 @@ const Register = () => {
 
     const registerHandler = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        user.subscription = "free"
+        user.subscription = {
+            "type": "free",
+            expiredAt: null
+        }
         user.isAdmin = false
 
-        try{
+        try {
             const res = await fetch("http://localhost:6969/users", {
                 method: "POST",
                 body: JSON.stringify(user),
@@ -24,20 +27,20 @@ const Register = () => {
                     "Content-type": "application/json"
                 }
             })
-            if(!res.ok) return alert("An error has occured")
+            if (!res.ok) return alert("An error has occured")
 
             const data = await res.json()
             setCookie("userData", data)
 
             router.push("/")
-        }catch(e){
+        } catch (e) {
             return alert("An error has occured")
         }
     }
 
     const checkPassword = (passwordC: string) => {
         if (passwordC !== user.password) {
-            return setError({status: true, message: "Password not match"})
+            return setError({ status: true, message: "Password not match" })
         }
         return setError(null)
     }
