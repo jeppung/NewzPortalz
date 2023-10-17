@@ -42,7 +42,7 @@ const Subscription = () => {
 
     const subscriptionHandler = async (duration: "yearly" | "monthly") => {
         const isConfirm = confirm("Are you sure to buy this subscription plan ?")
-        if(!isConfirm) return
+        if (!isConfirm) return
 
         const currDate = new Date()
         const data: ISubsTransaction = {
@@ -56,7 +56,7 @@ const Subscription = () => {
         }
 
         try {
-            const res = await fetch("http://localhost:6969/transactions", {
+            const res = await fetch("http://localhost:6969/transactions?_expand=user", {
                 method: "POST",
                 body: JSON.stringify(data),
                 headers: {
