@@ -47,9 +47,9 @@
       "type": "premium",
       "price": 225000,
       "duration": "yearly",
-      "status": "pending",
+      "status": "cancelled",
       "createdAt": "2023-10-17T05:25:17.647Z",
-      "updatedAt": "2023-10-17T05:27:37.807Z",
+      "updatedAt": "2023-10-17T05:55:01.961Z",
       "id": 2
     },
     {
@@ -57,9 +57,9 @@
       "type": "premium",
       "price": 25000,
       "duration": "monthly",
-      "status": "pending",
+      "status": "completed",
       "createdAt": "2023-10-17T05:35:51.410Z",
-      "updatedAt": "2023-10-17T05:36:01.753Z",
+      "updatedAt": "2023-10-17T05:56:05.499Z",
       "id": 3
     }
   ],
