@@ -142,7 +142,7 @@ const Profile = () => {
                                         {transactions?.map((data, i) => {
                                             if(data.userId === user?.id && data.status === "waiting payment"){
                                                 return(
-                                                    <tr>
+                                                    <tr key={i}>
                                                         <td>Subscription</td>
                                                         <td>{data.type}</td>
                                                         <td>{data.duration}</td>
