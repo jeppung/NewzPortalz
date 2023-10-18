@@ -6,8 +6,6 @@ import { IUser } from '../login'
 import { IPost } from '../admin/posts'
 import moment from 'moment'
 import { ISubsTransaction, encrypt } from '../subscription'
-import Modal from '@/components/modal'
-import TransactionAlert from '@/components/transactionAlert'
 import SubsModal from '@/components/subsModal'
 
 const Profile = () => {
@@ -100,7 +98,8 @@ const Profile = () => {
                         <div className='flex flex-col flex-1 '>
                             <h1 className='text-[40px]'>Read history</h1>
                             <div className='mt-5 flex flex-col gap-y-2 overflow-auto h-80'>
-                                <table>
+                                {
+                                    user?.readHistory !== null ? <table>
                                     <thead>
                                         <tr>
                                             <th className='text-start'>Title</th>
@@ -122,13 +121,16 @@ const Profile = () => {
                                         })}
                                     
                                     </tbody>
-                                </table>
+                                </table> : <p>There are no read history yet</p>
+                                }
                             </div>
                         </div>
                         <div className='flex flex-col flex-1 h-full'>
                             <h1 className='text-[40px]'>Pending Transaction</h1>
                             <div className='mt-5 flex flex-col gap-y-2 h-80 overflow-y-auto'>
-                                <table>
+                                {
+                                    transactions?.filter((data) => data.userId === user?.id).findIndex((data) => data.status === "waiting payment") !== -1 ? 
+                                    <table>
                                     <thead>
                                         <tr>
                                             <th className='text-start'>Item</th>
@@ -153,7 +155,8 @@ const Profile = () => {
                                             }
                                         })}
                                     </tbody>
-                                </table>
+                                </table> : <p>There are no pending transcations</p>
+                                }
                                 
                             </div>
                         </div>
