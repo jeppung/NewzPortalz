@@ -6,7 +6,7 @@ const NavUser = () => {
         <>
             <Link href="/#posts">Posts</Link>
             <Link href="/subscription">Subscription</Link>
-            <Link href="/posts">Profile</Link>
+            <Link href="/profile">Profile</Link>
         </>
     )
 }
