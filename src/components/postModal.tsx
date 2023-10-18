@@ -69,8 +69,8 @@ const PostModal = ({ onClose, onSuccess, type, initialData }: IPostModalProps) =
             body: body!,
             isPremium: postType === "premium" ? true : false,
             category: category,
-            likes: 0,
-            shares: 0,
+            likes: initialData ? initialData.likes : 0,
+            shares: initialData ? initialData.shares : 0,
             slug: slug,
             createdAt: type === "create" ? currentDate.toISOString() : initialData!.createdAt,
             updatedAt: currentDate.toISOString()
