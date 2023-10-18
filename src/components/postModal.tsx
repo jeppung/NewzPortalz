@@ -16,14 +16,18 @@ interface IUploadImage {
 
 const PostModal = ({ onClose, onSuccess, type, initialData }: IPostModalProps) => {
     const [body, setBody] = useState(initialData ? initialData.body : "")
+    const [slug, setSlug] = useState(initialData ? initialData.slug : "")
     const [title, setTitle] = useState<string>(initialData ? initialData.title : "")
     const [description, setDescription] = useState<string>(initialData ? initialData.description : "")
     const [postType, setPostType] = useState<string>(initialData ? initialData.isPremium ? "premium" : "free" : "free")
     const [category, setCategory] = useState<PostCategory>(initialData ? initialData.category : "technology")
     const [image, setImage] = useState<File | string | undefined>(initialData && initialData.thumbnail)
-    
-    const slugHandler = () => {
-        return title.toLowerCase().split(" ").join("-")
+    const [uniqueId, _] = useState(initialData ? initialData.slug.split("-")[initialData.slug.split("-").length - 1] : crypto.randomUUID().split("-")[0])
+
+    const slugHandler = (text: string) => {
+        let processedText = text.toLowerCase().split(" ")
+        processedText[processedText.length] = uniqueId
+        return setSlug(processedText.join("-"))
     }
 
     const photoUploadHandler = async (): Promise<IUploadImage> => {
@@ -67,7 +71,7 @@ const PostModal = ({ onClose, onSuccess, type, initialData }: IPostModalProps) =
             category: category,
             likes: 0,
             shares: 0,
-            slug: slugHandler(),
+            slug: slug,
             createdAt: type === "create" ? currentDate.toISOString() : initialData!.createdAt,
             updatedAt: currentDate.toISOString()
         }
@@ -101,11 +105,14 @@ const PostModal = ({ onClose, onSuccess, type, initialData }: IPostModalProps) =
                 <form action="#" className='mt-7 flex flex-col gap-y-3 ' onSubmit={(e) => submitHandler(e)}>
                     <div className='flex flex-col gap-y-2'>
                         <label htmlFor="title" className='text-lg'>Title</label>
-                        <input onChange={(e) => setTitle(e.target.value)} value={title} type="text" name="title" id="title" className='border-2 p-2 rounded-md' placeholder='Post title' required />
+                        <input onChange={(e) => {
+                            setTitle(e.target.value)
+                            slugHandler(e.target.value.trim())
+                        }} value={title} type="text" name="title" id="title" className='border-2 p-2 rounded-md' placeholder='Post title' required />
                     </div>
                     <div className='flex flex-col gap-y-2'>
                         <label htmlFor="slug" className='text-lg'>Slug</label>
-                        <input value={slugHandler()} type="text" name="slug" id="slug" className='border-2 p-2 rounded-md' disabled required />
+                        <input value={slug} type="text" name="slug" id="slug" className='border-2 p-2 rounded-md' disabled required />
                     </div>
                     <div className='flex flex-col gap-y-2'>
                         <label htmlFor="description" className='text-lg'>Description</label>
