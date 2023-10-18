@@ -8,7 +8,9 @@ import TrendingCard from "@/components/trendingCard";
 import { IPost, PostCategory } from "./admin/posts";
 import PostCard from "@/components/postCard";
 import moment from "moment";
-
+import 'react-date-range/dist/styles.css'; // main css file
+import 'react-date-range/dist/theme/default.css'; // theme css file
+import { DateRange } from 'react-date-range';
 
 type PostFilterOrder = "desc" | "asc"
 
@@ -18,7 +20,10 @@ interface IPostsFilter {
   sort: "createdAt"
   order: PostFilterOrder
   category: PostCategory | string,
-  date: string
+  date: {
+    startDate: Date | undefined,
+    endDate: Date
+  }
 }
 
 export default function Home() {
@@ -28,7 +33,10 @@ export default function Home() {
     order: "desc",
     type: "",
     category: "",
-    date: ""
+    date: {
+      startDate: undefined,
+      endDate: new Date()
+    }
   }
 
   const [user, setUser] = useState<IUser | undefined>()
@@ -36,6 +44,7 @@ export default function Home() {
   const [filteredPosts, setFilteredPosts] = useState<IPost[]>([])
   const [filter, setFilter] = useState<IPostsFilter>(initialFilter)
   const [initialLoad, setInitialLoad] = useState<boolean>(true)
+  const [isDateModal, setIsDateModal] = useState<boolean>(false)
   const userData = getCookie("userData")
   const router = useRouter()
 
@@ -74,7 +83,7 @@ export default function Home() {
 
   const getPostsData = async () => {
     try {
-      const res = await fetch(`http://localhost:6969/posts?_expand=user&title_like=${filter.search}&category_like=${filter.category}&isPremium_like=${filter.type}&createdAt_like=${filter.date}&_sort=${filter.sort}&_order=${filter.order}`)
+      const res = await fetch(`http://localhost:6969/posts?_expand=user&title_like=${filter.search}&category_like=${filter.category}&isPremium_like=${filter.type}&_sort=${filter.sort}&_order=${filter.order}&createdAt_gte=${filter.date.startDate ? filter.date.startDate.toISOString(): ""}&createdAt_lte=${filter.date.endDate.toISOString()}`)
       if (!res.ok) {
         alert("Error get post data")
       }
@@ -158,11 +167,25 @@ export default function Home() {
                 </select>
               </div>
               <div className="flex gap-x-2">
-                <input className="p-2 rounded-md" type="date" name="date" id="date" onChange={(e) => {
+                {/* <input className="p-2 rounded-md" type="date" name="date" id="date" onChange={(e) => {
                   if (e.target.valueAsDate === null) return setFilter({ ...filter, date: "" })
                   return setFilter({ ...filter, date: moment(e.target.valueAsDate).format("YYYY-MM-DD").toString() })
-                }} />
-
+                }} /> */}
+                <div className="bg-white h-10 w-52 rounded-md relative" onClick={() => setIsDateModal(true)}>
+                    <dialog open={isDateModal}>
+                      <DateRange
+                      calendarFocus="forwards"
+                      ranges={[{startDate: filter.date.startDate, endDate: filter.date.endDate, key: "selection"}]}
+                      onRangeFocusChange={(e) => {
+                        if(e[0] === 0 && e[1] === 0){
+                          setIsDateModal(false)
+                        }
+                      }}
+                      onChange={(e) => {
+                        setFilter({...filter, date: {startDate: e.selection.startDate!, endDate: new Date(e.selection.endDate!.setHours(23,59,59))}})                      
+                      }}/>
+                    </dialog>
+                </div>
                 <select name="order" id="order" className="p-2 rounded-md text-sm" value={filter.order} onChange={(e) => setFilter({ ...filter, order: e.target.value as PostFilterOrder })}>
                   <option value="asc">Ascending</option>
                   <option value="desc">Descending</option>
