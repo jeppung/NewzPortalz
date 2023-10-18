@@ -23,8 +23,7 @@ const PostDetail = ({ }) => {
 
         if (user != undefined) {
             let dataIndex = user?.readHistory?.findIndex(data => data.slug === router.query.slug)
-            console.log(dataIndex)
-            if (dataIndex !== -1) {
+            if (dataIndex !== -1 && dataIndex !== undefined) {
                 setIsLike(user!.readHistory![dataIndex!].isLike)
             }
         }
