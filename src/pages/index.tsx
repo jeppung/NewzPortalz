@@ -88,6 +88,17 @@ export default function Home() {
     }
   }
 
+  const getGreeting = () => {
+    const currHour = moment().hour()
+    if(currHour >= 0 && currHour < 12){
+      return "Good Morning,"
+    }else if (currHour >= 12 && currHour < 18) {
+      return "Good Afternoon,"
+    }else{
+      return "Good Evening,"
+    }
+  }
+
   useEffect(() => {
     getPostsData()
     setInitialLoad(false)
@@ -108,7 +119,7 @@ export default function Home() {
             <Image src="/hero.png" width={380} height={380} alt="Hero" />
             <div className="text-white text-5xl font-bold flex flex-col justify-around">
               <div >
-                <h1>Good Morning,</h1>
+                <h1>{getGreeting()}</h1>
                 <h1>{user?.name.split(" ")[0]}</h1>
               </div>
               <div>
