@@ -216,7 +216,6 @@ const PostDetail = ({ }) => {
 
 
     useEffect(() => {
-        console.log(crypto.randomUUID().split("-")[0])
         if (router.query.slug !== undefined) {
             getPostDetail()
             addToHistory()
