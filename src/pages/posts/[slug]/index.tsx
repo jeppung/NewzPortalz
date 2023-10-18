@@ -216,8 +216,25 @@ const PostDetail = ({ }) => {
                         <h1 className='text-3xl font-bold'>{post?.title}</h1>
                         <h2 className='text-sm text-gray-500'>{post?.description}</h2>
                     </div>
-                    <div>
-                        <p>Author: {post?.user.name}</p>
+
+                    <div className='flex flex-col gap-x-2'>
+                        <div className='self-end'>
+                            <p>Author: {post?.user.name}</p>
+                        </div>
+                        <div className='flex self-end gap-x-2'>
+                            <p>{moment(post?.createdAt).format("MMMM DD YYYY HH:mm")}</p>
+
+                            <div className='flex gap-x-1'>
+                                <p>{likesCounter}</p>
+                                <button onClick={likeHandler}>{isLike ? <AiFillHeart color="red" /> : <AiOutlineHeart />}</button>
+                            </div>
+                            <CopyToClipboard text={`http://localhost:3000/posts/${router.query.slug}`} onCopy={() => alert("Link copied")}>
+                                <div className='flex gap-x-1'>
+                                    <p>{sharesCounter}</p>
+                                    <button onClick={shareHandler}><AiOutlineShareAlt /></button>
+                                </div>
+                            </CopyToClipboard>
+                        </div>
                     </div>
                 </section>
                 <section className='flex justify-center mt-5'>
@@ -225,23 +242,6 @@ const PostDetail = ({ }) => {
                 </section>
                 <section className='mt-10 content-wrapper'>
                     {post && parse(post.body)}
-                </section>
-                <section className='flex gap-x-5 justify-between mt-16'>
-                    <div>
-                        <p>Created at: {moment(post?.createdAt).format("MMMM DD YYYY HH:mm")}</p>
-                    </div>
-                    <div className='flex gap-x-5'>
-                        <div className='flex gap-x-1'>
-                            <p>{likesCounter}</p>
-                            <button onClick={likeHandler}>{isLike ? <AiFillHeart color="red" /> : <AiOutlineHeart />}</button>
-                        </div>
-                        <CopyToClipboard text={`http://localhost:3000/posts/${router.query.slug}`} onCopy={() => alert("Link copied")}>
-                            <div className='flex gap-x-1'>
-                                <p>{sharesCounter}</p>
-                                <button onClick={shareHandler}><AiOutlineShareAlt /></button>
-                            </div>
-                        </CopyToClipboard>
-                    </div>
                 </section>
             </main>
         </>
