@@ -42,10 +42,42 @@
         {
           "id": 1,
           "slug": "crazy-little-thing-called-love-edited",
-          "isLike": true,
-          "isShare": true,
-          "createdAt": "2023-10-18T06:41:25.146Z",
-          "updatedAt": "2023-10-18T07:46:23.670Z"
+          "isLike": false,
+          "isShare": false,
+          "createdAt": "2023-10-18T07:51:37.048Z",
+          "updatedAt": "2023-10-18T07:56:06.563Z"
+        },
+        {
+          "id": 2,
+          "slug": "lorem-ipsum-dolor-amet-11",
+          "isLike": false,
+          "isShare": false,
+          "createdAt": "2023-10-18T07:56:10.265Z",
+          "updatedAt": "2023-10-18T07:56:10.265Z"
+        },
+        {
+          "id": 3,
+          "slug": "lorem-ipsum-dolor-amet",
+          "isLike": false,
+          "isShare": false,
+          "createdAt": "2023-10-18T07:56:17.833Z",
+          "updatedAt": "2023-10-18T08:08:06.433Z"
+        },
+        {
+          "id": 4,
+          "slug": "lorem-digust-amet-alor",
+          "isLike": false,
+          "isShare": false,
+          "createdAt": "2023-10-18T07:56:21.857Z",
+          "updatedAt": "2023-10-18T08:08:11.873Z"
+        },
+        {
+          "id": 5,
+          "slug": "lorem-digust-amet-alor-9",
+          "isLike": false,
+          "isShare": false,
+          "createdAt": "2023-10-18T08:08:18.264Z",
+          "updatedAt": "2023-10-18T08:09:25.078Z"
         }
       ],
       "isAdmin": false,

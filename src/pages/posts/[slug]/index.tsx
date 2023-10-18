@@ -12,7 +12,7 @@ import { IReadHistory, IUser } from '@/pages/login';
 
 const PostDetail = ({ }) => {
     const [post, setPost] = useState<IPost | null>(null)
-    const [isLike, setIsLike] = useState<boolean>(false)
+    const [isLike, setIsLike] = useState<boolean | null>(false)
     const [likesCounter, setLikesCounter] = useState<number>(0)
     const [sharesCounter, setSharesCounter] = useState<number>(0)
     const router = useRouter()
@@ -21,7 +21,11 @@ const PostDetail = ({ }) => {
         const user = getUserData()
 
         let dataIndex = user?.readHistory?.findIndex(data => data.slug === router.query.slug)
-        setIsLike(user!.readHistory![dataIndex!].isLike)
+
+        if (dataIndex !== -1) {
+            setIsLike(user!.readHistory![dataIndex!].isLike)
+        }
+
 
         try {
             const res = await fetch(`http://localhost:6969/posts?slug=${router.query.slug}&_expand=user`)
@@ -33,7 +37,7 @@ const PostDetail = ({ }) => {
             setLikesCounter(data[0].likes)
             setSharesCounter(data[0].shares)
         } catch (e) {
-            return alert(`Error fetching post detail data ${e}`)
+            return console.log("Error fetching post detail data")
         }
     }
 
@@ -164,7 +168,7 @@ const PostDetail = ({ }) => {
             const newUserData = await res.json()
             setCookie("userData", newUserData)
         } catch (e) {
-            return alert("Error adding post to history")
+            return console.log("Error adding post to history")
         }
     }
 
