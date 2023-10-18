@@ -111,6 +111,14 @@
           "isShare": false,
           "createdAt": "2023-10-18T14:43:17.662Z",
           "updatedAt": "2023-10-18T14:43:17.662Z"
+        },
+        {
+          "id": 2,
+          "slug": "lorem-digust-amet-alor-b4rbge2s",
+          "isLike": false,
+          "isShare": false,
+          "createdAt": "2023-10-18T15:00:54.551Z",
+          "updatedAt": "2023-10-18T15:00:54.551Z"
         }
       ],
       "isAdmin": false,
@@ -263,9 +271,9 @@
       "type": "premium",
       "price": 25000,
       "duration": "monthly",
-      "status": "waiting payment",
+      "status": "cancelled",
       "createdAt": "2023-10-18T14:43:30.057Z",
-      "updatedAt": "2023-10-18T14:43:30.057Z",
+      "updatedAt": "2023-10-18T15:07:25.144Z",
       "id": 15
     }
   ],
