@@ -10,6 +10,7 @@ import { getCookie, setCookie } from 'cookies-next';
 import { IReadHistory, IUser } from '@/pages/login';
 
 
+
 const PostDetail = ({ }) => {
     const [post, setPost] = useState<IPost | null>(null)
     const [isLike, setIsLike] = useState<boolean | null>(false)
@@ -20,10 +21,12 @@ const PostDetail = ({ }) => {
     const getPostDetail = async () => {
         const user = getUserData()
 
-        let dataIndex = user?.readHistory?.findIndex(data => data.slug === router.query.slug)
-
-        if (dataIndex !== -1) {
-            setIsLike(user!.readHistory![dataIndex!].isLike)
+        if (user != undefined) {
+            let dataIndex = user?.readHistory?.findIndex(data => data.slug === router.query.slug)
+            console.log(dataIndex)
+            if (dataIndex !== -1) {
+                setIsLike(user!.readHistory![dataIndex!].isLike)
+            }
         }
 
 
@@ -42,6 +45,9 @@ const PostDetail = ({ }) => {
     }
 
     const likeHandler = () => {
+        const user = getUserData()
+        if (user === undefined) return router.push("/login")
+
         if (isLike) {
             setLikesCounter(likesCounter - 1)
             updateLike(likesCounter - 1)
@@ -53,6 +59,9 @@ const PostDetail = ({ }) => {
     }
 
     const shareHandler = () => {
+        const user = getUserData()
+        if (user === undefined) return router.push("/login")
+
         setSharesCounter(sharesCounter + 1)
         updateShare()
     }
@@ -66,6 +75,7 @@ const PostDetail = ({ }) => {
 
     const updateShare = async () => {
         const user = getUserData()
+
         const dataIndex = user?.readHistory?.findIndex(data => data.slug === post?.slug)
         if (dataIndex !== -1 && user!.readHistory![dataIndex!].isShare === false) {
             user!.readHistory![dataIndex!].isShare = true
@@ -174,6 +184,7 @@ const PostDetail = ({ }) => {
 
     const addToHistory = async () => {
         const user = getUserData()
+        if (user === undefined) return
         const date = new Date().toISOString()
 
         let data: IReadHistory = {
@@ -205,6 +216,7 @@ const PostDetail = ({ }) => {
 
 
     useEffect(() => {
+        console.log(crypto.randomUUID().split("-")[0])
         if (router.query.slug !== undefined) {
             getPostDetail()
             addToHistory()
