@@ -5,13 +5,17 @@ import React, { useEffect, useState } from 'react'
 import { IUser } from '../login'
 import { IPost } from '../admin/posts'
 import moment from 'moment'
-import { ISubsTransaction } from '../subscription'
+import { ISubsTransaction, encrypt } from '../subscription'
+import Modal from '@/components/modal'
+import TransactionAlert from '@/components/transactionAlert'
+import SubsModal from '@/components/subsModal'
 
 const Profile = () => {
     const [user, setUser] = useState<IUser>()
     const [posts, setPosts] = useState<IPost[]>()
     const [transactions, setTransactions] = useState<ISubsTransaction[]>()
-
+    const [isModal, setIsModal] = useState<boolean>(false)
+    const [paymentLink, setPaymentLink] = useState<string>("")
 
     const getPostsData = async () => {
         try{
@@ -39,7 +43,11 @@ const Profile = () => {
         }
     }
 
-    const paymentHandler = () => {}
+    const paymentHandler = (transaction: ISubsTransaction) => {
+        setPaymentLink(btoa(encrypt(transaction)))
+
+        setIsModal(true)
+    }
 
     useEffect(() => {
         const cookie = getCookie("userData")
@@ -53,6 +61,12 @@ const Profile = () => {
 
   return (
     <div className='flex flex-col h-screen'>
+        {
+            isModal && <SubsModal onClose={() => {
+                setIsModal(false)
+                setPaymentLink("")
+            }} link={`/transaction/${paymentLink}`}/>
+        }
         <Navbar/>
         <main className='bg-[#112D4E] flex-1 py-[50px]'>
             <div className='max-w-7xl mx-auto h-full '>
@@ -113,7 +127,7 @@ const Profile = () => {
                         </div>
                         <div className='flex flex-col flex-1 h-full'>
                             <h1 className='text-[40px]'>Pending Transaction</h1>
-                            <div className='mt-5 flex flex-col gap-y-2 h-80   overflow-y-auto'>
+                            <div className='mt-5 flex flex-col gap-y-2 h-80 overflow-y-auto'>
                                 <table>
                                     <thead>
                                         <tr>
@@ -133,7 +147,7 @@ const Profile = () => {
                                                         <td>{data.type}</td>
                                                         <td>{data.duration}</td>
                                                         <td>{moment(data.createdAt).format("DD MMMM YYYY HH:mm")}</td>
-                                                        <td><button onClick={paymentHandler} className='bg-[#1F4172] px-4 py-1 text-sm rounded-md'>Pay</button></td>
+                                                        <td><button onClick={() => paymentHandler(data)} className='bg-[#1F4172] px-4 py-1 text-sm rounded-md'>Pay</button></td>
                                                     </tr>
                                                 )
                                             }

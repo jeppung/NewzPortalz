@@ -275,9 +275,9 @@
       "type": "premium",
       "price": 225000,
       "duration": "yearly",
-      "status": "waiting payment",
+      "status": "cancelled",
       "createdAt": "2023-10-18T14:05:32.290Z",
-      "updatedAt": "2023-10-18T14:05:32.290Z",
+      "updatedAt": "2023-10-18T14:30:19.301Z",
       "id": 13
     }
   ],
