@@ -110,7 +110,7 @@
           "isLike": false,
           "isShare": false,
           "createdAt": "2023-10-18T12:16:14.711Z",
-          "updatedAt": "2023-10-18T12:26:55.541Z"
+          "updatedAt": "2023-10-18T13:20:33.220Z"
         },
         {
           "id": 2,
@@ -126,7 +126,23 @@
           "isLike": false,
           "isShare": false,
           "createdAt": "2023-10-18T12:26:46.156Z",
-          "updatedAt": "2023-10-18T12:26:46.156Z"
+          "updatedAt": "2023-10-18T14:04:35.392Z"
+        },
+        {
+          "id": 4,
+          "slug": "lorem-digust-amet-alor-7-19cy9bwe",
+          "isLike": false,
+          "isShare": false,
+          "createdAt": "2023-10-18T13:11:53.142Z",
+          "updatedAt": "2023-10-18T13:16:04.141Z"
+        },
+        {
+          "id": 5,
+          "slug": "lorem-ipsum-dolor-amet-11-knhyt412",
+          "isLike": false,
+          "isShare": false,
+          "createdAt": "2023-10-18T13:20:19.587Z",
+          "updatedAt": "2023-10-18T13:20:30.579Z"
         }
       ],
       "isAdmin": false,
@@ -253,6 +269,16 @@
       "createdAt": "2023-10-18T03:41:25.564Z",
       "updatedAt": "2023-10-18T03:43:35.875Z",
       "id": 12
+    },
+    {
+      "userId": 3,
+      "type": "premium",
+      "price": 225000,
+      "duration": "yearly",
+      "status": "waiting payment",
+      "createdAt": "2023-10-18T14:05:32.290Z",
+      "updatedAt": "2023-10-18T14:05:32.290Z",
+      "id": 13
     }
   ],
   "posts": [
