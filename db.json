@@ -11,6 +11,15 @@
         "type": "premium",
         "expiredAt": null
       },
+      "statistic": {
+        "likes": {
+          "technology": 0,
+          "entertainment": 0,
+          "politics": 0,
+          "sports": 0,
+          "others": 0
+        }
+      },
       "readHistory": [
         {
           "id": 1,
@@ -103,22 +112,31 @@
         "type": "premium",
         "expiredAt": "2027-03-17T12:11:10.019Z"
       },
+      "statistic": {
+        "likes": {
+          "technology": 0,
+          "entertainment": 0,
+          "politics": 1,
+          "sports": 0,
+          "others": 1
+        }
+      },
       "readHistory": [
         {
           "id": 1,
           "slug": "crazy-little-thing-called-love-ce7wk12d",
-          "isLike": false,
+          "isLike": true,
           "isShare": false,
           "createdAt": "2023-10-18T14:43:17.662Z",
-          "updatedAt": "2023-10-19T12:09:33.894Z"
+          "updatedAt": "2023-10-19T12:50:11.156Z"
         },
         {
           "id": 2,
           "slug": "lorem-digust-amet-alor-b4rbge2s",
-          "isLike": false,
+          "isLike": true,
           "isShare": false,
           "createdAt": "2023-10-18T15:00:54.551Z",
-          "updatedAt": "2023-10-19T08:18:15.606Z"
+          "updatedAt": "2023-10-19T12:50:30.502Z"
         },
         {
           "id": 3,
@@ -443,11 +461,11 @@
       "body": "<h2>This is the beginning of me and you</h2>\n<blockquote>\n<p>Lorem ipsum dolor amet lorem lorem lorem dolor ipsum</p>\n<p>Amet dolor lorem&nbsp;</p>\n</blockquote>\n<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam in commodo nisi, ut fringilla orci. Nulla varius ex ac cursus porttitor. Maecenas vel dignissim velit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Duis dictum lorem at nulla ultricies commodo. Pellentesque faucibus lectus in ante gravida ullamcorper. Nulla id aliquet diam. Donec et rhoncus eros, sed tristique eros. Nulla molestie varius justo, ac rhoncus quam finibus in. Cras turpis nulla, mattis vel tempor vitae, gravida quis enim. Curabitur sed condimentum velit. Proin cursus risus non dui molestie, bibendum venenatis dolor tincidunt. Suspendisse commodo efficitur orci, sit amet condimentum leo porttitor eu.</p>\n<h2>&nbsp;</h2>\n<h2>This is the happy part of us</h2>\n<blockquote>\n<p>Lorem ipsum dolor amet lorem lorem lorem dolor ipsum</p>\n<p>Amet dolor lorem</p>\n</blockquote>\n<p>Fusce ipsum turpis, sodales et libero sed, lobortis efficitur ipsum. Donec elementum ante non rhoncus cursus. Fusce sit amet pulvinar est. Nunc elementum metus ac est lobortis volutpat. Praesent semper at turpis vitae sollicitudin. Donec id lobortis turpis. Proin dui diam, placerat in turpis ultrices, consequat ultricies enim. Vestibulum posuere sit amet est eget consequat. Pellentesque fringilla ultrices purus. Curabitur id magna erat. Pellentesque elit erat, malesuada eget massa ut, dictum ultricies magna. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sagittis semper turpis, a facilisis nisl consequat at. Sed neque mi, hendrerit ac nisi in, laoreet placerat lorem. Proin rhoncus neque vel nisi mattis malesuada.</p>\n<h2>&nbsp;</h2>\n<h2>This is the ending part of us</h2>\n<blockquote>\n<p><em>Lorem ipsum dolor amet</em></p>\n<p><em>Lorem ipsum dolor amet dahhhhhh</em></p>\n</blockquote>\n<p>Nam pellentesque ullamcorper nunc quis euismod. Mauris vel lectus eu dui gravida facilisis. Vivamus gravida sed felis accumsan facilisis. Integer accumsan dictum justo, vel porta lectus volutpat sit amet. Ut finibus augue ante, vitae pulvinar nulla sodales eu. Vestibulum tincidunt ac magna porta lacinia. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Donec augue nisl, rhoncus at ullamcorper ac, malesuada ac mauris.</p>\n<p>&nbsp;</p>\n<p style=\"text-align: center;\"><strong>Thank you</strong></p>",
       "category": "others",
       "isPremium": true,
-      "likes": 14,
+      "likes": 15,
       "shares": 2,
       "slug": "crazy-little-thing-called-love-ce7wk12d",
       "createdAt": "2023-10-13T04:06:53.299Z",
-      "updatedAt": "2023-10-18T09:38:23.020Z",
+      "updatedAt": "2023-10-19T12:50:27.093Z",
       "id": 2
     },
     {
@@ -458,11 +476,11 @@
       "body": "<h1><strong>Contrary to popular belief,</strong></h1>\n<p>Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \"Lorem ipsum dolor sit amet..\", comes from a line in section 1.10.32.</p>\n<p>&nbsp;</p>\n<h1><strong>The standard chunk of Lorem Ipsum</strong></h1>\n<p>used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>",
       "isPremium": true,
       "category": "politics",
-      "likes": 6,
+      "likes": 7,
       "shares": 0,
       "slug": "lorem-digust-amet-alor-b4rbge2s",
       "createdAt": "2023-10-14T04:22:40.590Z",
-      "updatedAt": "2023-10-14T04:27:18.235Z",
+      "updatedAt": "2023-10-19T12:50:32.481Z",
       "id": 3
     },
     {

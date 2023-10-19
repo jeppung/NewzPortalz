@@ -117,10 +117,30 @@ const PostDetail = ({ }) => {
 
     }
 
+
+    const likesStatisticHandler = (user: IUser) => {
+        switch(post?.category) {
+            case "entertainment": {
+                return {...user?.statistic.likes, entertainment: !isLike ? user!.statistic.likes.entertainment + 1 : user!.statistic.likes.entertainment - 1}
+            }
+            case "others": {
+                return {...user?.statistic.likes, others: !isLike ? user!.statistic.likes.others + 1 : user!.statistic.likes.others - 1}
+            }
+            case "politics": {
+                 return {...user?.statistic.likes, politics: !isLike ? user!.statistic.likes.politics + 1 : user!.statistic.likes.politics - 1}
+            }
+            case "sports": {
+                return {...user?.statistic.likes, sports: !isLike ? user!.statistic.likes.sports + 1 : user!.statistic.likes.sports - 1}
+            }
+            case "technology": {
+                return {...user?.statistic.likes, technology: !isLike ? user!.statistic.likes.technology + 1 : user!.statistic.likes.technology -  1}
+            }
+        }
+    }
+
     const updateLike = async (count: number) => {
         const user = getUserData()
         const dataIndex = user?.readHistory?.findIndex(data => data.slug === post?.slug)
-
         if (dataIndex === -1) return
 
         user!.readHistory![dataIndex!].isLike = !isLike
@@ -129,6 +149,9 @@ const PostDetail = ({ }) => {
             const res = await fetch(`http://localhost:6969/users/${user!.id}`, {
                 method: "PATCH",
                 body: JSON.stringify({
+                    statistic: {
+                        likes: likesStatisticHandler(user!)
+                    },
                     readHistory: user!.readHistory
                 } as IUser),
                 headers: {
@@ -213,11 +236,20 @@ const PostDetail = ({ }) => {
         }
     }
 
+    const getRecommendedPosts = () => {
+        const user = getUserData()
+
+        if(user !== undefined) {
+            console.log(user.statistic)
+        }
+    }
+
 
     useEffect(() => {
         if (router.query.slug !== undefined) {
             getPostDetail()
             addToHistory()
+            getRecommendedPosts()
         }
     }, [router])
 
@@ -255,6 +287,12 @@ const PostDetail = ({ }) => {
                 </section>
                 <section className='mt-10 content-wrapper'>
                     {post && parse(post.body)}
+                </section>
+                <section className='mt-20'>
+                    <h1 className='text-3xl'>Recommended for you</h1>
+                    <div>
+                        
+                    </div>
                 </section>
             </main>
         </>

@@ -30,6 +30,15 @@ export interface IUser {
     address: string
     phone: number
     subscription: ISubscription
+    statistic: {
+        likes: {
+            technology: number
+            entertainment: number
+            politics: number
+            sports: number
+            others: number
+        }
+    }
     readHistory: IReadHistory[] | null
     isAdmin: boolean
 }
