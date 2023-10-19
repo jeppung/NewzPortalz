@@ -2,14 +2,17 @@ import Navbar from '@/components/navbar'
 import { IUser } from '@/pages/login'
 import { ISubsTransaction } from '@/pages/subscription'
 import moment from 'moment'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 
 interface ITransactionFilter {
   status: string
   sort: "createdAt"
   order: string
-  date: string
+  date: {
+    startDate: Date | undefined,
+    endDate: Date
+  }
 }
 
 const AdminTransaction = () => {
@@ -19,12 +22,25 @@ const AdminTransaction = () => {
     status: "",
     sort: "createdAt",
     order: "desc",
-    date: ""
+    date: {
+      startDate: undefined,
+      endDate: new Date(new Date().setHours(23, 59, 59))
+    }
   })
+  const startDateRef = useRef<HTMLInputElement>(null)
+  const endDateRef = useRef<HTMLInputElement>(null)
+
+  const startDateFocusHandler = () => {
+    startDateRef.current?.showPicker()
+  }
+
+  const endDateFocusHandler = () => {
+    endDateRef.current?.showPicker()
+  }
 
   const getTransactionsData = async () => {
     try {
-      const res = await fetch(`http://localhost:6969/transactions?_expand=user&createdAt_like=${filter.date}&status_like=${filter.status}&_sort=${filter.sort}&_order=${filter.order}`)
+      const res = await fetch(`http://localhost:6969/transactions?_expand=user&status_like=${filter.status}&_sort=${filter.sort}&_order=${filter.order}&createdAt_gte=${filter.date.startDate ? filter.date.startDate.toISOString() : ""}&createdAt_lte=${filter.date.endDate.toISOString()}`)
       if (!res.ok) {
         console.log(res.statusText)
       }
@@ -112,10 +128,23 @@ const AdminTransaction = () => {
               <option value="pending">Pending</option>
               <option value="waiting payment">Waiting payment</option>
             </select>
-            <input type="date" name="date" id="date border" onChange={(e) => {
-              if (e.target.valueAsDate === null) return setFilter({ ...filter, date: "" })
-              setFilter({ ...filter, date: moment(e.target.valueAsDate).format("YYYY-MM-DD").toString() })
-            }} />
+            <div className=' flex items-center'>
+              <div className='relative w-32 rounded-md bg-slate-200 flex items-center' onClick={startDateFocusHandler}>
+                <label htmlFor="dateStart" className='absolute px-2 w-full text-end' >{filter.date.startDate ? moment(filter.date.startDate).format("MM/DD/YYYY") : "Start date"}</label>
+                <input type="date" name="dateStart" id="dateStart" ref={startDateRef} className='absolute invisible' onChange={(e) => {
+                  if (e.target.valueAsDate === null) return setFilter({ ...filter, date: { ...filter.date, startDate: undefined } })
+                  setFilter({ ...filter, date: { ...filter.date, startDate: e.target.valueAsDate } })
+                }} />
+              </div>
+              <p>-</p>
+              <div className='relative w-32 rounded-md bg-slate-200 flex items-center' onClick={endDateFocusHandler}>
+                <label htmlFor="dateEnd" className='absolute px-2  w-full text-start' >{moment(filter.date.endDate).format("MM/DD/YYYY")}</label>
+                <input type="date" name="dateEnd" id="dateEnd" ref={endDateRef} className='absolute invisible' onChange={(e) => {
+                  if (e.target.valueAsDate === null) return setFilter({ ...filter, date: { ...filter.date, endDate: new Date(new Date().setHours(23, 59, 59)) } })
+                  setFilter({ ...filter, date: { ...filter.date, endDate: new Date(e.target.valueAsDate!.setHours(23, 59, 59)) } })
+                }} />
+              </div>
+            </div>
             <select name="order" id="order" className='p-2 rounded-md border' value={filter.order} onChange={(e) => setFilter({ ...filter, order: e.target.value })}>
               <option value="asc">Ascending</option>
               <option value="desc">Descending</option>

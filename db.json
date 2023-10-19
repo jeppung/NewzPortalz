@@ -118,7 +118,7 @@
           "isLike": false,
           "isShare": false,
           "createdAt": "2023-10-18T15:00:54.551Z",
-          "updatedAt": "2023-10-18T15:00:54.551Z"
+          "updatedAt": "2023-10-19T04:12:37.428Z"
         },
         {
           "id": 3,
@@ -331,6 +331,16 @@
       "createdAt": "2023-10-19T03:34:02.641Z",
       "updatedAt": "2023-10-19T03:34:49.129Z",
       "id": 19
+    },
+    {
+      "userId": 3,
+      "type": "premium",
+      "price": 225000,
+      "duration": "yearly",
+      "status": "cancelled",
+      "createdAt": "2023-10-19T04:36:52.691Z",
+      "updatedAt": "2023-10-19T04:37:34.704Z",
+      "id": 20
     }
   ],
   "posts": [
