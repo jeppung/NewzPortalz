@@ -139,7 +139,7 @@ const Profile = () => {
                                     }
                                 </div>
                             </div>
-                            <div className='flex flex-col flex-1 h-full'>
+                            <div className='flex flex-col mt-10 md:mt-0 flex-1 h-full'>
                                 <h1 className='text-[40px]'>Pending Transaction</h1>
                                 <div className='mt-5 flex flex-col gap-y-2 h-80 overflow-y-auto'>
                                     {
