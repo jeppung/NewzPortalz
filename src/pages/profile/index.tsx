@@ -80,9 +80,9 @@ const Profile = () => {
                 }} link={`/transaction/${paymentLink}`} />
             }
             <Navbar />
-            <main className='bg-[#112D4E] flex-1 py-[50px]'>
+            <main className='bg-[#112D4E] flex-1 py-[50px] px-5 md:px-0'>
                 <div className='max-w-7xl mx-auto h-full '>
-                    <section className='flex justify-between  h-full'>
+                    <section className='flex flex-col md:flex-row  justify-between  h-full'>
                         <div className='text-white '>
                             <h1 className='text-[40px]'>Profile</h1>
                             <div className='mt-5 flex flex-col gap-y-5'>
@@ -108,7 +108,7 @@ const Profile = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className='text-white w-[50%]  flex flex-col'>
+                        <div className='text-white w-full mt-14 md:mt-0 md:w-[50%]  flex flex-col'>
                             <div className='flex flex-col flex-1 '>
                                 <h1 className='text-[40px]'>Read history</h1>
                                 <div className='mt-5 flex flex-col gap-y-2 overflow-auto h-80'>
@@ -171,7 +171,6 @@ const Profile = () => {
                                                 </tbody>
                                             </table> : <p>There are no pending transcations</p>
                                     }
-
                                 </div>
                             </div>
                         </div>
