@@ -144,32 +144,52 @@ const Profile = () => {
                                 <div className='mt-5 flex flex-col gap-y-2 h-80 overflow-y-auto'>
                                     {
                                         transactions?.filter((data) => data.userId === user?.id).findIndex((data) => data.status === "waiting payment") !== -1 ?
-                                            <table>
-                                                <thead>
-                                                    <tr>
-                                                        <th className='text-start'>Item</th>
-                                                        <th className='text-start'>Type</th>
-                                                        <th className='text-start'>Duration</th>
-                                                        <th className='text-start'>Created At</th>
-                                                        <th className='text-start'>Action</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
+                                            <>
+                                                <div className='md:hidden'>
                                                     {transactions?.map((data, i) => {
                                                         if (data.userId === user?.id && data.status === "waiting payment") {
                                                             return (
-                                                                <tr key={i}>
-                                                                    <td>Subscription</td>
-                                                                    <td>{data.type}</td>
-                                                                    <td>{data.duration}</td>
-                                                                    <td>{moment(data.createdAt).format("DD MMMM YYYY HH:mm")}</td>
-                                                                    <td><button onClick={() => paymentHandler(data)} className='bg-[#1F4172] px-4 py-1 text-sm rounded-md'>Pay</button></td>
-                                                                </tr>
+                                                                <div className='flex justify-between items-center'>
+                                                                    <div>
+                                                                        <h1 className='font-bold'>Subscription</h1>
+                                                                        <p className='text-sm'>{data.status}</p>
+                                                                        <p className='text-sm'>Created at: {moment(data.createdAt).format("DD MMMM YYYY HH:mm")}</p>
+                                                                    </div>
+                                                                    <div>
+                                                                        <button onClick={() => paymentHandler(data)} className='bg-[#1F4172] px-4 py-1 text-sm rounded-md'>Pay</button>
+                                                                    </div>
+                                                                </div>
                                                             )
                                                         }
                                                     })}
-                                                </tbody>
-                                            </table> : <p>There are no pending transcations</p>
+                                                </div>
+                                                <table className='hidden md:inline-table'>
+                                                    <thead>
+                                                        <tr>
+                                                            <th className='text-start'>Item</th>
+                                                            <th className='text-start'>Type</th>
+                                                            <th className='text-start'>Duration</th>
+                                                            <th className='text-start'>Created At</th>
+                                                            <th className='text-start'>Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {transactions?.map((data, i) => {
+                                                            if (data.userId === user?.id && data.status === "waiting payment") {
+                                                                return (
+                                                                    <tr key={i}>
+                                                                        <td>Subscription</td>
+                                                                        <td>{data.type}</td>
+                                                                        <td>{data.duration}</td>
+                                                                        <td>{moment(data.createdAt).format("DD MMMM YYYY HH:mm")}</td>
+                                                                        <td><button onClick={() => paymentHandler(data)} className='bg-[#1F4172] px-4 py-1 text-sm rounded-md'>Pay</button></td>
+                                                                    </tr>
+                                                                )
+                                                            }
+                                                        })}
+                                                    </tbody>
+                                                </table>
+                                            </> : <p>There are no pending transcations</p>
                                     }
                                 </div>
                             </div>
