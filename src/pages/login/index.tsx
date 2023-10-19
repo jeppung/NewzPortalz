@@ -22,6 +22,16 @@ export interface IReadHistory {
     updatedAt: string
 }
 
+export type PostCategory = "technology" | "entertainment" | "politics" | "sports" | "others"
+
+interface IStatisticLikes {
+    technology: number
+    entertainment: number
+    politics: number
+    sports: number
+    others: number
+}
+
 export interface IUser {
     id?: number
     name: string
@@ -31,13 +41,7 @@ export interface IUser {
     phone: number
     subscription: ISubscription
     statistic: {
-        likes: {
-            technology: number
-            entertainment: number
-            politics: number
-            sports: number
-            others: number
-        }
+        likes: IStatisticLikes
     }
     readHistory: IReadHistory[] | null
     isAdmin: boolean
