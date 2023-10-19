@@ -224,18 +224,18 @@ const PostDetail = ({ }) => {
     return (
         <>
             <Navbar />
-            <main className='max-w-7xl mx-auto py-10'>
-                <section className='border-b-2 pb-2 flex justify-between items-end'>
-                    <div className='max-w-4xl'>
-                        <h1 className='text-3xl font-bold'>{post?.title}</h1>
+            <main className='max-w-7xl mx-auto py-10 px-5 md:px-0'>
+                <section className='border-b-2 pb-2 flex flex-col md:flex-row justify-between items-end'>
+                    <div className='w-full'>
+                        <h1 className='text-3xl  font-bold'>{post?.title}</h1>
                         <h2 className='text-sm text-gray-500'>{post?.description}</h2>
                     </div>
 
-                    <div className='flex flex-col gap-x-2'>
-                        <div className='self-end'>
+                    <div className='flex flex-col w-full mt-5 gap-x-2'>
+                        <div className='md:self-end'>
                             <p>Author: {post?.user.name}</p>
                         </div>
-                        <div className='flex self-end gap-x-2'>
+                        <div className='flex md:self-end gap-x-2'>
                             <p>{moment(post?.createdAt).format("MMMM DD YYYY HH:mm")}</p>
 
                             <div className='flex gap-x-1'>
