@@ -131,9 +131,9 @@ export default function Home() {
       <Navbar onRefresh={() => router.reload()} />
       <main>
         <section className="bg-[#112D4E] w-full pt-[50px] pb-[80px]">
-          <div className="max-w-7xl mx-auto flex justify-around">
-            <Image src="/hero.png" width={380} height={380} alt="Hero" />
-            <div className="text-white text-5xl font-bold flex flex-col justify-around">
+          <div className="max-w-7xl mx-auto flex px-5 md:px-0 md:justify-around">
+            <Image className="hidden md:flex" src="/hero.png" width={380} height={380} alt="Hero" />
+            <div className="text-white text-3xl md:text-5xl font-bold flex flex-col justify-around">
               <div >
                 <h1>{getGreeting()}</h1>
                 <h1>{user?.name.split(" ")[0]}</h1>
@@ -144,10 +144,10 @@ export default function Home() {
             </div>
           </div>
         </section>
-        <section className="bg-[#F9F7F7] pt-[50px] pb-[80px]">
+        <section className="bg-[#F9F7F7] pt-[50px] pb-[80px] px-5 md:px-0">
           <div className="max-w-7xl mx-auto">
             <h1 className="text-3xl font-bold">Trending post of this week 🔥</h1>
-            <div id="card-wrapper" className="mt-[60px] flex gap-x-20 flex-wrap justify-center gap-y-12">
+            <div id="card-wrapper" className="mt-[60px]  flex flex-col md:flex-row  md:flex-wrap justify-center gap-y-12 gap-x-20">
               {
                 getTrendingPostWeek()
               }
@@ -155,11 +155,11 @@ export default function Home() {
           </div>
         </section>
         <section className="bg-[#112D4E] pt-[50px] pb-[80px]" id="posts">
-          <div className="max-w-7xl mx-auto">
+          <div className="max-w-7xl mx-auto px-5 md:px-0">
             <h1 className="text-3xl font-bold text-white">All Posts</h1>
-            <div className="mt-10 flex justify-between">
-              <div className="flex gap-x-2">
-                <input type="text" className="p-2 rounded-md text-sm w-[318px]" name="search" id="search" placeholder="Search by title..." onChange={(e) => setFilter({ ...filter, search: e.target.value })} />
+            <div className="mt-10 flex flex-col gap-y-10 md:gap-y-0 md:flex-row justify-between">
+              <div className="flex gap-x-2 flex-col gap-y-2 md:flex-row">
+                <input type="text" className="p-2 rounded-md text-sm w-full md:max-w-[318px]" name="search" id="search" placeholder="Search by title..." onChange={(e) => setFilter({ ...filter, search: e.target.value })} />
                 <select name="category" id="category" className="p-2 rounded-md text-sm" value={filter.category} onChange={(e) => setFilter({ ...filter, category: e.target.value })}>
                   <option value="">All</option>
                   <option value="technology">Technology</option>
@@ -173,8 +173,8 @@ export default function Home() {
                   <option value="true">Premium</option>
                 </select>
               </div>
-              <div className="flex gap-x-2">
-                <div className="flex">
+              <div className="flex gap-y-2 md:gap-y-0 md:gap-x-2 flex-col md:flex-row ">
+                <div className="flex justify-center md:justify-normal">
                   <div className='relative w-32 rounded-md text-white flex items-center' onClick={startDateFocusHandler}>
                     <label htmlFor="dateStart" className='absolute px-2 w-full text-end' >{filter.date.startDate ? moment(filter.date.startDate).format("MM/DD/YYYY") : "Start date"}</label>
                     <input type="date" name="dateStart" id="dateStart" ref={startDateRef} className='absolute invisible' onChange={(e) => {
@@ -197,7 +197,7 @@ export default function Home() {
                 </select>
               </div>
             </div>
-            <div id="posts-wrapper" className="mt-10 grid grid-cols-2 gap-x-20 gap-y-5">
+            <div id="posts-wrapper" className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-x-20 gap-y-5">
               {
                 filteredPosts.map((post, i) => {
                   return (
