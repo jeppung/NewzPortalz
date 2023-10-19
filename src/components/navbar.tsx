@@ -33,9 +33,9 @@ const Navbar = ({ onRefresh }: INavbarProps) => {
 
     return (
         <header className='bg-[#112D4E]'>
-            <div className='bg-[#112D4E] text-white py-4 max-w-7xl px-5 md:px-0 mx-auto flex justify-between items-center'>
+            <div className='bg-[#112D4E] text-white py-4 max-w-7xl px-5 md:px-0 mx-auto flex flex-col md:flex-row justify-between items-center'>
                 <h1 className='md:text-3xl font-bold'>NewzPortalz</h1>
-                <div className='hidden lg:flex'>
+                <div className='mt-3 md:mt-0 lg:flex'>
                     <nav className='flex gap-x-7'>
                         {
                             userData ? userData.isAdmin ? <>

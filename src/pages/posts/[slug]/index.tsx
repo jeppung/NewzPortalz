@@ -230,7 +230,6 @@ const PostDetail = ({ }) => {
                         <h1 className='text-3xl  font-bold'>{post?.title}</h1>
                         <h2 className='text-sm text-gray-500'>{post?.description}</h2>
                     </div>
-
                     <div className='flex flex-col w-full mt-5 gap-x-2'>
                         <div className='md:self-end'>
                             <p>Author: {post?.user.name}</p>
