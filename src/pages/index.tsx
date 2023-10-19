@@ -83,7 +83,7 @@ export default function Home() {
 
   const getPostsData = async () => {
     try {
-      const res = await fetch(`http://localhost:6969/posts?_expand=user&title_like=${filter.search}&category_like=${filter.category}&isPremium_like=${filter.type}&_sort=${filter.sort}&_order=${filter.order}&createdAt_gte=${filter.date.startDate ? filter.date.startDate.toISOString(): ""}&createdAt_lte=${filter.date.endDate.toISOString()}`)
+      const res = await fetch(`http://localhost:6969/posts?_expand=user&title_like=${filter.search}&category_like=${filter.category}&isPremium_like=${filter.type}&_sort=${filter.sort}&_order=${filter.order}&createdAt_gte=${filter.date.startDate ? filter.date.startDate.toISOString() : ""}&createdAt_lte=${filter.date.endDate.toISOString()}`)
       if (!res.ok) {
         alert("Error get post data")
       }
@@ -99,11 +99,11 @@ export default function Home() {
 
   const getGreeting = () => {
     const currHour = moment().hour()
-    if(currHour >= 0 && currHour < 12){
+    if (currHour >= 0 && currHour < 12) {
       return "Good Morning,"
-    }else if (currHour >= 12 && currHour < 18) {
+    } else if (currHour >= 12 && currHour < 18) {
       return "Good Afternoon,"
-    }else{
+    } else {
       return "Good Evening,"
     }
   }
@@ -172,19 +172,21 @@ export default function Home() {
                   return setFilter({ ...filter, date: moment(e.target.valueAsDate).format("YYYY-MM-DD").toString() })
                 }} /> */}
                 <div className="bg-white h-10 w-52 rounded-md relative" onClick={() => setIsDateModal(true)}>
-                    <dialog open={isDateModal}>
+                  {
+                    isDateModal && <dialog open>
                       <DateRange
-                      calendarFocus="forwards"
-                      ranges={[{startDate: filter.date.startDate, endDate: filter.date.endDate, key: "selection"}]}
-                      onRangeFocusChange={(e) => {
-                        if(e[0] === 0 && e[1] === 0){
-                          setIsDateModal(false)
-                        }
-                      }}
-                      onChange={(e) => {
-                        setFilter({...filter, date: {startDate: e.selection.startDate!, endDate: new Date(e.selection.endDate!.setHours(23,59,59))}})                      
-                      }}/>
+                        calendarFocus="forwards"
+                        ranges={[{ startDate: filter.date.startDate, endDate: filter.date.endDate, key: "selection" }]}
+                        onRangeFocusChange={(e) => {
+                          if (e[0] === 0 && e[1] === 0) {
+                            setIsDateModal(false)
+                          }
+                        }}
+                        onChange={(e) => {
+                          setFilter({ ...filter, date: { startDate: e.selection.startDate!, endDate: new Date(e.selection.endDate!.setHours(23, 59, 59)) } })
+                        }} />
                     </dialog>
+                  }
                 </div>
                 <select name="order" id="order" className="p-2 rounded-md text-sm" value={filter.order} onChange={(e) => setFilter({ ...filter, order: e.target.value as PostFilterOrder })}>
                   <option value="asc">Ascending</option>
