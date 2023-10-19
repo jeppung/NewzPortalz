@@ -101,7 +101,7 @@
       "password": "kevin123",
       "subscription": {
         "type": "premium",
-        "expiredAt": "2027-02-17T12:11:10.019Z"
+        "expiredAt": "2027-03-17T12:11:10.019Z"
       },
       "readHistory": [
         {
@@ -311,6 +311,26 @@
       "createdAt": "2023-10-19T03:23:47.804Z",
       "updatedAt": "2023-10-19T03:24:07.851Z",
       "id": 17
+    },
+    {
+      "userId": 3,
+      "type": "premium",
+      "price": 25000,
+      "duration": "monthly",
+      "status": "completed",
+      "createdAt": "2023-10-19T03:33:26.243Z",
+      "updatedAt": "2023-10-19T03:34:51.900Z",
+      "id": 18
+    },
+    {
+      "userId": 3,
+      "type": "premium",
+      "price": 225000,
+      "duration": "yearly",
+      "status": "completed",
+      "createdAt": "2023-10-19T03:34:02.641Z",
+      "updatedAt": "2023-10-19T03:34:49.129Z",
+      "id": 19
     }
   ],
   "posts": [
