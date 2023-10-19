@@ -110,7 +110,7 @@
           "isLike": false,
           "isShare": false,
           "createdAt": "2023-10-18T14:43:17.662Z",
-          "updatedAt": "2023-10-19T11:35:39.833Z"
+          "updatedAt": "2023-10-19T12:09:33.894Z"
         },
         {
           "id": 2,
@@ -126,7 +126,7 @@
           "isLike": false,
           "isShare": false,
           "createdAt": "2023-10-18T16:58:59.503Z",
-          "updatedAt": "2023-10-18T16:58:59.503Z"
+          "updatedAt": "2023-10-19T12:09:21.549Z"
         },
         {
           "id": 4,
@@ -407,6 +407,16 @@
       "createdAt": "2023-10-19T12:02:46.015Z",
       "updatedAt": "2023-10-19T12:03:35.464Z",
       "id": 25
+    },
+    {
+      "userId": 3,
+      "type": "premium",
+      "price": 25000,
+      "duration": "monthly",
+      "status": "pending",
+      "createdAt": "2023-10-19T12:10:15.226Z",
+      "updatedAt": "2023-10-19T12:12:55.151Z",
+      "id": 26
     }
   ],
   "posts": [
