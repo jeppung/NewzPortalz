@@ -171,7 +171,8 @@ export default function Home() {
                   if (e.target.valueAsDate === null) return setFilter({ ...filter, date: "" })
                   return setFilter({ ...filter, date: moment(e.target.valueAsDate).format("YYYY-MM-DD").toString() })
                 }} /> */}
-                <div className="bg-white h-10 w-52 rounded-md relative" onClick={() => setIsDateModal(true)}>
+                <div className="bg-white h-10 w-52 px-3 rounded-md flex relative" onClick={() => setIsDateModal(true)}>
+                  <p className="text-sm self-center">{filter.date.startDate ? `${moment(filter.date.startDate).format("MM/DD/YYYY")} - ${moment(filter.date.endDate).format("MM/DD/YYYY")}` : "Filter by date..."}</p>
                   {
                     isDateModal && <dialog open>
                       <DateRange
