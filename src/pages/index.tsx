@@ -2,15 +2,12 @@ import Navbar from "@/components/navbar";
 import { getCookie } from "cookies-next";
 import Image from "next/image";
 import { IUser } from "./login";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/router";
 import TrendingCard from "@/components/trendingCard";
 import { IPost, PostCategory } from "./admin/posts";
 import PostCard from "@/components/postCard";
 import moment from "moment";
-import 'react-date-range/dist/styles.css'; // main css file
-import 'react-date-range/dist/theme/default.css'; // theme css file
-import { DateRange } from 'react-date-range';
 
 type PostFilterOrder = "desc" | "asc"
 
@@ -44,9 +41,19 @@ export default function Home() {
   const [filteredPosts, setFilteredPosts] = useState<IPost[]>([])
   const [filter, setFilter] = useState<IPostsFilter>(initialFilter)
   const [initialLoad, setInitialLoad] = useState<boolean>(true)
-  const [isDateModal, setIsDateModal] = useState<boolean>(false)
+  const startDateRef = useRef<HTMLInputElement>(null)
+  const endDateRef = useRef<HTMLInputElement>(null)
   const userData = getCookie("userData")
   const router = useRouter()
+
+  const startDateFocusHandler = () => {
+    startDateRef.current?.showPicker()
+  }
+
+  const endDateFocusHandler = () => {
+    endDateRef.current?.showPicker()
+  }
+
 
   const getLastSevenDaysDate = () => {
     const date = new Date()
@@ -167,27 +174,22 @@ export default function Home() {
                 </select>
               </div>
               <div className="flex gap-x-2">
-                {/* <input className="p-2 rounded-md" type="date" name="date" id="date" onChange={(e) => {
-                  if (e.target.valueAsDate === null) return setFilter({ ...filter, date: "" })
-                  return setFilter({ ...filter, date: moment(e.target.valueAsDate).format("YYYY-MM-DD").toString() })
-                }} /> */}
-                <div className="bg-white h-10 w-52 px-3 rounded-md flex relative" onClick={() => setIsDateModal(true)}>
-                  <p className="text-sm self-center">{filter.date.startDate ? `${moment(filter.date.startDate).format("MM/DD/YYYY")} - ${moment(filter.date.endDate).format("MM/DD/YYYY")}` : "Filter by date..."}</p>
-                  {
-                    isDateModal && <dialog open>
-                      <DateRange
-                        calendarFocus="forwards"
-                        ranges={[{ startDate: filter.date.startDate, endDate: filter.date.endDate, key: "selection" }]}
-                        onRangeFocusChange={(e) => {
-                          if (e[0] === 0 && e[1] === 0) {
-                            setIsDateModal(false)
-                          }
-                        }}
-                        onChange={(e) => {
-                          setFilter({ ...filter, date: { startDate: e.selection.startDate!, endDate: new Date(e.selection.endDate!.setHours(23, 59, 59)) } })
-                        }} />
-                    </dialog>
-                  }
+                <div className="flex">
+                  <div className='relative w-32 rounded-md text-white flex items-center' onClick={startDateFocusHandler}>
+                    <label htmlFor="dateStart" className='absolute px-2 w-full text-end' >{filter.date.startDate ? moment(filter.date.startDate).format("MM/DD/YYYY") : "Start date"}</label>
+                    <input type="date" name="dateStart" id="dateStart" ref={startDateRef} className='absolute invisible' onChange={(e) => {
+                      if (e.target.valueAsDate === null) return setFilter({ ...filter, date: { ...filter.date, startDate: undefined } })
+                      setFilter({ ...filter, date: { ...filter.date, startDate: e.target.valueAsDate } })
+                    }} />
+                  </div>
+                  <p className="self-center text-white">-</p>
+                  <div className='relative w-32 rounded-md text-white flex items-center' onClick={endDateFocusHandler}>
+                    <label htmlFor="dateEnd" className='absolute px-2  w-full text-start' >{moment(filter.date.endDate).format("MM/DD/YYYY")}</label>
+                    <input type="date" name="dateEnd" id="dateEnd" ref={endDateRef} className='absolute invisible' onChange={(e) => {
+                      if (e.target.valueAsDate === null) return setFilter({ ...filter, date: { ...filter.date, endDate: new Date(new Date().setHours(23, 59, 59)) } })
+                      setFilter({ ...filter, date: { ...filter.date, endDate: new Date(e.target.valueAsDate!.setHours(23, 59, 59)) } })
+                    }} />
+                  </div>
                 </div>
                 <select name="order" id="order" className="p-2 rounded-md text-sm" value={filter.order} onChange={(e) => setFilter({ ...filter, order: e.target.value as PostFilterOrder })}>
                   <option value="asc">Ascending</option>
