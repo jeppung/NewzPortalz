@@ -142,7 +142,7 @@
           "isLike": false,
           "isShare": false,
           "createdAt": "2023-10-19T06:28:14.051Z",
-          "updatedAt": "2023-10-19T06:28:14.051Z"
+          "updatedAt": "2023-10-19T12:06:39.282Z"
         },
         {
           "id": 6,
@@ -363,10 +363,50 @@
       "type": "premium",
       "price": 25000,
       "duration": "monthly",
-      "status": "waiting payment",
+      "status": "cancelled",
       "createdAt": "2023-10-19T09:26:11.559Z",
-      "updatedAt": "2023-10-19T09:26:11.559Z",
+      "updatedAt": "2023-10-19T12:03:42.762Z",
       "id": 21
+    },
+    {
+      "userId": 3,
+      "type": "premium",
+      "price": 25000,
+      "duration": "monthly",
+      "status": "cancelled",
+      "createdAt": "2023-10-19T12:01:52.392Z",
+      "updatedAt": "2023-10-19T12:03:41.143Z",
+      "id": 22
+    },
+    {
+      "userId": 3,
+      "type": "premium",
+      "price": 25000,
+      "duration": "monthly",
+      "status": "cancelled",
+      "createdAt": "2023-10-19T12:02:28.182Z",
+      "updatedAt": "2023-10-19T12:03:38.538Z",
+      "id": 23
+    },
+    {
+      "userId": 3,
+      "type": "premium",
+      "price": 25000,
+      "duration": "monthly",
+      "status": "cancelled",
+      "createdAt": "2023-10-19T12:02:38.655Z",
+      "updatedAt": "2023-10-19T12:03:36.854Z",
+      "id": 24
+    },
+    {
+      "userId": 3,
+      "type": "premium",
+      "price": 25000,
+      "duration": "monthly",
+      "status": "cancelled",
+      "createdAt": "2023-10-19T12:02:46.015Z",
+      "updatedAt": "2023-10-19T12:03:35.464Z",
+      "id": 25
     }
   ],
   "posts": [

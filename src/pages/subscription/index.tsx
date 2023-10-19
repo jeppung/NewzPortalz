@@ -84,17 +84,17 @@ const Subscription = () => {
             <Navbar />
             <main className='bg-[#112D4E] flex-1 pt-[50px]'>
                 <section className='max-w-7xl mx-auto'>
-                    <div className='bg-[#F9F7F7]  w-full rounded-2xl py-[80px] px-[50px] flex'>
-                        <div className='w-full flex flex-col justify-center gap-y-3'>
+                    <div className='bg-[#F9F7F7]  w-full rounded-tr-2xl rounded-tl-2xl md:rounded-2xl py-[80px] px-[50px] flex flex-col md:flex-row'>
+                        <div className='w-full flex flex-col justify-center items-center md:items-start gap-y-3'>
                             <Image src="/group-team.png" alt='group-team' width={500} height={0} />
                             <div className=''>
                                 <h1 className='text-5xl font-bold'>Be part of us</h1>
                                 <p className='mt-1 text-lg'>Lets read and read and read more</p>
                             </div>
                         </div>
-                        <div className='w-full'>
+                        <div className='w-full mt-10 md:mt-0'>
                             <h1 className='text-[36px] text-center'>Subscription</h1>
-                            <div className='flex gap-x-5'>
+                            <div className='flex flex-col items-center md:flex-row gap-x-5'>
                                 <div className='bg-[#DEDEDE] w-[277px] h-[413px] p-[28px] rounded-2xl flex flex-col mt-[40px] shadow-lg border border-black'>
                                     <div className='flex-1'>
                                         <h1 className='text-[36px]'>Monthly</h1>
