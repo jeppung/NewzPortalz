@@ -196,8 +196,8 @@ const Profile = () => {
                         </div>
                     </section>
                 </div>
-            </main>
-        </div>
+            </main >
+        </div >
     )
 }
 
