@@ -1,6 +1,7 @@
 import Navbar from '@/components/navbar'
 import PostModal from '@/components/postModal'
 import { IUser } from '@/pages/login'
+import axios, { Axios, isAxiosError } from 'axios'
 import moment from 'moment'
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
@@ -29,21 +30,54 @@ interface IModalPost {
     initialData?: IPost
 }
 
+export interface IPaginationLink {
+    link: string
+    status: string
+}
+
+export interface IPagination {
+    _page: number
+    _limit: number
+    data: IPaginationLink[]
+}
+
 const AdminPosts = () => {
 
     const [posts, setPosts] = useState<IPost[]>([])
     const [modal, setModal] = useState<IModalPost>({ isModal: false, type: "create" })
+    const [pagination, setPagination] = useState<IPagination | null>(null)
 
-    const getPostsData = async () => {
+    const getPostsData = async (url: string) => {
         try {
-            const res = await fetch("http://localhost:6969/posts?_expand=user")
-            if (!res.ok) {
-                console.log(res.statusText)
-            }
-            const data = await res.json()
+            const res = await axios.get(url, {
+                params: {
+                    _expand: "user",
+                    _page: 1,
+                    _limit: 10
+                }
+            })
+
+            const link = res.headers.link.split(",").map((data: string) => {
+                let data2 = data.split(";")
+                return {
+                    link: data2[0].replace("<", "").replace(">", ""),
+                    status: data2[1].match(/last|next|first|prev/g)?.[0]
+                }
+            })
+
+            const data = res.data as IPost[]
+            const params = new URLSearchParams(url)
+
+            setPagination({
+                _page: parseInt(params.get("_page")!),
+                _limit: parseInt(params.get("_limit")!),
+                data: link
+            })
             setPosts(data)
         } catch (e) {
-            console.log(e)
+            if (isAxiosError(e)) {
+                return alert(`Error fetching posts data ${e.cause}`)
+            }
         }
     }
 
@@ -68,7 +102,7 @@ const AdminPosts = () => {
 
 
     useEffect(() => {
-        getPostsData()
+        getPostsData("http://localhost:6969/posts?_expand=user&_page=1&_limit=10")
     }, [])
 
     return (
@@ -76,7 +110,7 @@ const AdminPosts = () => {
             {
                 modal.isModal && <PostModal type={modal.type} onClose={() => setModal({ ...modal, isModal: false })} onSuccess={() => {
                     setModal({ ...modal, isModal: false })
-                    getPostsData()
+                    getPostsData(`http://localhost:6969/posts?_expand=user&_page=${pagination?._page}&_limit=${pagination?._limit}`)
                 }} initialData={modal.initialData} />
             }
             <Navbar />
@@ -104,7 +138,7 @@ const AdminPosts = () => {
                                 posts.map((post, i) => {
                                     return (
                                         <tr key={i} className='border'>
-                                            <td className='p-2'>{i + 1}</td>
+                                            <td className='p-2'>{(pagination!._limit * pagination!._page) - 10 + 1 + i}</td>
                                             <td className='p-2'>{post.title}</td>
                                             <td className='p-2'>{post.slug}</td>
                                             <td className='p-2'>{post.user.name}</td>
@@ -125,6 +159,22 @@ const AdminPosts = () => {
                             }
                         </tbody>
                     </table>
+                    <div className='mt-2 flex justify-end'>
+                        <div className='flex gap-x-2'>
+                            {
+                                pagination?.data.find((data) => data.status === "prev") && <button onClick={() => {
+                                    const url = pagination?.data.find((data) => data.status === "prev")?.link
+                                    return getPostsData(url!.trim())
+                                }} className='py-1 border-2 rounded-md px-2'>Prev</button>
+                            }
+                            {
+                                pagination?.data.find((data) => data.status === "next") && <button onClick={() => {
+                                    const url = pagination?.data.find((data) => data.status === "next")?.link
+                                    return getPostsData(url!.trim())
+                                }} className='py-1 border-2 rounded-md px-2'>Next</button>
+                            }
+                        </div>
+                    </div>
                 </section>
             </main>
         </>
