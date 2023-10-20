@@ -5,9 +5,10 @@ import { IUser } from "./login";
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/router";
 import TrendingCard from "@/components/trendingCard";
-import { IPost, PostCategory } from "./admin/posts";
+import { IPagination, IPost, PostCategory } from "./admin/posts";
 import PostCard from "@/components/postCard";
 import moment from "moment";
+import axios from "axios";
 
 type PostFilterOrder = "desc" | "asc"
 
@@ -41,6 +42,7 @@ export default function Home() {
   const [filteredPosts, setFilteredPosts] = useState<IPost[]>([])
   const [filter, setFilter] = useState<IPostsFilter>(initialFilter)
   const [initialLoad, setInitialLoad] = useState<boolean>(true)
+  const [pagination, setPagination] = useState<IPagination | null>(null)
   const startDateRef = useRef<HTMLInputElement>(null)
   const endDateRef = useRef<HTMLInputElement>(null)
   const userData = getCookie("userData")
@@ -88,13 +90,31 @@ export default function Home() {
 
   }
 
-  const getPostsData = async () => {
+  const getPostsData = async (url: string) => {
     try {
-      const res = await fetch(`http://localhost:6969/posts?_expand=user&title_like=${filter.search}&category_like=${filter.category}&isPremium_like=${filter.type}&_sort=${filter.sort}&_order=${filter.order}&createdAt_gte=${filter.date.startDate ? filter.date.startDate.toISOString() : ""}&createdAt_lte=${filter.date.endDate.toISOString()}`)
-      if (!res.ok) {
-        alert("Error get post data")
+      const res = await axios.get(url)
+
+      if (res.headers.link !== "") {
+        const link = res.headers.link.split(",").map((data: string) => {
+          let data2 = data.split(";")
+          return {
+            link: data2[0].replace("<", "").replace(">", ""),
+            status: data2[1].match(/last|next|first|prev/g)?.[0]
+          }
+        })
+
+        const params = new URLSearchParams(url)
+
+        setPagination({
+          _limit: parseInt(params.get("_limit")!),
+          _page: parseInt(params.get("_page")!),
+          data: link
+        })
+      } else {
+        setPagination(null)
       }
-      const data = await res.json()
+
+      const data = res.data as IPost[]
       if (initialLoad) {
         setPosts(data)
       }
@@ -116,7 +136,7 @@ export default function Home() {
   }
 
   useEffect(() => {
-    getPostsData()
+    getPostsData(`http://localhost:6969/posts?_expand=user&title_like=${filter.search}&category_like=${filter.category}&isPremium_like=${filter.type}&_sort=${filter.sort}&_order=${filter.order}&createdAt_gte=${filter.date.startDate ? filter.date.startDate.toISOString() : ""}&createdAt_lte=${filter.date.endDate.toISOString()}&_page=${pagination ? pagination._page : 1}&_limit=${pagination ? pagination._limit : 10}`)
     setInitialLoad(false)
   }, [filter])
 
@@ -205,6 +225,22 @@ export default function Home() {
                   )
                 })
               }
+            </div>
+            <div className='mt-5 flex justify-end'>
+              <div className='flex gap-x-2'>
+                {
+                  pagination?.data.find((data) => data.status === "prev") && <button onClick={() => {
+                    const url = pagination?.data.find((data) => data.status === "prev")?.link
+                    return getPostsData(url!.trim())
+                  }} className='py-1 bg-white border-2 rounded-md px-2'>Prev</button>
+                }
+                {
+                  pagination?.data.find((data) => data.status === "next") && <button onClick={() => {
+                    const url = pagination?.data.find((data) => data.status === "next")?.link
+                    return getPostsData(url!.trim())
+                  }} className='py-1 bg-white border-2 rounded-md px-2'>Next</button>
+                }
+              </div>
             </div>
           </div>
         </section>
