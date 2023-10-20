@@ -1,4 +1,5 @@
 import { setCookie } from 'cookies-next'
+import Head from 'next/head'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
@@ -75,6 +76,9 @@ const Login = () => {
 
     return (
         <main className='h-screen w-screen flex justify-center items-center'>
+            <Head>
+                <title>Newz Portalz | Login</title>
+            </Head>
             <div className='bg-red-500 w-96 p-5 rounded-xl'>
                 <form action="#" className='flex flex-col gap-y-5' onSubmit={(e) => loginHandler(e)}>
                     <div className='flex flex-col gap-y-2'>

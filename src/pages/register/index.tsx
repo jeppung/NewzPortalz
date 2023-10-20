@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { IError, IUser } from '../login'
 import { setCookie } from 'cookies-next'
 import { useRouter } from 'next/router'
+import Head from 'next/head'
 
 
 
@@ -57,6 +58,9 @@ const Register = () => {
 
     return (
         <main className='h-screen w-screen flex justify-center items-center'>
+            <Head>
+                <title>Newz Portalz | Register</title>
+            </Head>
             <div className='bg-red-500 w-96 p-5 rounded-xl'>
                 <form action="#" className='flex flex-col gap-y-5' onSubmit={(e) => registerHandler(e)}>
                     <div className='flex flex-col gap-y-2'>

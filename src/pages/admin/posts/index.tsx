@@ -3,6 +3,7 @@ import PostModal from '@/components/postModal'
 import { IUser } from '@/pages/login'
 import axios, { Axios, isAxiosError } from 'axios'
 import moment from 'moment'
+import Head from 'next/head'
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 
@@ -104,6 +105,9 @@ const AdminPosts = () => {
 
     return (
         <>
+            <Head>
+                <title>Newz Portalz | Posts</title>
+            </Head>
             {
                 modal.isModal && <PostModal type={modal.type} onClose={() => setModal({ ...modal, isModal: false })} onSuccess={() => {
                     setModal({ ...modal, isModal: false })

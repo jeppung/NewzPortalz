@@ -10,6 +10,7 @@ import { getCookie, setCookie } from 'cookies-next';
 import { IReadHistory, IUser, PostCategory } from '@/pages/login';
 import PostCard from '@/components/postCard';
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
+import Head from 'next/head';
 
 
 
@@ -248,6 +249,9 @@ const PostDetail = ({ recommendedPosts }: InferGetServerSidePropsType<typeof get
 
     return (
         <>
+            <Head>
+                <title>{post?.title}</title>
+            </Head>
             <Navbar />
             <main className='max-w-7xl mx-auto py-10 px-5 md:px-0'>
                 <section className='border-b-2 pb-2 flex flex-col md:flex-row justify-between items-end'>

@@ -7,6 +7,7 @@ import { IPost } from '../admin/posts'
 import moment from 'moment'
 import { ISubsTransaction, encrypt } from '../subscription'
 import SubsModal from '@/components/subsModal'
+import Head from 'next/head'
 
 const Profile = () => {
     const [user, setUser] = useState<IUser>()
@@ -73,6 +74,9 @@ const Profile = () => {
 
     return (
         <div className='flex flex-col h-screen'>
+            <Head>
+                <title>Newz Portalz | Profile</title>
+            </Head>
             {
                 isModal && <SubsModal onClose={() => {
                     setIsModal(false)

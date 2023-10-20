@@ -4,6 +4,7 @@ import SubsModal from '@/components/subsModal'
 import TransactionAlert from '@/components/transactionAlert'
 import { ISubsTransaction, decrypt } from '@/pages/subscription'
 import moment from 'moment'
+import Head from 'next/head'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 
@@ -58,6 +59,9 @@ const Transaction = () => {
 
     return (
         <div className='bg-[#112D4E] w-screen h-screen flex justify-center items-center'>
+            <Head>
+                <title>Newz Portalz | Transactions</title>
+            </Head>
             {
                 isModal && <Modal onClose={() => setIsModal(false)} component={<TransactionAlert status={isSuccess!} data={isSuccess ? transaction : undefined} onOk={(status) => status ? router.replace("/") : setIsModal(false)} />} data={{}} />
             }

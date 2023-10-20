@@ -5,6 +5,7 @@ import moment from 'moment'
 import React, { useEffect, useRef, useState } from 'react'
 import { IPagination } from '../posts'
 import axios from 'axios'
+import Head from 'next/head'
 
 
 interface ITransactionFilter {
@@ -139,6 +140,9 @@ const AdminTransaction = () => {
 
   return (
     <>
+      <Head>
+        <title>Newz Portalz | Transactions</title>
+      </Head>
       <Navbar />
       <main className='max-w-7xl mx-auto pt-10'>
         <div className='flex items-center justify-between'>

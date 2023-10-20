@@ -4,6 +4,7 @@ import moment from 'moment'
 import React, { useEffect, useState } from 'react'
 import { IPagination } from '../posts'
 import axios from 'axios'
+import Head from 'next/head'
 
 const AdminSubscription = () => {
 
@@ -77,6 +78,9 @@ const AdminSubscription = () => {
 
     return (
         <>
+            <Head>
+                <title>Newz Portalz | Subscription</title>
+            </Head>
             <Navbar />
             <main className='max-w-7xl mx-auto pt-10'>
                 <h1 className='text-3xl'>Subscriptions</h1>

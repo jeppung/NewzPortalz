@@ -9,6 +9,7 @@ import { IPagination, IPost, PostCategory } from "./admin/posts";
 import PostCard from "@/components/postCard";
 import moment from "moment";
 import axios from "axios";
+import Head from "next/head";
 
 type PostFilterOrder = "desc" | "asc"
 
@@ -148,6 +149,9 @@ export default function Home() {
 
   return (
     <>
+      <Head>
+        <title>Newz Portalz</title>
+      </Head>
       <Navbar onRefresh={() => router.reload()} />
       <main>
         <section className="bg-[#112D4E] w-full pt-[50px] pb-[80px]">

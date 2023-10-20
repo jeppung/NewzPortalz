@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react'
 import { IUser } from '../login'
 import { useRouter } from 'next/router'
 import SubsModal from '@/components/subsModal'
+import Head from 'next/head'
 
 
 
@@ -78,6 +79,9 @@ const Subscription = () => {
 
     return (
         <div className='flex flex-col h-screen w-full'>
+            <Head>
+                <title>Newz Portalz | Subscription</title>
+            </Head>
             {
                 isModal && transactionLink && <SubsModal onClose={() => setIsModal(false)} link={transactionLink} />
             }
