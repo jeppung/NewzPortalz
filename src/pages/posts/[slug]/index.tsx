@@ -7,16 +7,14 @@ import moment from 'moment';
 import { AiFillHeart, AiOutlineHeart, AiOutlineShareAlt } from "react-icons/ai"
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { getCookie, setCookie } from 'cookies-next';
-import { IReadHistory, IUser, PostCategory} from '@/pages/login';
+import { IReadHistory, IUser, PostCategory } from '@/pages/login';
 import PostCard from '@/components/postCard';
-import { NextRequest } from 'next/server';
-import { GetServerSidePropsContext } from 'next';
+import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
 
 
 
-const PostDetail = ({ }) => {
+const PostDetail = ({ recommendedPosts }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
     const [post, setPost] = useState<IPost | null>(null)
-    const [recommendedPosts, setRecommendedPosts] = useState<IPost[] | null>(null)
     const [isLike, setIsLike] = useState<boolean | null>(false)
     const [likesCounter, setLikesCounter] = useState<number>(0)
     const [sharesCounter, setSharesCounter] = useState<number>(0)
@@ -123,21 +121,21 @@ const PostDetail = ({ }) => {
 
 
     const likesStatisticHandler = (user: IUser) => {
-        switch(post?.category) {
+        switch (post?.category) {
             case "entertainment": {
-                return {...user?.statistic.likes, entertainment: !isLike ? user!.statistic.likes.entertainment + 1 : user!.statistic.likes.entertainment - 1}
+                return { ...user?.statistic.likes, entertainment: !isLike ? user!.statistic.likes.entertainment + 1 : user!.statistic.likes.entertainment - 1 }
             }
             case "others": {
-                return {...user?.statistic.likes, others: !isLike ? user!.statistic.likes.others + 1 : user!.statistic.likes.others - 1}
+                return { ...user?.statistic.likes, others: !isLike ? user!.statistic.likes.others + 1 : user!.statistic.likes.others - 1 }
             }
             case "politics": {
-                 return {...user?.statistic.likes, politics: !isLike ? user!.statistic.likes.politics + 1 : user!.statistic.likes.politics - 1}
+                return { ...user?.statistic.likes, politics: !isLike ? user!.statistic.likes.politics + 1 : user!.statistic.likes.politics - 1 }
             }
             case "sports": {
-                return {...user?.statistic.likes, sports: !isLike ? user!.statistic.likes.sports + 1 : user!.statistic.likes.sports - 1}
+                return { ...user?.statistic.likes, sports: !isLike ? user!.statistic.likes.sports + 1 : user!.statistic.likes.sports - 1 }
             }
             case "technology": {
-                return {...user?.statistic.likes, technology: !isLike ? user!.statistic.likes.technology + 1 : user!.statistic.likes.technology -  1}
+                return { ...user?.statistic.likes, technology: !isLike ? user!.statistic.likes.technology + 1 : user!.statistic.likes.technology - 1 }
             }
         }
     }
@@ -240,55 +238,12 @@ const PostDetail = ({ }) => {
         }
     }
 
-    const recommendedPostsHandler = () => {
-        const user = getUserData()
-
-        if(user !== undefined) {
-            let arr = Object.values(user.statistic.likes)
-            let max = Math.max(...arr) 
-
-            const topCategory = Object.keys(user.statistic.likes).sort().find(key => {
-                return user.statistic.likes[key as PostCategory] === max
-            })
-
-            getRecommendedPost(topCategory!)
-        }
-    }
-
-    const getRecommendedPost = async (category: string) => {
-        try{
-            const res = await fetch(`http://localhost:6969/posts?category=${category}`)
-            if(!res.ok){
-                return alert(`Error fetch recommended posts data ${res.statusText}`)
-            }
-            const data = await res.json() as IPost[]
-            const tempArr: IPost[] = []
-            console.log(data)
-            if(data.length > 3){
-                // let tempData = data[Math.floor(Math.random() * tempArr.length)]
-                // let isTempDataExist = tempArr.findIndex((data) => data.id === tempData.id)
-                // if(isTempDataExist !== -1){
-                //     tempArr.push(tempData)
-                // }
-            }else{
-                console.log("no")
-                // return setRecommendedPosts(data)
-            }
-
-        }catch(e){
-            return console.log(`Error fetch recommended posts data - ${e}`)
-        }
-    }
-
-
     useEffect(() => {
         if (router.query.slug !== undefined) {
             getPostDetail()
             addToHistory()
-            recommendedPostsHandler()
         }
     }, [router])
-
 
 
     return (
@@ -326,16 +281,18 @@ const PostDetail = ({ }) => {
                 <section className='mt-10 content-wrapper'>
                     {post && parse(post.body)}
                 </section>
-                <section className='mt-20'>
-                    <h1 className='text-3xl'>Recommended for you</h1>
-                    <div className='mt-5 flex flex-col gap-y-2'>
-                        {
-                            recommendedPosts?.map((post) => {
-                                return <PostCard data={post}/>
-                            })
-                        }
-                    </div>
-                </section>
+                {
+                    recommendedPosts && <section className='mt-20'>
+                        <h1 className='text-3xl'>Recommended for you</h1>
+                        <div className='mt-5 flex flex-col gap-y-2'>
+                            {
+                                recommendedPosts?.map((post) => {
+                                    return <PostCard data={post} />
+                                })
+                            }
+                        </div>
+                    </section>
+                }
             </main>
         </>
     )
@@ -344,47 +301,51 @@ const PostDetail = ({ }) => {
 export default PostDetail
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
+    let recommendedPosts: IPost[] | null = []
+    try {
+        const user = JSON.parse(context.req.cookies["userData"]!) as IUser
 
-    const user = JSON.parse(context.req.cookies["userData"]!) as IUser
+        const recommendedPostsHandler = async () => {
+            let arr = Object.values(user.statistic.likes)
+            let max = Math.max(...arr)
 
-    const recommendedPostsHandler = () => {
-        let arr = Object.values(user.statistic.likes)
-        let max = Math.max(...arr) 
+            const topCategory = Object.keys(user.statistic.likes).sort().find(key => {
+                return user.statistic.likes[key as PostCategory] === max
+            })
 
-        const topCategory = Object.keys(user.statistic.likes).sort().find(key => {
-            return user.statistic.likes[key as PostCategory] === max
-        })
+            await getRecommendedPost(topCategory!)
+        }
 
-        getRecommendedPost(topCategory!)
+        const getRecommendedPost = async (category: string) => {
+            try {
+                const res = await fetch(`http://localhost:6969/posts?category=${category}&slug_ne=${context.params?.slug}`)
+                if (!res.ok) {
+                    return alert(`Error fetch recommended posts data ${res.statusText}`)
+                }
+                const data = await res.json() as IPost[]
+                let tempArr: IPost[] = []
+                if (data.length > 3) {
+                    tempArr = data.slice(0, 3)
+                } else {
+                    tempArr = data
+                }
+
+                recommendedPosts = tempArr
+
+            } catch (e) {
+                console.log(`Error fetch recommended posts data - ${e}`)
+                recommendedPosts = []
+            }
+        }
+
+        await recommendedPostsHandler()
+    } catch (e) {
+        recommendedPosts = null
     }
 
-    const getRecommendedPost = async (category: string) => {
-        try{
-            const res = await fetch(`http://localhost:6969/posts?category=${category}`)
-            if(!res.ok){
-                return alert(`Error fetch recommended posts data ${res.statusText}`)
-            }
-            const data = await res.json() as IPost[]
-            const tempArr: IPost[] = []
-            console.log(data)
-            if(data.length > 3){
-                while(tempArr.length < 3){
-                    let tempData = data[Math.floor(Math.random() * tempArr.length)]
-                    tempArr.push(tempData)
-                }
-                console.log(tempArr)
-            }else{
-                console.log("no")
-            }
-
-            console.log("made it here")
-        }catch(e){
-            return console.log(`Error fetch recommended posts data - ${e}`)
+    return {
+        props: {
+            recommendedPosts: recommendedPosts
         }
     }
-
-    recommendedPostsHandler()
- 
-  // Pass data to the page via props
-  return { props: { "dsa": "dsa"} }
 }
