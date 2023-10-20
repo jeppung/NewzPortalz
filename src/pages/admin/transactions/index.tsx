@@ -134,7 +134,6 @@ const AdminTransaction = () => {
   }
 
   useEffect(() => {
-    console.log(filter.status)
     getTransactionsData(`http://localhost:6969/transactions?_expand=user&status_like=${filter.status}&_sort=${filter.sort}&_order=${filter.order}&createdAt_gte=${filter.date.startDate ? filter.date.startDate.toISOString() : ""}&createdAt_lte=${filter.date.endDate.toISOString()}&_page=${pagination ? pagination?._page : 1}&_limit=${pagination ? pagination?._limit : 10}`)
   }, [filter])
 

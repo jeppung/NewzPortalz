@@ -2,18 +2,37 @@ import Navbar from '@/components/navbar'
 import { IUser } from '@/pages/login'
 import moment from 'moment'
 import React, { useEffect, useState } from 'react'
+import { IPagination } from '../posts'
+import axios from 'axios'
 
 const AdminSubscription = () => {
 
     const [users, setUsers] = useState<IUser[]>([])
+    const [pagination, setPagination] = useState<IPagination>()
 
-    const getUserData = async () => {
+    const getUserData = async (url: string) => {
         try {
-            const res = await fetch("http://localhost:6969/users")
-            if (!res.ok) {
-                console.log(res.statusText)
+            const res = await axios.get(url)
+
+            if (res.headers.link !== "") {
+                const link = res.headers.link.split(",").map((data: string) => {
+                    let data2 = data.split(";")
+                    return {
+                        link: data2[0].replace("<", "").replace(">", ""),
+                        status: data2[1].match(/last|next|first|prev/g)?.[0]
+                    }
+                })
+
+                const params = new URLSearchParams(url)
+
+                setPagination({
+                    _limit: parseInt(params.get("_limit")!),
+                    _page: parseInt(params.get("_page")!),
+                    data: link
+                })
             }
-            const data = await res.json()
+
+            const data = res.data as IUser[]
             setUsers(data)
         } catch (e) {
             console.log(e)
@@ -53,7 +72,7 @@ const AdminSubscription = () => {
     }
 
     useEffect(() => {
-        getUserData()
+        getUserData(`http://localhost:6969/users?_page=${pagination ? pagination._page : 1}&_limit=${pagination ? pagination._limit : 10}`)
     }, [])
 
     return (
@@ -78,7 +97,7 @@ const AdminSubscription = () => {
                                 users.map((user, i) => {
                                     return (
                                         <tr key={i} className='border'>
-                                            <td className='p-2'>{i + 1}</td>
+                                            <td className='p-2'>{pagination ? (pagination!._page * pagination!._limit) - 10 + 1 + i : i + 1}</td>
                                             <td className='p-2'>{user.name}</td>
                                             <td className='p-2'>{user.subscription.type}</td>
                                             <td className='p-2'>{user.subscription.expiredAt !== null ? moment(user.subscription.expiredAt).format("MM-DD-YYYY HH:mm:ss") : "unlimited"}</td>
@@ -91,6 +110,22 @@ const AdminSubscription = () => {
                             }
                         </tbody>
                     </table>
+                    <div className='mt-2 flex justify-end'>
+                        <div className='flex gap-x-2'>
+                            {
+                                pagination?.data.find((data) => data.status === "prev") && <button onClick={() => {
+                                    const url = pagination?.data.find((data) => data.status === "prev")?.link
+                                    return getUserData(url!.trim())
+                                }} className='py-1 border-2 rounded-md px-2'>Prev</button>
+                            }
+                            {
+                                pagination?.data.find((data) => data.status === "next") && <button onClick={() => {
+                                    const url = pagination?.data.find((data) => data.status === "next")?.link
+                                    return getUserData(url!.trim())
+                                }} className='py-1 border-2 rounded-md px-2'>Next</button>
+                            }
+                        </div>
+                    </div>
                 </section>
             </main>
         </>
