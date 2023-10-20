@@ -19,6 +19,15 @@ const Register = () => {
         }
         user.isAdmin = false
         user.readHistory = null
+        user.statistic = {
+            likes: {
+                entertainment: 0,
+                others: 0,
+                politics: 0,
+                sports: 0,
+                technology: 0
+            }
+        }
 
         try {
             const res = await fetch("http://localhost:6969/users", {
