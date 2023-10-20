@@ -83,7 +83,7 @@
           "isLike": false,
           "isShare": false,
           "createdAt": "2023-10-18T09:37:48.715Z",
-          "updatedAt": "2023-10-18T09:37:48.715Z"
+          "updatedAt": "2023-10-20T07:38:06.546Z"
         },
         {
           "id": 9,
@@ -91,7 +91,7 @@
           "isLike": false,
           "isShare": false,
           "createdAt": "2023-10-20T06:53:28.038Z",
-          "updatedAt": "2023-10-20T06:55:46.063Z"
+          "updatedAt": "2023-10-20T06:55:46.053Z"
         }
       ],
       "isAdmin": true

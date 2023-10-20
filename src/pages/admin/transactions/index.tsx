@@ -3,6 +3,8 @@ import { IUser } from '@/pages/login'
 import { ISubsTransaction } from '@/pages/subscription'
 import moment from 'moment'
 import React, { useEffect, useRef, useState } from 'react'
+import { IPagination } from '../posts'
+import axios from 'axios'
 
 
 interface ITransactionFilter {
@@ -18,6 +20,7 @@ interface ITransactionFilter {
 const AdminTransaction = () => {
 
   const [transactions, setTransactions] = useState<ISubsTransaction[]>()
+  const [pagination, setPagination] = useState<IPagination | null>(null)
   const [filter, setFilter] = useState<ITransactionFilter>({
     status: "",
     sort: "createdAt",
@@ -38,13 +41,33 @@ const AdminTransaction = () => {
     endDateRef.current?.showPicker()
   }
 
-  const getTransactionsData = async () => {
+  const getTransactionsData = async (url: string) => {
+    console.log(url)
     try {
-      const res = await fetch(`http://localhost:6969/transactions?_expand=user&status_like=${filter.status}&_sort=${filter.sort}&_order=${filter.order}&createdAt_gte=${filter.date.startDate ? filter.date.startDate.toISOString() : ""}&createdAt_lte=${filter.date.endDate.toISOString()}`)
-      if (!res.ok) {
-        console.log(res.statusText)
+      const res = await axios.get(url)
+
+      if (res.headers.link !== "") {
+        const link = res.headers.link.split(",").map((data: string) => {
+          let data2 = data.split(";")
+          return {
+            link: data2[0].replace("<", "").replace(">", ""),
+            status: data2[1].match(/last|next|first|prev/g)?.[0]
+          }
+        })
+
+        console.log(link)
+        const params = new URLSearchParams(url)
+
+        setPagination({
+          _limit: parseInt(params.get("_limit")!),
+          _page: parseInt(params.get("_page")!),
+          data: link
+        })
+      } else {
+        setPagination(null)
       }
-      const data = await res.json()
+
+      const data = res.data as ISubsTransaction[]
       setTransactions(data)
     } catch (e) {
       console.log(e)
@@ -111,7 +134,8 @@ const AdminTransaction = () => {
   }
 
   useEffect(() => {
-    getTransactionsData()
+    console.log(filter.status)
+    getTransactionsData(`http://localhost:6969/transactions?_expand=user&status_like=${filter.status}&_sort=${filter.sort}&_order=${filter.order}&createdAt_gte=${filter.date.startDate ? filter.date.startDate.toISOString() : ""}&createdAt_lte=${filter.date.endDate.toISOString()}&_page=${pagination ? pagination?._page : 1}&_limit=${pagination ? pagination?._limit : 10}`)
   }, [filter])
 
   return (
@@ -124,7 +148,7 @@ const AdminTransaction = () => {
             <select name="transaction_filter" id="transaction_filter" className='p-2 rounded-md border' value={filter.status} onChange={(e) => setFilter({ ...filter, status: e.target.value })}>
               <option value="">All</option>
               <option value="cancelled">Cancelled</option>
-              <option value="cancelled">Completed</option>
+              <option value="completed">Completed</option>
               <option value="pending">Pending</option>
               <option value="waiting payment">Waiting payment</option>
             </select>
@@ -170,7 +194,7 @@ const AdminTransaction = () => {
                 transactions?.map((transaction, i) => {
                   return (
                     <tr key={i} className='border'>
-                      <td className='p-2'>{i + 1}</td>
+                      <td className='p-2'>{pagination ? (pagination!._page * pagination!._limit) - 10 + 1 + i : i + 1}</td>
                       <td className='p-2'>{transaction.type}</td>
                       <td className='p-2'>{transaction.duration}</td>
                       <td className='p-2'>{transaction.user?.name}</td>
@@ -191,6 +215,22 @@ const AdminTransaction = () => {
               }
             </tbody>
           </table>
+          <div className='mt-2 flex justify-end'>
+            <div className='flex gap-x-2'>
+              {
+                pagination?.data.find((data) => data.status === "prev") && <button onClick={() => {
+                  const url = pagination?.data.find((data) => data.status === "prev")?.link
+                  return getTransactionsData(url!.trim())
+                }} className='py-1 border-2 rounded-md px-2'>Prev</button>
+              }
+              {
+                pagination?.data.find((data) => data.status === "next") && <button onClick={() => {
+                  const url = pagination?.data.find((data) => data.status === "next")?.link
+                  return getTransactionsData(url!.trim())
+                }} className='py-1 border-2 rounded-md px-2'>Next</button>
+              }
+            </div>
+          </div>
         </section>
       </main>
     </>

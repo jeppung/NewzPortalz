@@ -49,30 +49,27 @@ const AdminPosts = () => {
 
     const getPostsData = async (url: string) => {
         try {
-            const res = await axios.get(url, {
-                params: {
-                    _expand: "user",
-                    _page: 1,
-                    _limit: 10
-                }
-            })
+            const res = await axios.get(url)
 
-            const link = res.headers.link.split(",").map((data: string) => {
-                let data2 = data.split(";")
-                return {
-                    link: data2[0].replace("<", "").replace(">", ""),
-                    status: data2[1].match(/last|next|first|prev/g)?.[0]
-                }
-            })
+            if (res.headers.link !== "") {
+                const link = res.headers.link.split(",").map((data: string) => {
+                    let data2 = data.split(";")
+                    return {
+                        link: data2[0].replace("<", "").replace(">", ""),
+                        status: data2[1].match(/last|next|first|prev/g)?.[0]
+                    }
+                })
+
+                const params = new URLSearchParams(url)
+
+                setPagination({
+                    _page: parseInt(params.get("_page")!),
+                    _limit: parseInt(params.get("_limit")!),
+                    data: link
+                })
+            }
 
             const data = res.data as IPost[]
-            const params = new URLSearchParams(url)
-
-            setPagination({
-                _page: parseInt(params.get("_page")!),
-                _limit: parseInt(params.get("_limit")!),
-                data: link
-            })
             setPosts(data)
         } catch (e) {
             if (isAxiosError(e)) {
@@ -138,7 +135,7 @@ const AdminPosts = () => {
                                 posts.map((post, i) => {
                                     return (
                                         <tr key={i} className='border'>
-                                            <td className='p-2'>{(pagination!._limit * pagination!._page) - 10 + 1 + i}</td>
+                                            <td className='p-2'>{pagination ? (pagination!._page * pagination!._limit) - 10 + 1 + i : i + 1}</td>
                                             <td className='p-2'>{post.title}</td>
                                             <td className='p-2'>{post.slug}</td>
                                             <td className='p-2'>{post.user.name}</td>
