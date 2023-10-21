@@ -6,7 +6,7 @@ import moment from 'moment'
 import Head from 'next/head'
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
-
+import {AiFillDelete, AiFillEdit, AiFillEye} from "react-icons/ai"
 export type PostCategory = "technology" | "entertainment" | "politics" | "sports" | "others"
 export interface IPost {
     id?: number
@@ -149,9 +149,9 @@ const AdminPosts = () => {
 
                                             <td>
                                                 <div className='flex justify-around'>
-                                                    <Link href={`/posts/${post.slug}`}>See</Link>
-                                                    <button onClick={() => setModal({ isModal: true, type: 'edit', initialData: post })}>edit</button>
-                                                    <button onClick={() => deleteHandler(post)}>del</button>
+                                                    <Link href={`/posts/${post.slug}`}><AiFillEye size={20}/></Link>
+                                                    <button onClick={() => setModal({ isModal: true, type: 'edit', initialData: post })} ><AiFillEdit size={20}/></button>
+                                                    <button onClick={() => deleteHandler(post)}><AiFillDelete color="red" size={20}/></button>
                                                 </div>
                                             </td>
                                         </tr>
