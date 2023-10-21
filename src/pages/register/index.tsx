@@ -45,7 +45,7 @@ const Register = () => {
                 maxAge: 60 * 60
             })
 
-            router.push("/")
+            router.replace("/")
         } catch (e) {
             return alert("An error has occured")
         }
