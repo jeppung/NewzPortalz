@@ -59,37 +59,37 @@ const Register = () => {
     }
 
     return (
-        <main className='h-screen w-screen flex justify-center items-center'>
+        <main className='h-screen w-screen flex justify-center items-center bg-[#112D4E]'>
             <Head>
                 <title>Newz Portalz | Register</title>
             </Head>
-            <div className='bg-red-500 w-96 p-5 rounded-xl'>
+            <div className='bg-[#F9F7F7] w-96 p-5 rounded-xl'>
                 <form action="#" className='flex flex-col gap-y-5' onSubmit={(e) => registerHandler(e)}>
                     <div className='flex flex-col gap-y-2'>
-                        <label htmlFor="name">Name</label>
+                        <label htmlFor="name" className='font-bold'>Name</label>
                         <input onChange={(e) => setUser({ ...user, name: e.target.value })} type="text" name="name" id="name" className='p-2 rounded-lg border-2' placeholder='John Doe' required />
                     </div>
                     <div className='flex flex-col gap-y-2'>
-                        <label htmlFor="phone">Phone</label>
+                        <label htmlFor="phone" className='font-bold'>Phone</label>
                         <input onChange={(e) => setUser({ ...user, phone: parseInt(e.target.value) })} type="number" name="phone" id="phone" className='p-2 rounded-lg border-2' placeholder='081245237751' required />
                     </div>
                     <div className='flex flex-col gap-y-2'>
-                        <label htmlFor="address">Address</label>
+                        <label htmlFor="address" className='font-bold'>Address</label>
                         <input onChange={(e) => setUser({ ...user, address: e.target.value })} type="text" name="address" id="address" className='p-2 rounded-lg border-2' placeholder='JL. Somewhere only you know' required />
                     </div>
                     <div className='flex flex-col gap-y-2'>
-                        <label htmlFor="email">Email</label>
+                        <label htmlFor="email" className='font-bold'>Email</label>
                         <input onChange={(e) => setUser({ ...user, email: e.target.value })} type="email" name="email" id="email" className='p-2 rounded-lg border-2' placeholder='john.doe@mail.com' required />
                     </div>
                     <div className='flex flex-col gap-y-2'>
-                        <label htmlFor="password">Password</label>
+                        <label htmlFor="password" className='font-bold'>Password</label>
                         <input onChange={(e) => setUser({ ...user, password: e.target.value })} type="password" name="password" id="password" className='p-2 rounded-lg border-2' placeholder='************' required />
                     </div>
                     <div className='flex flex-col gap-y-2'>
-                        <label htmlFor="passwordC">Password Confirmation</label>
+                        <label htmlFor="passwordC" className='font-bold'>Password Confirmation</label>
                         <input onChange={(e) => checkPassword(e.target.value)} type="password" name="passwordC" id="passwordC" className='p-2 rounded-lg border-2' placeholder='************' required />
                     </div>
-                    <button type='submit' className={`${error?.status ? "bg-slate-400" : "bg-green-500"} w-full py-2 rounded-full`} disabled={error?.status}>Register</button>
+                    <button type='submit' className={`${error?.status ? "bg-slate-400" : "bg-[#112D4E] text-white"} w-full py-2 rounded-lg`} disabled={error?.status}>Register</button>
                     {error?.status && <p className='text-center text-sm'>{error.message}</p>}
                 </form>
                 <p className='text-center mt-10 text-sm'>Not registered yet? <Link href="/login" className='font-bold'>Login Here</Link></p>
