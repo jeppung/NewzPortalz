@@ -59,7 +59,9 @@ const Profile = () => {
                 }
                 const data = await res.json() as IUser
                 setUser(data)
-                setCookie("userData", data)
+                setCookie("userData", data, {
+                    maxAge: 60 * 60
+                })
             } catch (e) {
                 return alert(`Error fetching user data ${e}`)
             }

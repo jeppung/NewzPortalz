@@ -95,7 +95,9 @@ const PostDetail = ({ recommendedPosts }: InferGetServerSidePropsType<typeof get
                 if (!res.ok) return alert("Error updating share")
 
                 const newUserData = await res.json()
-                setCookie("userData", newUserData)
+                setCookie("userData", newUserData, {
+                    maxAge: 60 * 60
+                })
             } catch (e) {
                 return alert(`Error updating share ${e}`)
             }
@@ -165,7 +167,9 @@ const PostDetail = ({ recommendedPosts }: InferGetServerSidePropsType<typeof get
             if (!res.ok) return alert("Error updating like")
 
             const newUserData = await res.json()
-            setCookie("userData", newUserData)
+            setCookie("userData", newUserData, {
+                maxAge: 60 * 60
+            })
         } catch (e) {
             return alert(`Error updating like ${e}`)
         }
@@ -201,7 +205,9 @@ const PostDetail = ({ recommendedPosts }: InferGetServerSidePropsType<typeof get
             })
             if (!res.ok) return alert("Error adding post to history")
             const newUserData = await res.json()
-            setCookie("userData", newUserData)
+            setCookie("userData", newUserData, {
+                maxAge: 60 * 60
+            })
         } catch (e) {
             return console.log("Error adding post to history")
         }

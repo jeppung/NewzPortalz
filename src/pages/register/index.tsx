@@ -41,7 +41,9 @@ const Register = () => {
             if (!res.ok) return alert("An error has occured")
 
             const data = await res.json()
-            setCookie("userData", data)
+            setCookie("userData", data, {
+                maxAge: 60 * 60
+            })
 
             router.push("/")
         } catch (e) {

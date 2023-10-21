@@ -67,7 +67,9 @@ const Login = () => {
             const data = await res.json() as IUser[]
             if (data.length === 0) return setError({ status: true, message: "Email/password is invalid" })
 
-            setCookie("userData", data[0])
+            setCookie("userData", data[0], {
+                maxAge: 60 * 60
+            })
             data[0].isAdmin ? router.push("/admin") : router.push("/")
         } catch (e) {
             return setError({ status: true, message: "An error occured" })
