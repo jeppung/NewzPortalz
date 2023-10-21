@@ -110,7 +110,7 @@ const Profile = () => {
                                 </div>
                                 <div>
                                     <h3 className='font-bold'>Subscription</h3>
-                                    <p>{user?.subscription.type} (Expired {moment(user?.subscription.expiredAt).format("DD MMMM YYYY")})</p>
+                                    <p>{user?.subscription.type} {user?.subscription.expiredAt && `(Expired ${moment(user?.subscription.expiredAt).format("DD MMMM YYYY")})`}</p>
                                 </div>
                             </div>
                         </div>
