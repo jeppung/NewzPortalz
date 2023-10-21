@@ -6,28 +6,32 @@ import parse from 'html-react-parser';
 import moment from 'moment';
 import { AiFillHeart, AiOutlineHeart, AiOutlineShareAlt } from "react-icons/ai"
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-import { getCookie, setCookie } from 'cookies-next';
+import { setCookie } from 'cookies-next';
 import { IReadHistory, IUser, PostCategory } from '@/pages/login';
 import PostCard from '@/components/postCard';
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
 import Head from 'next/head';
+import{FaCrown} from "react-icons/fa"
+import Link from 'next/link';
 
 
 
-const PostDetail = ({ recommendedPosts }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+const PostDetail = ({ recommendedPosts, userData }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
     const [post, setPost] = useState<IPost | null>(null)
     const [isLike, setIsLike] = useState<boolean | null>(false)
     const [likesCounter, setLikesCounter] = useState<number>(0)
     const [sharesCounter, setSharesCounter] = useState<number>(0)
+    const [isProtected, setIsProtected] = useState<boolean>(false)
+
     const router = useRouter()
 
-    const getPostDetail = async () => {
-        const user = getUserData()
+    console.log(userData)
 
-        if (user != undefined) {
-            let dataIndex = user?.readHistory?.findIndex(data => data.slug === router.query.slug)
+    const getPostDetail = async () => {
+        if (userData !== null) {
+            let dataIndex = userData.readHistory?.findIndex(data => data.slug === router.query.slug)
             if (dataIndex !== -1 && dataIndex !== undefined) {
-                setIsLike(user!.readHistory![dataIndex!].isLike)
+                setIsLike(userData.readHistory![dataIndex!].isLike)
             }
         }
 
@@ -38,6 +42,14 @@ const PostDetail = ({ recommendedPosts }: InferGetServerSidePropsType<typeof get
                 return alert("Error fetching post detail data")
             }
             const data = await res.json() as IPost[]
+            
+            if(data[0].isPremium && userData?.subscription.type !== "premium") {
+                setIsProtected(true)
+                data[0].body = data[0].body.slice(0, data[0].body.length / 2)
+            }else{
+                setIsProtected(false)
+            }
+
             setPost(data[0])
             setLikesCounter(data[0].likes)
             setSharesCounter(data[0].shares)
@@ -47,8 +59,7 @@ const PostDetail = ({ recommendedPosts }: InferGetServerSidePropsType<typeof get
     }
 
     const likeHandler = () => {
-        const user = getUserData()
-        if (user === undefined) return router.push("/login")
+        if (userData === null) return router.push("/login")
 
         if (isLike) {
             setLikesCounter(likesCounter - 1)
@@ -61,31 +72,21 @@ const PostDetail = ({ recommendedPosts }: InferGetServerSidePropsType<typeof get
     }
 
     const shareHandler = () => {
-        const user = getUserData()
-        if (user === undefined) return router.push("/login")
+        if (userData === null) return router.push("/login")
 
         setSharesCounter(sharesCounter + 1)
         updateShare()
     }
 
-    const getUserData = () => {
-        const cookie = getCookie("userData")
-        if (cookie !== undefined) {
-            return JSON.parse(cookie) as IUser
-        }
-    }
-
     const updateShare = async () => {
-        const user = getUserData()
-
-        const dataIndex = user?.readHistory?.findIndex(data => data.slug === post?.slug)
-        if (dataIndex !== -1 && user!.readHistory![dataIndex!].isShare === false) {
-            user!.readHistory![dataIndex!].isShare = true
+        const dataIndex = userData?.readHistory?.findIndex(data => data.slug === post?.slug)
+        if (dataIndex !== -1 && userData!.readHistory![dataIndex!].isShare === false) {
+            userData!.readHistory![dataIndex!].isShare = true
             try {
-                const res = await fetch(`http://localhost:6969/users/${user!.id}`, {
+                const res = await fetch(`http://localhost:6969/users/${userData!.id}`, {
                     method: "PATCH",
                     body: JSON.stringify({
-                        readHistory: user!.readHistory
+                        readHistory: userData!.readHistory
                     } as IUser),
                     headers: {
                         "Content-type": "application/json"
@@ -123,41 +124,40 @@ const PostDetail = ({ recommendedPosts }: InferGetServerSidePropsType<typeof get
     }
 
 
-    const likesStatisticHandler = (user: IUser) => {
+    const likesStatisticHandler = () => {
         switch (post?.category) {
             case "entertainment": {
-                return { ...user?.statistic.likes, entertainment: !isLike ? user!.statistic.likes.entertainment + 1 : user!.statistic.likes.entertainment - 1 }
+                return { ...userData?.statistic.likes, entertainment: !isLike ? userData!.statistic.likes.entertainment + 1 : userData!.statistic.likes.entertainment - 1 }
             }
             case "others": {
-                return { ...user?.statistic.likes, others: !isLike ? user!.statistic.likes.others + 1 : user!.statistic.likes.others - 1 }
+                return { ...userData?.statistic.likes, others: !isLike ? userData!.statistic.likes.others + 1 : userData!.statistic.likes.others - 1 }
             }
             case "politics": {
-                return { ...user?.statistic.likes, politics: !isLike ? user!.statistic.likes.politics + 1 : user!.statistic.likes.politics - 1 }
+                return { ...userData?.statistic.likes, politics: !isLike ? userData!.statistic.likes.politics + 1 : userData!.statistic.likes.politics - 1 }
             }
             case "sports": {
-                return { ...user?.statistic.likes, sports: !isLike ? user!.statistic.likes.sports + 1 : user!.statistic.likes.sports - 1 }
+                return { ...userData?.statistic.likes, sports: !isLike ? userData!.statistic.likes.sports + 1 : userData!.statistic.likes.sports - 1 }
             }
             case "technology": {
-                return { ...user?.statistic.likes, technology: !isLike ? user!.statistic.likes.technology + 1 : user!.statistic.likes.technology - 1 }
+                return { ...userData?.statistic.likes, technology: !isLike ? userData!.statistic.likes.technology + 1 : userData!.statistic.likes.technology - 1 }
             }
         }
     }
 
     const updateLike = async (count: number) => {
-        const user = getUserData()
-        const dataIndex = user?.readHistory?.findIndex(data => data.slug === post?.slug)
+        const dataIndex = userData?.readHistory?.findIndex(data => data.slug === post?.slug)
         if (dataIndex === -1) return
 
-        user!.readHistory![dataIndex!].isLike = !isLike
+        userData!.readHistory![dataIndex!].isLike = !isLike
 
         try {
-            const res = await fetch(`http://localhost:6969/users/${user!.id}`, {
+            const res = await fetch(`http://localhost:6969/users/${userData!.id}`, {
                 method: "PATCH",
                 body: JSON.stringify({
                     statistic: {
-                        likes: likesStatisticHandler(user!)
+                        likes: likesStatisticHandler( )
                     },
-                    readHistory: user!.readHistory
+                    readHistory: userData!.readHistory
                 } as IUser),
                 headers: {
                     "Content-type": "application/json"
@@ -214,8 +214,7 @@ const PostDetail = ({ recommendedPosts }: InferGetServerSidePropsType<typeof get
     }
 
     const addToHistory = async () => {
-        const user = getUserData()
-        if (user === undefined) return
+        if (userData === null) return
         const date = new Date().toISOString()
 
         let data: IReadHistory = {
@@ -227,20 +226,20 @@ const PostDetail = ({ recommendedPosts }: InferGetServerSidePropsType<typeof get
             updatedAt: ""
         }
 
-        if (user!.readHistory == null) {
+        if (userData!.readHistory == null) {
             data.createdAt = date
             data.updatedAt = date
-            updateUserHistory([data], user!)
+            updateUserHistory([data], userData!)
         } else {
-            const isExistIndex = user!.readHistory.findIndex((data) => data.slug === router.query.slug)
+            const isExistIndex = userData!.readHistory.findIndex((data) => data.slug === router.query.slug)
             if (isExistIndex === -1) {
-                data.id = user!.readHistory.length + 1
+                data.id = userData!.readHistory.length + 1
                 data.createdAt = date
                 data.updatedAt = date
-                updateUserHistory([...user!.readHistory, data], user!)
+                updateUserHistory([...userData!.readHistory, data], userData!)
             } else {
-                user!.readHistory[isExistIndex].updatedAt = date
-                updateUserHistory([...user!.readHistory], user!)
+                userData!.readHistory[isExistIndex].updatedAt = date
+                updateUserHistory([...userData!.readHistory], userData!)
             }
         }
     }
@@ -288,8 +287,19 @@ const PostDetail = ({ recommendedPosts }: InferGetServerSidePropsType<typeof get
                 <section className='flex justify-center mt-5'>
                     <img src={post?.thumbnail} className='object-cover' width={400} />
                 </section>
-                <section className='mt-10 content-wrapper'>
-                    {post && parse(post.body)}
+                <section className={`mt-10 content-wrapper relative ${isProtected && "h-[50vh]"} ` }>
+                    <div className={`${isProtected && "absolute"}`}>
+                        {post && parse(post.body)}
+                    </div>
+                    {
+                        isProtected && <div className='absolute bg-gradient-to-t from-white from-60%  w-full h-full flex justify-center items-end pb-10'>
+                        <div className='flex flex-col justify-center items-center'>
+                            <FaCrown size={100} color="orange"/>
+                            <h1>Premium content</h1>
+                            <Link href={userData !== null ? "/subscription" : "/login"} className='py-2 px-3 bg-[#112D4E] rounded-md text-sm text-white '>Subscribe to premium</Link>
+                        </div>
+                    </div>
+                    }
                 </section>
                 {
                     recommendedPosts && <section className='mt-20'>
@@ -312,18 +322,36 @@ export default PostDetail
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
     let recommendedPosts: IPost[] | null = []
-    try {
-        const user = JSON.parse(context.req.cookies["userData"]!) as IUser
+    let user: IUser | null
 
+    try {
+        user = JSON.parse(context.req.cookies["userData"]!) as IUser
+        
         const recommendedPostsHandler = async () => {
-            let arr = Object.values(user.statistic.likes)
+            let arr = Object.values(user!.statistic.likes)
             let max = Math.max(...arr)
 
-            const topCategory = Object.keys(user.statistic.likes).sort().find(key => {
-                return user.statistic.likes[key as PostCategory] === max
+            const topCategory = Object.keys(user!.statistic.likes).sort().find(key => {
+                return user!.statistic.likes[key as PostCategory] === max
             })
 
             await getRecommendedPost(topCategory!)
+        }
+
+        const getUserData = async () => {
+            try {
+                const res = await fetch(`http://localhost:6969/auth/user/${user?.id}`)
+                if (!res.ok) {
+                    return alert(`Error fetching user data ${res.statusText}`)
+                }
+                const data = await res.json() as IUser
+                user = data
+                setCookie("userData", data, {
+                    maxAge: 60 * 60
+                })
+            } catch (e) {
+                return alert(`Error fetching user data ${e}`)
+            }
         }
 
         const getRecommendedPost = async (category: string) => {
@@ -347,15 +375,18 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
                 recommendedPosts = []
             }
         }
-
+        
+        await getUserData()
         await recommendedPostsHandler()
     } catch (e) {
+        user = null
         recommendedPosts = null
     }
 
     return {
         props: {
-            recommendedPosts: recommendedPosts
+            recommendedPosts: recommendedPosts,
+            userData: user
         }
     }
 }

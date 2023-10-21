@@ -104,10 +104,68 @@
       "address": "Jl. somewhere only me know M7/17",
       "phone": 6281381237654,
       "subscription": {
-        "type": "free",
-        "expiredAt": null
+        "type": "premium",
+        "expiredAt": "2024-10-21T04:32:11.894Z"
       },
-      "readHistory": null,
+      "statistic": {
+        "likes": {
+          "technology": 0,
+          "entertainment": 0,
+          "politics": 0,
+          "sports": 0,
+          "others": 0
+        }
+      },
+      "readHistory": [
+        {
+          "id": 1,
+          "slug": "crazy-little-thing-called-love-ce7wk12d",
+          "isLike": false,
+          "isShare": false,
+          "createdAt": "2023-10-21T03:16:04.484Z",
+          "updatedAt": "2023-10-21T04:32:27.368Z"
+        },
+        {
+          "id": 2,
+          "slug": "lorem-digust-amet-alor-b4rbge2s",
+          "isLike": false,
+          "isShare": false,
+          "createdAt": "2023-10-21T03:34:39.486Z",
+          "updatedAt": "2023-10-21T03:44:43.784Z"
+        },
+        {
+          "id": 3,
+          "slug": "lorem-ipsum-dolor-amet-11-knhyt412",
+          "isLike": false,
+          "isShare": false,
+          "createdAt": "2023-10-21T03:34:57.069Z",
+          "updatedAt": "2023-10-21T03:42:45.551Z"
+        },
+        {
+          "id": 4,
+          "slug": "the-future-of-programming-is-here-9db51c85",
+          "isLike": false,
+          "isShare": false,
+          "createdAt": "2023-10-21T03:35:01.887Z",
+          "updatedAt": "2023-10-21T03:42:48.114Z"
+        },
+        {
+          "id": 5,
+          "slug": "lorem-ipsum-is-so-mainstream-1910ac8f",
+          "isLike": false,
+          "isShare": false,
+          "createdAt": "2023-10-21T03:35:06.855Z",
+          "updatedAt": "2023-10-21T04:24:26.626Z"
+        },
+        {
+          "id": 6,
+          "slug": "lorem-digust-amet-alor-2-kd21dks1",
+          "isLike": false,
+          "isShare": false,
+          "createdAt": "2023-10-21T03:42:57.715Z",
+          "updatedAt": "2023-10-21T03:44:30.924Z"
+        }
+      ],
       "isAdmin": false
     },
     {
@@ -136,7 +194,7 @@
           "isLike": true,
           "isShare": false,
           "createdAt": "2023-10-18T14:43:17.662Z",
-          "updatedAt": "2023-10-21T02:14:28.889Z"
+          "updatedAt": "2023-10-21T04:11:52.962Z"
         },
         {
           "id": 2,
@@ -144,7 +202,7 @@
           "isLike": true,
           "isShare": false,
           "createdAt": "2023-10-18T15:00:54.551Z",
-          "updatedAt": "2023-10-19T14:16:43.395Z"
+          "updatedAt": "2023-10-21T04:11:47.699Z"
         },
         {
           "id": 3,
@@ -463,10 +521,30 @@
       "type": "premium",
       "price": 25000,
       "duration": "monthly",
-      "status": "pending",
+      "status": "cancelled",
       "createdAt": "2023-10-19T12:10:15.226Z",
-      "updatedAt": "2023-10-19T12:12:55.151Z",
+      "updatedAt": "2023-10-21T04:31:28.116Z",
       "id": 26
+    },
+    {
+      "userId": 2,
+      "type": "premium",
+      "price": 25000,
+      "duration": "monthly",
+      "status": "completed",
+      "createdAt": "2023-10-21T04:26:38.652Z",
+      "updatedAt": "2023-10-21T04:28:06.245Z",
+      "id": 27
+    },
+    {
+      "userId": 2,
+      "type": "premium",
+      "price": 225000,
+      "duration": "yearly",
+      "status": "completed",
+      "createdAt": "2023-10-21T04:31:10.086Z",
+      "updatedAt": "2023-10-21T04:32:11.882Z",
+      "id": 28
     }
   ],
   "posts": [
