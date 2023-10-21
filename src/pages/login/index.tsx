@@ -77,21 +77,21 @@ const Login = () => {
     }
 
     return (
-        <main className='h-screen w-screen flex justify-center items-center'>
+        <main className='h-screen w-screen flex justify-center items-center bg-[#112D4E]'>
             <Head>
                 <title>Newz Portalz | Login</title>
             </Head>
-            <div className='bg-red-500 w-96 p-5 rounded-xl'>
+            <div className='bg-[#F9F7F7] w-96 p-5 rounded-xl'>
                 <form action="#" className='flex flex-col gap-y-5' onSubmit={(e) => loginHandler(e)}>
                     <div className='flex flex-col gap-y-2'>
-                        <label htmlFor="email">Email</label>
+                        <label htmlFor="email" className='font-bold'>Email</label>
                         <input onChange={(e) => setEmail(e.target.value)} type="email" name="email" id="email" className='p-2 rounded-lg border-2' placeholder='john.doe@mail.com' required />
                     </div>
                     <div className='flex flex-col gap-y-2'>
-                        <label htmlFor="password">Password</label>
+                        <label htmlFor="password" className='font-bold'>Password</label>
                         <input onChange={(e) => setPassword(e.target.value)} type="password" name="password" id="password" className='p-2 rounded-lg border-2' placeholder='************' required />
                     </div>
-                    <button type='submit' className='bg-green-500 w-full py-2 rounded-full'>Log In</button>
+                    <button type='submit' className='bg-[#112D4E] text-white w-full py-2 rounded-lg'>Log In</button>
                     {error?.status && <p className='text-center text-sm'>{error.message}</p>}
                 </form>
                 <p className='text-center mt-10 text-sm'>Not registered yet? <Link href="/register" className='font-bold'>Register Here</Link></p>
