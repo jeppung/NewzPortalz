@@ -70,7 +70,7 @@ const Login = () => {
             setCookie("userData", data[0], {
                 maxAge: 60 * 60
             })
-            data[0].isAdmin ? router.push("/admin") : router.push("/")
+            data[0].isAdmin ? router.push("/admin/posts") : router.push("/")
         } catch (e) {
             return setError({ status: true, message: "An error occured" })
         }
