@@ -92,6 +92,14 @@
           "isShare": false,
           "createdAt": "2023-10-20T06:53:28.038Z",
           "updatedAt": "2023-10-20T06:55:46.053Z"
+        },
+        {
+          "id": 10,
+          "slug": "lorem-digust-amet-alor-b4rbge2s",
+          "isLike": false,
+          "isShare": false,
+          "createdAt": "2023-10-21T07:36:48.617Z",
+          "updatedAt": "2023-10-21T07:36:48.617Z"
         }
       ],
       "isAdmin": true

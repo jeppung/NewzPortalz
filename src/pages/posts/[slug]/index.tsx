@@ -287,18 +287,18 @@ const PostDetail = ({ recommendedPosts, userData }: InferGetServerSidePropsType<
                 <section className='flex justify-center mt-5'>
                     <img src={post?.thumbnail} className='object-cover' width={400} />
                 </section>
-                <section className={`mt-10 content-wrapper relative ${isProtected && "h-[50vh]"} ` }>
+                <section className={`mt-10 content-wrapper relative ${isProtected && "h-[50vh]"} overflow-hidden` }>
                     <div className={`${isProtected && "absolute"}`}>
                         {post && parse(post.body)}
                     </div>
                     {
                         isProtected && <div className='absolute bg-gradient-to-t from-white from-60%  w-full h-full flex justify-center items-end pb-10'>
                         <div className='flex flex-col justify-center items-center'>
-                            <FaCrown size={100} color="orange"/>
-                            <h1>Premium content</h1>
-                            <Link href={userData !== null ? "/subscription" : "/login"} className='py-2 px-3 bg-[#112D4E] rounded-md text-sm text-white '>Subscribe to premium</Link>
+                                <FaCrown size={100} color="orange"/>
+                                <h1>Premium content</h1>
+                                <Link href={userData !== null ? "/subscription" : "/login"} className='py-2 px-3 bg-[#112D4E] rounded-md text-sm text-white '>Subscribe to premium</Link>
+                            </div>
                         </div>
-                    </div>
                     }
                 </section>
                 {
