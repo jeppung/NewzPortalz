@@ -15,7 +15,6 @@ import{FaCrown} from "react-icons/fa"
 import Link from 'next/link';
 
 
-
 const PostDetail = ({ recommendedPosts, userData }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
     const [post, setPost] = useState<IPost | null>(null)
     const [isLike, setIsLike] = useState<boolean | null>(false)
@@ -25,8 +24,6 @@ const PostDetail = ({ recommendedPosts, userData }: InferGetServerSidePropsType<
 
     const router = useRouter()
 
-    console.log(userData)
-
     const getPostDetail = async () => {
         if (userData !== null) {
             let dataIndex = userData.readHistory?.findIndex(data => data.slug === router.query.slug)
@@ -34,7 +31,6 @@ const PostDetail = ({ recommendedPosts, userData }: InferGetServerSidePropsType<
                 setIsLike(userData.readHistory![dataIndex!].isLike)
             }
         }
-
 
         try {
             const res = await fetch(`http://localhost:6969/posts?slug=${router.query.slug}&_expand=user`)
@@ -49,6 +45,8 @@ const PostDetail = ({ recommendedPosts, userData }: InferGetServerSidePropsType<
             }else{
                 setIsProtected(false)
             }
+
+       
 
             setPost(data[0])
             setLikesCounter(data[0].likes)
