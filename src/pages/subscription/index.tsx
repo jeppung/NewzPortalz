@@ -6,6 +6,7 @@ import { IUser } from '../login'
 import { useRouter } from 'next/router'
 import SubsModal from '@/components/subsModal'
 import Head from 'next/head'
+import Footer from '@/components/footer'
 
 
 
@@ -126,6 +127,8 @@ const Subscription = () => {
                     </div>
                 </section>
             </main>
+            <Footer/>
+
         </div>
     )
 }

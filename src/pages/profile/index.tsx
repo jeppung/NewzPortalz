@@ -8,6 +8,7 @@ import moment from 'moment'
 import { ISubsTransaction, encrypt } from '../subscription'
 import SubsModal from '@/components/subsModal'
 import Head from 'next/head'
+import Footer from '@/components/footer'
 
 const Profile = () => {
     const [user, setUser] = useState<IUser>()
@@ -203,6 +204,7 @@ const Profile = () => {
                     </section>
                 </div>
             </main >
+            <Footer/>
         </div >
     )
 }
