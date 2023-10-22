@@ -13,6 +13,7 @@ import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
 import Head from 'next/head';
 import{FaCrown} from "react-icons/fa"
 import Link from 'next/link';
+import Image from 'next/image';
 
 
 const PostDetail = ({ recommendedPosts, userData }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
@@ -283,7 +284,9 @@ const PostDetail = ({ recommendedPosts, userData }: InferGetServerSidePropsType<
                     </div>
                 </section>
                 <section className='flex justify-center mt-5'>
-                    <img src={post?.thumbnail} className='object-cover' width={400} />
+                    {
+                        post && <Image src={post.thumbnail} className='object-cover' alt='post_thumbnail' width={400} height={400} />
+                    }
                 </section>
                 <section className={`mt-10 content-wrapper relative ${isProtected && "h-[50vh]"} overflow-hidden` }>
                     <div className={`${isProtected && "absolute"}`}>
@@ -304,8 +307,8 @@ const PostDetail = ({ recommendedPosts, userData }: InferGetServerSidePropsType<
                         <h1 className='text-3xl'>Recommended for you</h1>
                         <div className='mt-5 flex flex-col gap-y-2'>
                             {
-                                recommendedPosts?.map((post) => {
-                                    return <PostCard data={post} />
+                                recommendedPosts?.map((post, i) => {
+                                    return <PostCard key={i} data={post} />
                                 })
                             }
                         </div>

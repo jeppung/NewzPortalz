@@ -155,7 +155,7 @@ const Profile = () => {
                                                     {transactions?.map((data, i) => {
                                                         if (data.userId === user?.id && data.status === "waiting payment") {
                                                             return (
-                                                                <div className='flex justify-between items-center'>
+                                                                <div key={i} className='flex justify-between items-center'>
                                                                     <div>
                                                                         <h1 className='font-bold'>Subscription</h1>
                                                                         <p className='text-sm'>{data.status}</p>

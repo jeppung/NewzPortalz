@@ -163,7 +163,7 @@ export default function Home() {
                 <h1>{user?.name.split(" ")[0]}</h1>
               </div>
               <div>
-                <h1>Let's read some news!</h1>
+                <h1>Let&apos;s read some news!</h1>
               </div>
             </div>
           </div>

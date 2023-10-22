@@ -1,6 +1,7 @@
 
 import { IPost, PostCategory } from '@/pages/admin/posts'
 import { Editor } from '@tinymce/tinymce-react'
+import Image from 'next/image'
 import React, { useState } from 'react'
 
 interface IPostModalProps {
@@ -135,7 +136,7 @@ const PostModal = ({ onClose, onSuccess, type, initialData }: IPostModalProps) =
                         </div>
                         {
                             image && <div>
-                                <img src={typeof image === "string" ? image : URL.createObjectURL(image)} className='h-52' alt="" />
+                                <Image src={typeof image === "string" ? image : URL.createObjectURL(image)} className='h-52' alt="" />
                             </div>
                         }
 
