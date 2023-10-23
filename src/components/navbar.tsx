@@ -25,8 +25,13 @@ const Navbar = ({ onRefresh }: INavbarProps) => {
     }, [])
 
     const logoutHandler = () => {
+        const isConfirm = confirm("Are you sure want to log out ?")
+        if (!isConfirm) return
+
         deleteCookie("userData")
         setUserData(undefined)
+        router.replace("/")
+
         if (router.pathname === "/") {
             onRefresh!()
         }
@@ -41,10 +46,10 @@ const Navbar = ({ onRefresh }: INavbarProps) => {
                         {
                             userData ? userData.isAdmin ? <>
                                 <NavAdmin />
-                                <Link href="/" onClick={logoutHandler}>Logout</Link>
+                                <button onClick={logoutHandler}>Logout</button>
                             </> : <>
                                 <NavUser />
-                                <Link href="/" onClick={logoutHandler}>Logout</Link>
+                                <button onClick={logoutHandler}>Logout</button>
                             </> : <>
                                 <Link href="/login">Login</Link>
                             </>
