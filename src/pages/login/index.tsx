@@ -1,4 +1,5 @@
 import { setCookie } from 'cookies-next'
+import moment from 'moment'
 import Head from 'next/head'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -66,6 +67,12 @@ const Login = () => {
 
             const data = await res.json() as IUser[]
             if (data.length === 0) return setError({ status: true, message: "Email/password is invalid" })
+
+            const isExpired = moment(new Date()).isAfter(data[0].subscription.expiredAt)
+            if (isExpired) {
+                data[0].subscription.expiredAt = null
+                data[0].subscription.type = "free"
+            }
 
             setCookie("userData", data[0], {
                 maxAge: 60 * 60

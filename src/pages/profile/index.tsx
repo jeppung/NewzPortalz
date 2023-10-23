@@ -59,6 +59,12 @@ const Profile = () => {
                     return alert(`Error fetching user data ${res.statusText}`)
                 }
                 const data = await res.json() as IUser
+                const isExpired = moment(new Date()).isAfter(data.subscription.expiredAt)
+                if (isExpired) {
+                    data.subscription.type = "free"
+                    data.subscription.expiredAt = null
+                }
+
                 setUser(data)
                 setCookie("userData", data, {
                     maxAge: 60 * 60
@@ -204,7 +210,7 @@ const Profile = () => {
                     </section>
                 </div>
             </main >
-            <Footer/>
+            <Footer />
         </div >
     )
 }

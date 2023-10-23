@@ -11,7 +11,7 @@ import { IReadHistory, IUser, PostCategory } from '@/pages/login';
 import PostCard from '@/components/postCard';
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
 import Head from 'next/head';
-import{FaCrown} from "react-icons/fa"
+import { FaCrown } from "react-icons/fa"
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -39,15 +39,15 @@ const PostDetail = ({ recommendedPosts, userData }: InferGetServerSidePropsType<
                 return alert("Error fetching post detail data")
             }
             const data = await res.json() as IPost[]
-            
-            if(data[0].isPremium && userData?.subscription.type !== "premium") {
+
+            if (data[0].isPremium && userData?.subscription.type !== "premium") {
                 setIsProtected(true)
                 data[0].body = data[0].body.slice(0, data[0].body.length / 2)
-            }else{
+            } else {
                 setIsProtected(false)
             }
 
-       
+
 
             setPost(data[0])
             setLikesCounter(data[0].likes)
@@ -154,7 +154,7 @@ const PostDetail = ({ recommendedPosts, userData }: InferGetServerSidePropsType<
                 method: "PATCH",
                 body: JSON.stringify({
                     statistic: {
-                        likes: likesStatisticHandler( )
+                        likes: likesStatisticHandler()
                     },
                     readHistory: userData!.readHistory
                 } as IUser),
@@ -288,14 +288,14 @@ const PostDetail = ({ recommendedPosts, userData }: InferGetServerSidePropsType<
                         post && <Image src={post.thumbnail} className='object-cover' alt='post_thumbnail' width={400} height={400} />
                     }
                 </section>
-                <section className={`mt-10 content-wrapper relative ${isProtected && "h-[50vh]"} overflow-hidden` }>
+                <section className={`mt-10 content-wrapper relative ${isProtected && "h-[50vh]"} overflow-hidden`}>
                     <div className={`${isProtected && "absolute"}`}>
                         {post && parse(post.body)}
                     </div>
                     {
                         isProtected && <div className='absolute bg-gradient-to-t from-white from-60%  w-full h-full flex justify-center items-end pb-10'>
-                        <div className='flex flex-col justify-center items-center'>
-                                <FaCrown size={100} color="orange"/>
+                            <div className='flex flex-col justify-center items-center'>
+                                <FaCrown size={100} color="orange" />
                                 <h1>Premium content</h1>
                                 <Link href={userData !== null ? "/subscription" : "/login"} className='py-2 px-3 bg-[#112D4E] rounded-md text-sm text-white '>Subscribe to premium</Link>
                             </div>
@@ -327,7 +327,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
     try {
         user = JSON.parse(context.req.cookies["userData"]!) as IUser
-        
+
         const recommendedPostsHandler = async () => {
             let arr = Object.values(user!.statistic.likes)
             let max = Math.max(...arr)
@@ -346,6 +346,13 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
                     return alert(`Error fetching user data ${res.statusText}`)
                 }
                 const data = await res.json() as IUser
+                const isExpired = moment(new Date()).isAfter(data.subscription.expiredAt)
+
+                if (isExpired) {
+                    data.subscription.expiredAt = null
+                    data.subscription.type = "free"
+                }
+
                 user = data
                 setCookie("userData", data, {
                     maxAge: 60 * 60
@@ -376,7 +383,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
                 recommendedPosts = []
             }
         }
-        
+
         await getUserData()
         await recommendedPostsHandler()
     } catch (e) {
