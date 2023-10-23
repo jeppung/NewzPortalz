@@ -92,7 +92,7 @@ const Register = () => {
                     <button type='submit' className={`${error?.status ? "bg-slate-400" : "bg-[#112D4E] text-white"} w-full py-2 rounded-lg`} disabled={error?.status}>Register</button>
                     {error?.status && <p className='text-center text-sm'>{error.message}</p>}
                 </form>
-                <p className='text-center mt-10 text-sm'>Not registered yet? <Link href="/login" className='font-bold'>Login Here</Link></p>
+                <p className='text-center mt-10 text-sm'>Already have an account? <Link href="/login" className='font-bold'>Login Here</Link></p>
             </div>
         </main>
     )
