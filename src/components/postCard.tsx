@@ -14,10 +14,10 @@ const PostCard = ({ data }: IPostCardProps) => {
 
     return (
         <div className="flex flex-col md:flex-row bg-[#1F4172] rounded-md overflow-hidden shadow-lg relative">
-            {data.isPremium && <p className='right-0 w-fit hidden md:flex  bg-[#E9EB97] absolute text-sm p-2 rounded-tr-xl rounded-bl-xl text-black font-bold'>Premium</p>}
+            {data.isPremium && <p className='right-0 w-fit hidden md:flex  bg-[#E9EB97] absolute text-sm p-2 rounded-bl-xl text-black font-bold'>Premium</p>}
             <div className='relative h-[200px] md:h-40 md:w-52'>
                 <Image src={data.thumbnail} width={150} height={150} className='h-full w-full object-cover md:w-52 absolute' alt="thumbnail_post" />
-                {data.isPremium && <p className='right-0 w-fit md:hidden bg-[#E9EB97] absolute text-sm p-2 rounded-tr-xl rounded-bl-xl text-black font-bold'>Premium</p>}
+                {data.isPremium && <p className='right-0 w-fit md:hidden bg-[#E9EB97] absolute text-sm p-2 rounded-bl-xl text-black font-bold'>Premium</p>}
             </div>
             <div className="text-white p-4 flex flex-col  flex-1">
                 <h1 className="font-bold hover:cursor-pointer" onClick={() => router.push(`/posts/${data.slug}`)}>{data.title}</h1>

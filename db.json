@@ -210,7 +210,7 @@
           "isLike": true,
           "isShare": false,
           "createdAt": "2023-10-18T14:43:17.662Z",
-          "updatedAt": "2023-10-23T06:25:30.790Z"
+          "updatedAt": "2023-10-23T13:58:35.239Z"
         },
         {
           "id": 2,
@@ -274,7 +274,15 @@
           "isLike": false,
           "isShare": false,
           "createdAt": "2023-10-19T14:55:10.287Z",
-          "updatedAt": "2023-10-19T14:55:10.287Z"
+          "updatedAt": "2023-10-23T13:59:26.038Z"
+        },
+        {
+          "id": 10,
+          "slug": "lorem-ipsum-dolor-amet-10-edited-nkvdwo23",
+          "isLike": false,
+          "isShare": false,
+          "createdAt": "2023-10-23T14:01:09.100Z",
+          "updatedAt": "2023-10-23T14:01:09.100Z"
         }
       ],
       "isAdmin": false,
