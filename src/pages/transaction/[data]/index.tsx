@@ -1,6 +1,4 @@
 import Modal from '@/components/modal'
-import PostModal from '@/components/postModal'
-import SubsModal from '@/components/subsModal'
 import TransactionAlert from '@/components/transactionAlert'
 import { ISubsTransaction, decrypt } from '@/pages/subscription'
 import moment from 'moment'

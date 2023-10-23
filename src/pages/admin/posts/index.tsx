@@ -1,7 +1,7 @@
 import Navbar from '@/components/navbar'
 import PostModal from '@/components/postModal'
 import { IUser } from '@/pages/login'
-import axios, { Axios, isAxiosError } from 'axios'
+import axios, { isAxiosError } from 'axios'
 import moment from 'moment'
 import Head from 'next/head'
 import Link from 'next/link'

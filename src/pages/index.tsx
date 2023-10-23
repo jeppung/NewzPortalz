@@ -9,10 +9,7 @@ import { IPagination, IPost, PostCategory } from "./admin/posts";
 import PostCard from "@/components/postCard";
 import moment from "moment";
 import axios from "axios";
-import Head from "next/head";
-import { AiFillFacebook, AiOutlineInstagram, AiOutlineTwitter } from "react-icons/ai";
-import {BsFacebook} from "react-icons/bs"
-import Link from "next/link";
+import Head from "next/head"
 import Footer from "@/components/footer";
 
 type PostFilterOrder = "desc" | "asc"
