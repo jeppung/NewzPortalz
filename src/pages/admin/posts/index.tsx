@@ -5,7 +5,7 @@ import axios, { Axios, isAxiosError } from 'axios'
 import moment from 'moment'
 import Head from 'next/head'
 import Link from 'next/link'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import {AiFillDelete, AiFillEdit, AiFillEye} from "react-icons/ai"
 export type PostCategory = "technology" | "entertainment" | "politics" | "sports" | "others"
 export interface IPost {
@@ -42,11 +42,36 @@ export interface IPagination {
     data: IPaginationLink[]
 }
 
+interface IPostsFilter {
+    search: string
+    date: {
+        startDate: Date | undefined
+        endDate: Date
+    }
+}
+
 const AdminPosts = () => {
 
     const [posts, setPosts] = useState<IPost[]>([])
     const [modal, setModal] = useState<IModalPost>({ isModal: false, type: "create" })
     const [pagination, setPagination] = useState<IPagination | null>(null)
+    const [filter, setFilter] = useState<IPostsFilter>({
+        search: "",
+        date: {
+            startDate: undefined,
+            endDate: new Date(new Date().setHours(23, 59, 59))
+        }
+    })
+    const startDateRef = useRef<HTMLInputElement>(null)
+    const endDateRef = useRef<HTMLInputElement>(null)
+
+    const startDateFocusHandler = () => {
+        startDateRef.current?.showPicker()
+    }
+
+    const endDateFocusHandler = () => {
+        endDateRef.current?.showPicker()
+    }
 
     const getPostsData = async (url: string) => {
         try {
@@ -68,6 +93,8 @@ const AdminPosts = () => {
                     _limit: parseInt(params.get("_limit")!),
                     data: link
                 })
+            }else{
+                setPagination(null)
             }
 
             const data = res.data as IPost[]
@@ -100,8 +127,8 @@ const AdminPosts = () => {
 
 
     useEffect(() => {
-        getPostsData("http://localhost:6969/posts?_expand=user&_page=1&_limit=10")
-    }, [])
+        getPostsData(`http://localhost:6969/posts?q=${filter.search}&_expand=user&_page=1&_limit=10&createdAt_gte=${filter.date.startDate ? filter.date.startDate.toISOString() : ""}&createdAt_lte=${filter.date.endDate.toISOString()}`)
+    }, [filter])
 
     return (
         <>
@@ -118,7 +145,29 @@ const AdminPosts = () => {
             <main className='max-w-7xl mx-auto pt-10'>
                 <div className='flex justify-between'>
                     <h1 className='text-3xl'>Posts</h1>
-                    <button onClick={() => setModal({ isModal: true, type: "create" })} className='bg-yellow-500 py-1 px-2 rounded-lg text-white text-sm'>Create Post</button>
+                    <div className='flex gap-x-2'>
+                        <input type="text" name="search_post" id="search_post" placeholder='Search...' className='w-96 border rounded-md px-2' onChange={(e) => {
+                            setFilter({...filter, search: e.target.value})
+                        }}/>
+                        <div className=' flex items-center'>
+                            <div className='relative w-32 rounded-md bg-slate-200 flex items-center' onClick={startDateFocusHandler}>
+                                <label htmlFor="dateStart" className='absolute px-2 w-full text-end' >{filter.date.startDate ? moment(filter.date.startDate).format("MM/DD/YYYY") : "Start date"}</label>
+                                <input type="date" name="dateStart" id="dateStart" ref={startDateRef} className='absolute invisible' onChange={(e) => {
+                                if (e.target.valueAsDate === null) return setFilter({ ...filter, date: { ...filter.date, startDate: undefined } })
+                                setFilter({ ...filter, date: { ...filter.date, startDate: e.target.valueAsDate } })
+                                }} />
+                            </div>
+                            <p>-</p>
+                            <div className='relative w-32 rounded-md bg-slate-200 flex items-center' onClick={endDateFocusHandler}>
+                                <label htmlFor="dateEnd" className='absolute px-2  w-full text-start' >{moment(filter.date.endDate).format("MM/DD/YYYY")}</label>
+                                <input type="date" name="dateEnd" id="dateEnd" ref={endDateRef} className='absolute invisible' onChange={(e) => {
+                                if (e.target.valueAsDate === null) return setFilter({ ...filter, date: { ...filter.date, endDate: new Date(new Date().setHours(23, 59, 59)) } })
+                                setFilter({ ...filter, date: { ...filter.date, endDate: new Date(e.target.valueAsDate!.setHours(23, 59, 59)) } })
+                                }} />
+                            </div>
+                        </div>
+                        <button onClick={() => setModal({ isModal: true, type: "create" })} className='bg-yellow-500 py-1 px-2 rounded-lg text-white text-sm'>Create Post</button>
+                    </div>
                 </div>
                 <section className='mt-5 '>
                     <table className='w-full table border border-collapse'>

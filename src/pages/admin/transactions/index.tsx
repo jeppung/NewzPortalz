@@ -43,7 +43,6 @@ const AdminTransaction = () => {
   }
 
   const getTransactionsData = async (url: string) => {
-    console.log(url)
     try {
       const res = await axios.get(url)
 
@@ -56,7 +55,6 @@ const AdminTransaction = () => {
           }
         })
 
-        console.log(link)
         const params = new URLSearchParams(url)
 
         setPagination({
