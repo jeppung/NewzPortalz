@@ -61,7 +61,7 @@ const Login = () => {
         e.preventDefault()
         setError(null)
         try {
-            const res = await fetch(`${BASE_DB_URL}/auth/login?email=${email}&password=${password}`)
+            const res = await fetch(`${BASE_DB_URL}/users?email=${email}&password=${password}`)
             if (!res.ok) {
                 return setError({ status: true, message: "An error occured" })
             }
