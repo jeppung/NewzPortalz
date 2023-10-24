@@ -367,6 +367,29 @@
         }
       },
       "id": 4
+    },
+    {
+      "name": "apapung",
+      "phone": 3123213213,
+      "address": "JL. Somewhere i know",
+      "email": "apapung@mail.com",
+      "password": "apapung123",
+      "subscription": {
+        "type": "free",
+        "expiredAt": null
+      },
+      "isAdmin": false,
+      "readHistory": null,
+      "statistic": {
+        "likes": {
+          "entertainment": 0,
+          "others": 0,
+          "politics": 0,
+          "sports": 0,
+          "technology": 0
+        }
+      },
+      "id": 5
     }
   ],
   "transactions": [

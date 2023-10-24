@@ -46,7 +46,7 @@ const Register = () => {
                 maxAge: 60 * 60
             })
 
-            router.replace("/")
+            router.replace({ pathname: "/", query: { isRegister: true } }, "/")
         } catch (e) {
             return alert("An error has occured")
         }

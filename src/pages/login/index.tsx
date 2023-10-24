@@ -78,7 +78,7 @@ const Login = () => {
             setCookie("userData", data[0], {
                 maxAge: 60 * 60
             })
-            data[0].isAdmin ? router.push("/admin/posts") : router.push("/")
+            data[0].isAdmin ? router.push({ pathname: "/admin/posts", query: { isLogin: true } }, "/admin/posts") : router.push({ pathname: "/", query: { isLogin: true } }, "/")
         } catch (e) {
             return setError({ status: true, message: "An error occured" })
         }

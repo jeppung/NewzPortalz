@@ -1,13 +1,16 @@
 import Navbar from '@/components/navbar'
 import PostModal from '@/components/postModal'
 import { BASE_DB_URL } from '@/constants/url'
+import { customToastId } from '@/pages'
 import { IUser } from '@/pages/login'
 import axios, { isAxiosError } from 'axios'
 import moment from 'moment'
 import Head from 'next/head'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import React, { useEffect, useRef, useState } from 'react'
 import { AiFillDelete, AiFillEdit, AiFillEye } from "react-icons/ai"
+import { ToastContainer, toast } from 'react-toastify'
 export type PostCategory = "technology" | "entertainment" | "politics" | "sports" | "others"
 export interface IPost {
     id?: number
@@ -65,6 +68,7 @@ const AdminPosts = () => {
     })
     const startDateRef = useRef<HTMLInputElement>(null)
     const endDateRef = useRef<HTMLInputElement>(null)
+    const router = useRouter()
 
     const startDateFocusHandler = () => {
         startDateRef.current?.showPicker()
@@ -131,8 +135,18 @@ const AdminPosts = () => {
         getPostsData(`${BASE_DB_URL}/posts?q=${filter.search}&_expand=user&_page=1&_limit=10&createdAt_gte=${filter.date.startDate ? filter.date.startDate.toISOString() : ""}&createdAt_lte=${filter.date.endDate.toISOString()}`)
     }, [filter])
 
+    useEffect(() => {
+        if (router.query.isLogin !== undefined) {
+            toast.success("Login Success", {
+                toastId: customToastId,
+                autoClose: 1000
+            })
+        }
+    }, [])
+
     return (
         <>
+            <ToastContainer />
             <Head>
                 <title>Newz Portalz | Posts</title>
             </Head>
