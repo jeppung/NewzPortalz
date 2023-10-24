@@ -1,6 +1,6 @@
 import Navbar from '@/components/navbar'
 import PostModal from '@/components/postModal'
-import { BASE_DB_URL } from '@/constants/api'
+import { BASE_DB_URL } from '@/constants/url'
 import { IUser } from '@/pages/login'
 import axios, { isAxiosError } from 'axios'
 import moment from 'moment'

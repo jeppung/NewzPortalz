@@ -6,7 +6,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { IPagination } from '../posts'
 import axios from 'axios'
 import Head from 'next/head'
-import { BASE_DB_URL } from '@/constants/api'
+import { BASE_DB_URL } from '@/constants/url'
 
 
 interface ITransactionFilter {

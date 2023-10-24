@@ -13,7 +13,7 @@ import Head from 'next/head';
 import { FaCrown } from "react-icons/fa"
 import Link from 'next/link';
 import Image from 'next/image';
-import { BASE_DB_URL } from '@/constants/api';
+import { BASE_DB_URL, BASE_URL } from '@/constants/url';
 
 
 const PostDetail = ({ recommendedPosts, userData }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
@@ -277,7 +277,7 @@ const PostDetail = ({ recommendedPosts, userData }: InferGetServerSidePropsType<
                             <div className='flex gap-x-1'>
                                 <p>{sharesCounter}</p>
                                 <button onClick={() => {
-                                    navigator.clipboard.writeText(`http://localhost:3000/posts/${post?.slug}`)
+                                    navigator.clipboard.writeText(`${BASE_URL}/posts/${post?.slug}`)
                                     shareHandler()
                                 }}><AiOutlineShareAlt /></button>
                             </div>

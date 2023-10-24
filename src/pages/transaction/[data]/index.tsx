@@ -1,6 +1,6 @@
 import Modal from '@/components/modal'
 import TransactionAlert from '@/components/transactionAlert'
-import { BASE_DB_URL } from '@/constants/api'
+import { BASE_DB_URL } from '@/constants/url'
 import { ISubsTransaction, decrypt } from '@/pages/subscription'
 import moment from 'moment'
 import Head from 'next/head'
@@ -66,7 +66,7 @@ const Transaction = () => {
             }
             <div>
                 <h1 className='text-3xl text-white font-bold text-center'>Payment Process</h1>
-                <div className='bg-[#F9F7F7] w-[400px] h-fit rounded-2xl mt-5 py-7 px-8'>
+                <div className='bg-[#F9F7F7] max-w-[400px] h-fit rounded-2xl mt-5 py-7 px-8'>
                     <div className='flex flex-col gap-y-3'>
                         <div>
                             <h1 className='font-bold text-lg'>Transaction ID</h1>

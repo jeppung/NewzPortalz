@@ -1,5 +1,5 @@
 
-import { BASE_DB_URL } from '@/constants/api'
+import { BASE_DB_URL } from '@/constants/url'
 import { IPost, PostCategory } from '@/pages/admin/posts'
 import { Editor } from '@tinymce/tinymce-react'
 import Image from 'next/image'

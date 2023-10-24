@@ -4,7 +4,7 @@ import { IError, IUser } from '../login'
 import { setCookie } from 'cookies-next'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
-import { BASE_DB_URL } from '@/constants/api'
+import { BASE_DB_URL } from '@/constants/url'
 
 
 

@@ -11,7 +11,7 @@ import moment from "moment";
 import axios from "axios";
 import Head from "next/head"
 import Footer from "@/components/footer";
-import { BASE_DB_URL } from "@/constants/api";
+import { BASE_DB_URL } from "@/constants/url";
 
 type PostFilterOrder = "desc" | "asc"
 
@@ -245,6 +245,7 @@ export default function Home() {
                 {
                   pagination?.data.find((data) => data.status === "next") && <button onClick={() => {
                     const url = pagination?.data.find((data) => data.status === "next")?.link
+                    console.log(url)
                     return getPostsData(url!.trim())
                   }} className='py-1 bg-white border-2 rounded-md px-2'>Next</button>
                 }

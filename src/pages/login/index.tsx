@@ -1,4 +1,4 @@
-import { BASE_DB_URL } from '@/constants/api'
+import { BASE_DB_URL } from '@/constants/url'
 import { setCookie } from 'cookies-next'
 import moment from 'moment'
 import Head from 'next/head'

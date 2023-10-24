@@ -9,7 +9,7 @@ import { ISubsTransaction, encrypt } from '../subscription'
 import SubsModal from '@/components/subsModal'
 import Head from 'next/head'
 import Footer from '@/components/footer'
-import { BASE_DB_URL } from '@/constants/api'
+import { BASE_DB_URL } from '@/constants/url'
 
 const Profile = () => {
     const [user, setUser] = useState<IUser>()
