@@ -1,12 +1,13 @@
 import Navbar from '@/components/navbar'
 import PostModal from '@/components/postModal'
+import { BASE_DB_URL } from '@/constants/api'
 import { IUser } from '@/pages/login'
 import axios, { isAxiosError } from 'axios'
 import moment from 'moment'
 import Head from 'next/head'
 import Link from 'next/link'
 import React, { useEffect, useRef, useState } from 'react'
-import {AiFillDelete, AiFillEdit, AiFillEye} from "react-icons/ai"
+import { AiFillDelete, AiFillEdit, AiFillEye } from "react-icons/ai"
 export type PostCategory = "technology" | "entertainment" | "politics" | "sports" | "others"
 export interface IPost {
     id?: number
@@ -93,7 +94,7 @@ const AdminPosts = () => {
                     _limit: parseInt(params.get("_limit")!),
                     data: link
                 })
-            }else{
+            } else {
                 setPagination(null)
             }
 
@@ -111,7 +112,7 @@ const AdminPosts = () => {
 
         if (isConfirm) {
             try {
-                const res = await fetch(`http://localhost:6969/posts/${post.id}`, {
+                const res = await fetch(`${BASE_DB_URL}/posts/${post.id}`, {
                     method: "DELETE",
                 })
                 if (!res.ok) {
@@ -127,7 +128,7 @@ const AdminPosts = () => {
 
 
     useEffect(() => {
-        getPostsData(`http://localhost:6969/posts?q=${filter.search}&_expand=user&_page=1&_limit=10&createdAt_gte=${filter.date.startDate ? filter.date.startDate.toISOString() : ""}&createdAt_lte=${filter.date.endDate.toISOString()}`)
+        getPostsData(`${BASE_DB_URL}/posts?q=${filter.search}&_expand=user&_page=1&_limit=10&createdAt_gte=${filter.date.startDate ? filter.date.startDate.toISOString() : ""}&createdAt_lte=${filter.date.endDate.toISOString()}`)
     }, [filter])
 
     return (
@@ -138,7 +139,7 @@ const AdminPosts = () => {
             {
                 modal.isModal && <PostModal type={modal.type} onClose={() => setModal({ ...modal, isModal: false })} onSuccess={() => {
                     setModal({ ...modal, isModal: false })
-                    getPostsData(`http://localhost:6969/posts?_expand=user&_page=${pagination?._page}&_limit=${pagination?._limit}`)
+                    getPostsData(`${BASE_DB_URL}/posts?_expand=user&_page=${pagination?._page}&_limit=${pagination?._limit}`)
                 }} initialData={modal.initialData} />
             }
             <Navbar />
@@ -147,22 +148,22 @@ const AdminPosts = () => {
                     <h1 className='text-3xl'>Posts</h1>
                     <div className='flex gap-x-2'>
                         <input type="text" name="search_post" id="search_post" placeholder='Search...' className='w-96 border rounded-md px-2' onChange={(e) => {
-                            setFilter({...filter, search: e.target.value})
-                        }}/>
+                            setFilter({ ...filter, search: e.target.value })
+                        }} />
                         <div className=' flex items-center'>
                             <div className='relative w-32 rounded-md bg-slate-200 flex items-center' onClick={startDateFocusHandler}>
                                 <label htmlFor="dateStart" className='absolute px-2 w-full text-end' >{filter.date.startDate ? moment(filter.date.startDate).format("MM/DD/YYYY") : "Start date"}</label>
                                 <input type="date" name="dateStart" id="dateStart" ref={startDateRef} className='absolute invisible' onChange={(e) => {
-                                if (e.target.valueAsDate === null) return setFilter({ ...filter, date: { ...filter.date, startDate: undefined } })
-                                setFilter({ ...filter, date: { ...filter.date, startDate: e.target.valueAsDate } })
+                                    if (e.target.valueAsDate === null) return setFilter({ ...filter, date: { ...filter.date, startDate: undefined } })
+                                    setFilter({ ...filter, date: { ...filter.date, startDate: e.target.valueAsDate } })
                                 }} />
                             </div>
                             <p>-</p>
                             <div className='relative w-32 rounded-md bg-slate-200 flex items-center' onClick={endDateFocusHandler}>
                                 <label htmlFor="dateEnd" className='absolute px-2  w-full text-start' >{moment(filter.date.endDate).format("MM/DD/YYYY")}</label>
                                 <input type="date" name="dateEnd" id="dateEnd" ref={endDateRef} className='absolute invisible' onChange={(e) => {
-                                if (e.target.valueAsDate === null) return setFilter({ ...filter, date: { ...filter.date, endDate: new Date(new Date().setHours(23, 59, 59)) } })
-                                setFilter({ ...filter, date: { ...filter.date, endDate: new Date(e.target.valueAsDate!.setHours(23, 59, 59)) } })
+                                    if (e.target.valueAsDate === null) return setFilter({ ...filter, date: { ...filter.date, endDate: new Date(new Date().setHours(23, 59, 59)) } })
+                                    setFilter({ ...filter, date: { ...filter.date, endDate: new Date(e.target.valueAsDate!.setHours(23, 59, 59)) } })
                                 }} />
                             </div>
                         </div>
@@ -198,9 +199,9 @@ const AdminPosts = () => {
 
                                             <td>
                                                 <div className='flex justify-around'>
-                                                    <Link href={`/posts/${post.slug}`}><AiFillEye size={20}/></Link>
-                                                    <button onClick={() => setModal({ isModal: true, type: 'edit', initialData: post })} ><AiFillEdit size={20}/></button>
-                                                    <button onClick={() => deleteHandler(post)}><AiFillDelete color="red" size={20}/></button>
+                                                    <Link href={`/posts/${post.slug}`}><AiFillEye size={20} /></Link>
+                                                    <button onClick={() => setModal({ isModal: true, type: 'edit', initialData: post })} ><AiFillEdit size={20} /></button>
+                                                    <button onClick={() => deleteHandler(post)}><AiFillDelete color="red" size={20} /></button>
                                                 </div>
                                             </td>
                                         </tr>

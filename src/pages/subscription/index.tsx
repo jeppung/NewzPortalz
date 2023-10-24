@@ -6,6 +6,7 @@ import { IUser } from '../login'
 import SubsModal from '@/components/subsModal'
 import Head from 'next/head'
 import Footer from '@/components/footer'
+import { BASE_DB_URL } from '@/constants/api'
 
 
 
@@ -57,7 +58,7 @@ const Subscription = () => {
         }
 
         try {
-            const res = await fetch("http://localhost:6969/transactions?_expand=user", {
+            const res = await fetch(`${BASE_DB_URL}/transactions?_expand=user`, {
                 method: "POST",
                 body: JSON.stringify(data),
                 headers: {
@@ -126,7 +127,7 @@ const Subscription = () => {
                     </div>
                 </section>
             </main>
-            <Footer/>
+            <Footer />
 
         </div>
     )

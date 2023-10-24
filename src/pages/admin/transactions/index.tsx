@@ -6,6 +6,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { IPagination } from '../posts'
 import axios from 'axios'
 import Head from 'next/head'
+import { BASE_DB_URL } from '@/constants/api'
 
 
 interface ITransactionFilter {
@@ -75,7 +76,7 @@ const AdminTransaction = () => {
 
   const updateUserData = async (transaction: ISubsTransaction) => {
     try {
-      const res = await fetch(`http://localhost:6969/users/${transaction.userId}`, {
+      const res = await fetch(`${BASE_DB_URL}/users/${transaction.userId}`, {
         method: "PATCH",
         body: JSON.stringify({
           subscription: {
@@ -102,7 +103,7 @@ const AdminTransaction = () => {
     if (!isConfirm) return
 
     try {
-      const res = await fetch(`http://localhost:6969/transactions/${transaction.id}`, {
+      const res = await fetch(`${BASE_DB_URL}/transactions/${transaction.id}`, {
         method: "PATCH",
         body: JSON.stringify({
           status: action === "accept" ? "completed" : "cancelled",
@@ -133,7 +134,7 @@ const AdminTransaction = () => {
   }
 
   useEffect(() => {
-    getTransactionsData(`http://localhost:6969/transactions?_expand=user&status_like=${filter.status}&_sort=${filter.sort}&_order=${filter.order}&createdAt_gte=${filter.date.startDate ? filter.date.startDate.toISOString() : ""}&createdAt_lte=${filter.date.endDate.toISOString()}&_page=${pagination ? pagination?._page : 1}&_limit=${pagination ? pagination?._limit : 10}`)
+    getTransactionsData(`${BASE_DB_URL}/transactions?_expand=user&status_like=${filter.status}&_sort=${filter.sort}&_order=${filter.order}&createdAt_gte=${filter.date.startDate ? filter.date.startDate.toISOString() : ""}&createdAt_lte=${filter.date.endDate.toISOString()}&_page=${pagination ? pagination?._page : 1}&_limit=${pagination ? pagination?._limit : 10}`)
   }, [filter])
 
   return (

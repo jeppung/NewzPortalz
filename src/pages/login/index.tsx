@@ -1,3 +1,4 @@
+import { BASE_DB_URL } from '@/constants/api'
 import { setCookie } from 'cookies-next'
 import moment from 'moment'
 import Head from 'next/head'
@@ -60,7 +61,7 @@ const Login = () => {
         e.preventDefault()
         setError(null)
         try {
-            const res = await fetch(`http://localhost:6969/auth/login?email=${email}&password=${password}`)
+            const res = await fetch(`${BASE_DB_URL}/auth/login?email=${email}&password=${password}`)
             if (!res.ok) {
                 return setError({ status: true, message: "An error occured" })
             }

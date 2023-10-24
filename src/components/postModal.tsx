@@ -1,4 +1,5 @@
 
+import { BASE_DB_URL } from '@/constants/api'
 import { IPost, PostCategory } from '@/pages/admin/posts'
 import { Editor } from '@tinymce/tinymce-react'
 import Image from 'next/image'
@@ -78,7 +79,7 @@ const PostModal = ({ onClose, onSuccess, type, initialData }: IPostModalProps) =
         }
 
         try {
-            const res = await fetch(type === "create" ? "http://localhost:6969/posts" : `http://localhost:6969/posts/${initialData?.id}`, {
+            const res = await fetch(type === "create" ? `${BASE_DB_URL}/posts` : `${BASE_DB_URL}/posts/${initialData?.id}`, {
                 method: type === "create" ? "POST" : "PATCH",
                 body: JSON.stringify(data),
                 headers: {

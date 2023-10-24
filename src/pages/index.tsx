@@ -11,6 +11,7 @@ import moment from "moment";
 import axios from "axios";
 import Head from "next/head"
 import Footer from "@/components/footer";
+import { BASE_DB_URL } from "@/constants/api";
 
 type PostFilterOrder = "desc" | "asc"
 
@@ -138,7 +139,7 @@ export default function Home() {
   }
 
   useEffect(() => {
-    getPostsData(`http://localhost:6969/posts?_expand=user&title_like=${filter.search}&category_like=${filter.category}&isPremium_like=${filter.type}&_sort=${filter.sort}&_order=${filter.order}&createdAt_gte=${filter.date.startDate ? filter.date.startDate.toISOString() : ""}&createdAt_lte=${filter.date.endDate.toISOString()}&_page=${pagination ? pagination._page : 1}&_limit=${pagination ? pagination._limit : 10}`)
+    getPostsData(`${BASE_DB_URL}/posts?_expand=user&title_like=${filter.search}&category_like=${filter.category}&isPremium_like=${filter.type}&_sort=${filter.sort}&_order=${filter.order}&createdAt_gte=${filter.date.startDate ? filter.date.startDate.toISOString() : ""}&createdAt_lte=${filter.date.endDate.toISOString()}&_page=${pagination ? pagination._page : 1}&_limit=${pagination ? pagination._limit : 10}`)
     setInitialLoad(false)
   }, [filter])
 

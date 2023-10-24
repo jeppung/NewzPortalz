@@ -4,6 +4,7 @@ import { IError, IUser } from '../login'
 import { setCookie } from 'cookies-next'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
+import { BASE_DB_URL } from '@/constants/api'
 
 
 
@@ -31,7 +32,7 @@ const Register = () => {
         }
 
         try {
-            const res = await fetch("http://localhost:6969/users", {
+            const res = await fetch(`${BASE_DB_URL}/users`, {
                 method: "POST",
                 body: JSON.stringify(user),
                 headers: {

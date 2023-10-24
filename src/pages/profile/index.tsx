@@ -9,6 +9,7 @@ import { ISubsTransaction, encrypt } from '../subscription'
 import SubsModal from '@/components/subsModal'
 import Head from 'next/head'
 import Footer from '@/components/footer'
+import { BASE_DB_URL } from '@/constants/api'
 
 const Profile = () => {
     const [user, setUser] = useState<IUser>()
@@ -19,7 +20,7 @@ const Profile = () => {
 
     const getPostsData = async () => {
         try {
-            const res = await fetch("http://localhost:6969/posts")
+            const res = await fetch(`${BASE_DB_URL}/posts`)
             if (!res.ok) {
                 return alert(`Error fetching posts data ${res.statusText}`)
             }
@@ -32,7 +33,7 @@ const Profile = () => {
 
     const getTransactionsData = async () => {
         try {
-            const res = await fetch("http://localhost:6969/transactions?_sort=createdAt&_order=desc")
+            const res = await fetch(`${BASE_DB_URL}/transactions?_sort=createdAt&_order=desc`)
             if (!res.ok) {
                 return alert(`Error fetching posts data ${res.statusText}`)
             }
@@ -54,7 +55,7 @@ const Profile = () => {
         if (cookie !== undefined) {
             const cookieUser = JSON.parse(cookie) as IUser
             try {
-                const res = await fetch(`http://localhost:6969/auth/user/${cookieUser.id}`)
+                const res = await fetch(`${BASE_DB_URL}/auth/user/${cookieUser.id}`)
                 if (!res.ok) {
                     return alert(`Error fetching user data ${res.statusText}`)
                 }

@@ -13,6 +13,7 @@ import Head from 'next/head';
 import { FaCrown } from "react-icons/fa"
 import Link from 'next/link';
 import Image from 'next/image';
+import { BASE_DB_URL } from '@/constants/api';
 
 
 const PostDetail = ({ recommendedPosts, userData }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
@@ -33,7 +34,7 @@ const PostDetail = ({ recommendedPosts, userData }: InferGetServerSidePropsType<
         }
 
         try {
-            const res = await fetch(`http://localhost:6969/posts?slug=${router.query.slug}&_expand=user`)
+            const res = await fetch(`${BASE_DB_URL}/posts?slug=${router.query.slug}&_expand=user`)
             if (!res.ok) {
                 return alert("Error fetching post detail data")
             }
@@ -81,7 +82,7 @@ const PostDetail = ({ recommendedPosts, userData }: InferGetServerSidePropsType<
         if (dataIndex !== -1 && userData!.readHistory![dataIndex!].isShare === false) {
             userData!.readHistory![dataIndex!].isShare = true
             try {
-                const res = await fetch(`http://localhost:6969/users/${userData!.id}`, {
+                const res = await fetch(`${BASE_DB_URL}/users/${userData!.id}`, {
                     method: "PATCH",
                     body: JSON.stringify({
                         readHistory: userData!.readHistory
@@ -103,7 +104,7 @@ const PostDetail = ({ recommendedPosts, userData }: InferGetServerSidePropsType<
         }
 
         try {
-            const res = await fetch(`http://localhost:6969/posts/${post?.id}`, {
+            const res = await fetch(`${BASE_DB_URL}/posts/${post?.id}`, {
                 method: "PATCH",
                 body: JSON.stringify({
                     shares: post!.shares + 1,
@@ -149,7 +150,7 @@ const PostDetail = ({ recommendedPosts, userData }: InferGetServerSidePropsType<
         userData!.readHistory![dataIndex!].isLike = !isLike
 
         try {
-            const res = await fetch(`http://localhost:6969/users/${userData!.id}`, {
+            const res = await fetch(`${BASE_DB_URL}/users/${userData!.id}`, {
                 method: "PATCH",
                 body: JSON.stringify({
                     statistic: {
@@ -173,7 +174,7 @@ const PostDetail = ({ recommendedPosts, userData }: InferGetServerSidePropsType<
         }
 
         try {
-            const res = await fetch(`http://localhost:6969/posts/${post?.id}`, {
+            const res = await fetch(`${BASE_DB_URL}/posts/${post?.id}`, {
                 method: "PATCH",
                 body: JSON.stringify({
                     likes: count,
@@ -192,7 +193,7 @@ const PostDetail = ({ recommendedPosts, userData }: InferGetServerSidePropsType<
 
     const updateUserHistory = async (data: IReadHistory[], user: IUser) => {
         try {
-            const res = await fetch(`http://localhost:6969/users/${user.id}`, {
+            const res = await fetch(`${BASE_DB_URL}/users/${user.id}`, {
                 method: "PATCH",
                 body: JSON.stringify({
                     readHistory: data
@@ -341,7 +342,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
         const getUserData = async () => {
             try {
-                const res = await fetch(`http://localhost:6969/auth/user/${user?.id}`)
+                const res = await fetch(`${BASE_DB_URL}/auth/user/${user?.id}`)
                 if (!res.ok) {
                     return alert(`Error fetching user data ${res.statusText}`)
                 }
@@ -364,7 +365,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
         const getRecommendedPost = async (category: string) => {
             try {
-                const res = await fetch(`http://localhost:6969/posts?category=${category}&slug_ne=${context.params?.slug}`)
+                const res = await fetch(`${BASE_DB_URL}/posts?category=${category}&slug_ne=${context.params?.slug}`)
                 if (!res.ok) {
                     return alert(`Error fetch recommended posts data ${res.statusText}`)
                 }

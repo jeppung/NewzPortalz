@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react'
 import { IPagination } from '../posts'
 import axios from 'axios'
 import Head from 'next/head'
+import { BASE_DB_URL } from '@/constants/api'
 
 const AdminSubscription = () => {
 
@@ -44,7 +45,7 @@ const AdminSubscription = () => {
         let isConfirm = confirm(`Are you sure to deactivate subscription for ${user.name} ?`)
         if (isConfirm) {
             try {
-                const res = await fetch(`http://localhost:6969/users/${user.id}`, {
+                const res = await fetch(`${BASE_DB_URL}/users/${user.id}`, {
                     method: "PATCH",
                     body: JSON.stringify({
                         subscription: {
@@ -73,7 +74,7 @@ const AdminSubscription = () => {
     }
 
     useEffect(() => {
-        getUserData(`http://localhost:6969/users?_page=${pagination ? pagination._page : 1}&_limit=${pagination ? pagination._limit : 10}`)
+        getUserData(`${BASE_DB_URL}/users?_page=${pagination ? pagination._page : 1}&_limit=${pagination ? pagination._limit : 10}`)
     }, [])
 
     return (

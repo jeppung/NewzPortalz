@@ -1,5 +1,6 @@
 import Modal from '@/components/modal'
 import TransactionAlert from '@/components/transactionAlert'
+import { BASE_DB_URL } from '@/constants/api'
 import { ISubsTransaction, decrypt } from '@/pages/subscription'
 import moment from 'moment'
 import Head from 'next/head'
@@ -33,7 +34,7 @@ const Transaction = () => {
             setIsSuccess(false)
         } else {
             try {
-                const res = await fetch(`http://localhost:6969/transactions/${transaction?.id}`, {
+                const res = await fetch(`${BASE_DB_URL}/transactions/${transaction?.id}`, {
                     method: "PATCH",
                     body: JSON.stringify({
                         status: "pending",
