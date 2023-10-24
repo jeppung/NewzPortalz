@@ -708,8 +708,8 @@
     {
       "id": 1,
       "userId": 1,
-      "title": "Lorem ipsum dolor amet",
-      "slug": "lorem-ipsum-dolor-amet-cd1892d7",
+      "title": "Lorem ipsum dolor amet edit",
+      "slug": "lorem-ipsum-dolor-amet-edit-cd1892d7",
       "description": "This is a lorem description",
       "category": "entertainment",
       "thumbnail": "https://picsum.photos/600/400",
@@ -718,7 +718,7 @@
       "shares": 2,
       "isPremium": false,
       "createdAt": "2023-10-10T04:04:31.651Z",
-      "updatedAt": "2023-10-14T04:27:30.508Z"
+      "updatedAt": "2023-10-24T15:01:12.407Z"
     },
     {
       "userId": 1,
@@ -989,6 +989,21 @@
       "createdAt": "2023-10-24T05:02:22.398Z",
       "updatedAt": "2023-10-24T05:12:54.376Z",
       "id": 20
+    },
+    {
+      "userId": 1,
+      "title": "Apapun itu dahhh",
+      "description": "Lorem ipsum dolor amet Lorem ipsum dolor amet ",
+      "thumbnail": "http://res.cloudinary.com/dylzfyn4b/image/upload/v1698159742/nuwiouyjwtefbkrfnpxn.jpg",
+      "body": "<p>Lorem ipsum dolor amet Lorem ipsum dolor amet Lorem ipsum dolor amet Lorem ipsum dolor amet Lorem ipsum dolor amet Lorem ipsum dolor amet Lorem ipsum dolor amet Lorem ipsum dolor amet Lorem ipsum dolor amet Lorem ipsum dolor amet Lorem ipsum dolor amet Lorem ipsum dolor amet Lorem ipsum dolor amet Lorem ipsum dolor amet Lorem ipsum dolor amet Lorem ipsum dolor amet Lorem ipsum dolor amet Lorem ipsum dolor amet&nbsp;</p>\n<p>Lorem ipsum dolor amet Lorem ipsum dolor amet Lorem ipsum dolor amet Lorem ipsum dolor amet Lorem ipsum dolor amet Lorem ipsum dolor amet Lorem ipsum dolor amet Lorem ipsum dolor amet Lorem ipsum dolor amet Lorem ipsum dolor amet Lorem ipsum dolor amet Lorem ipsum dolor amet Lorem ipsum dolor amet Lorem ipsum dolor amet Lorem ipsum dolor amet Lorem ipsum dolor amet&nbsp;</p>\n<p>Lorem ipsum dolor amet Lorem ipsum dolor amet Lorem ipsum dolor amet Lorem ipsum dolor amet Lorem ipsum dolor amet Lorem ipsum dolor amet Lorem ipsum dolor amet Lorem ipsum dolor amet Lorem ipsum dolor amet Lorem ipsum dolor amet Lorem ipsum dolor amet Lorem ipsum dolor amet&nbsp;</p>",
+      "isPremium": true,
+      "category": "others",
+      "likes": 0,
+      "shares": 0,
+      "slug": "apapun-itu-dahhh-98ce353e",
+      "createdAt": "2023-10-24T15:02:22.469Z",
+      "updatedAt": "2023-10-24T15:02:22.469Z",
+      "id": 21
     }
   ]
 }
