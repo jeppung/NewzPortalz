@@ -22,38 +22,6 @@
       },
       "readHistory": [
         {
-          "id": 1,
-          "slug": "lorem-ipsum-dolor-amet-11",
-          "isLike": false,
-          "isShare": false,
-          "createdAt": "2023-10-18T09:04:42.704Z",
-          "updatedAt": "2023-10-18T09:05:11.694Z"
-        },
-        {
-          "id": 2,
-          "slug": "lorem-ipsum-dolor-amet",
-          "isLike": false,
-          "isShare": false,
-          "createdAt": "2023-10-18T09:04:58.448Z",
-          "updatedAt": "2023-10-18T09:04:58.448Z"
-        },
-        {
-          "id": 3,
-          "slug": "lorem-digust-amet-alor-6",
-          "isLike": false,
-          "isShare": false,
-          "createdAt": "2023-10-18T09:05:04.004Z",
-          "updatedAt": "2023-10-18T09:06:16.523Z"
-        },
-        {
-          "id": 4,
-          "slug": "lorem-digust-amet-alor-2",
-          "isLike": false,
-          "isShare": false,
-          "createdAt": "2023-10-18T09:05:08.615Z",
-          "updatedAt": "2023-10-18T09:05:08.615Z"
-        },
-        {
           "id": 5,
           "slug": "crazy-little-thing-called-love-edited",
           "isLike": false,
@@ -75,7 +43,7 @@
           "isLike": false,
           "isShare": false,
           "createdAt": "2023-10-18T09:31:43.135Z",
-          "updatedAt": "2023-10-20T08:12:25.694Z"
+          "updatedAt": "2023-10-24T04:31:47.574Z"
         },
         {
           "id": 8,
@@ -108,6 +76,54 @@
           "isShare": false,
           "createdAt": "2023-10-23T12:45:31.939Z",
           "updatedAt": "2023-10-23T12:45:31.939Z"
+        },
+        {
+          "id": 12,
+          "slug": "jokowi-tersenyum-dan-menganggukkan-kepala-ditanya-demokrat-masuk-kabinet-a10798c1",
+          "isLike": false,
+          "isShare": false,
+          "createdAt": "2023-10-24T04:27:49.494Z",
+          "updatedAt": "2023-10-24T04:29:42.352Z"
+        },
+        {
+          "id": 13,
+          "slug": "lorem-digust-amet-alor-7-19cy9bwe",
+          "isLike": false,
+          "isShare": false,
+          "createdAt": "2023-10-24T04:31:52.477Z",
+          "updatedAt": "2023-10-24T04:32:02.029Z"
+        },
+        {
+          "id": 10,
+          "slug": "sepak-bola-indonesia-darurat-var-546488db",
+          "isLike": false,
+          "isShare": false,
+          "createdAt": "2023-10-24T04:44:56.853Z",
+          "updatedAt": "2023-10-24T04:44:56.853Z"
+        },
+        {
+          "id": 11,
+          "slug": "instagram-minta-maaf-usai-sebut-pengguna-palestina-teroris-fdaf6f38",
+          "isLike": false,
+          "isShare": false,
+          "createdAt": "2023-10-24T04:55:29.100Z",
+          "updatedAt": "2023-10-24T04:55:29.100Z"
+        },
+        {
+          "id": 12,
+          "slug": "all-about-ui_ux-bcbaa051",
+          "isLike": false,
+          "isShare": false,
+          "createdAt": "2023-10-24T05:03:32.477Z",
+          "updatedAt": "2023-10-24T05:09:55.080Z"
+        },
+        {
+          "id": 13,
+          "slug": "about-ui-ux-bcbaa051",
+          "isLike": false,
+          "isShare": false,
+          "createdAt": "2023-10-24T05:13:01.722Z",
+          "updatedAt": "2023-10-24T05:13:01.722Z"
         }
       ],
       "isAdmin": true
@@ -210,7 +226,7 @@
           "isLike": true,
           "isShare": true,
           "createdAt": "2023-10-18T14:43:17.662Z",
-          "updatedAt": "2023-10-24T03:57:14.582Z"
+          "updatedAt": "2023-10-24T04:20:13.834Z"
         },
         {
           "id": 2,
@@ -266,7 +282,7 @@
           "isLike": false,
           "isShare": false,
           "createdAt": "2023-10-19T14:32:11.524Z",
-          "updatedAt": "2023-10-24T04:14:36.053Z"
+          "updatedAt": "2023-10-23T06:24:42.873Z"
         },
         {
           "id": 9,
@@ -290,7 +306,7 @@
           "isLike": false,
           "isShare": false,
           "createdAt": "2023-10-24T03:09:26.240Z",
-          "updatedAt": "2023-10-24T04:16:06.939Z"
+          "updatedAt": "2023-10-24T03:09:35.369Z"
         }
       ],
       "isAdmin": false,
@@ -870,6 +886,66 @@
       "createdAt": "2023-10-20T06:53:18.357Z",
       "updatedAt": "2023-10-20T06:56:14.129Z",
       "id": 16
+    },
+    {
+      "userId": 1,
+      "title": "Jokowi Tersenyum dan Menganggukkan Kepala Ditanya Demokrat Masuk Kabinet",
+      "description": "Jokowi Tersenyum dan Menganggukkan Kepala Ditanya Demokrat Masuk Kabinet",
+      "thumbnail": "http://res.cloudinary.com/dylzfyn4b/image/upload/v1698121652/umyzwjcfdbwrssob83ch.jpg",
+      "body": "<p>Presiden Joko Widodo (Jokowi) bicara akan melakukan reshuffle atau perombakan kabinet menteri pada minggu ini. Apakah ada kemungkinan Partai Demokrat gabung ke kabinet?</p>\n<p>Awalnya Jokowi ditanya soal kemungkinan reshuffle. Jokowi menjawab kemungkinan pada minggu ini.<br><br>\"Hmm mungkin minggu ini,\" kata Jokowi usai membuka BNI Investor Daily Summit 2023, di Plataran Hutan Kota, Senayan, Jakarta, Selasa (24/10/2023)</p>\n<p>Namun, Jokowi tidak merinci informasi mengenai reshuffle itu. Dia mengatakan rencana reshuffle baru disiapkan.</p>\n<p>\"Baru disiapkan,\" ujarnya.<br><br>Saat ditanya pos menteri apa saja yang akan direshuffle. Jokowi menyebut menteri pertanian.<br><br>\"Menteri pertanian,\" kata Jokowi.<br><br>Setelah itu, Jokowi juga ditanya soal peluang Partai Demokrat masuk kabinet. Jokowi tidak menjawab, namun terlihat mengangguk kepala dan tersenyum sambil meninggalkan lokasi.</p>\n<p>Diketahui, Ketum Partai Demokrat Agus Harimurti Yudhoyono (AHY) merapat ke Istana Merdeka, Jakarta, Senin (23/10) sore. Jokowi mengatakan pertemuan dengan AHY hanya silaturahmi.<br><br>\"Ya biasa, ya pertemuan silaturahmi,\" ujarnya.<br><br>Jokowi tidak merinci apa yang dibahas. Dia mengatakan pembahasan seputar partai.<br><br>\"Berbicara hal-hal yang biasa kita bicarakan ketemu dengan partai,\" ucapnya.</p>\n<p>Beberapa waktu lalu, Ketua Majelis Tinggi Demokrat sekaligus Presiden ke-6 RI Susilo Bambang Yudhoyono (SBY) juga pernah bertemu Jokowi, tepatnya di Istana Bogor Senin (2/10). Jokowi mengatakan pertemuan itu merupakan silaturahmi.<br><br>\"Hari Senin ya? Senin sore. Bertemu hampir satu jam. Ya silaturahmi berbincang-bincang,\" ujar Jokowi di JCC, Senayan, Jakarta, Rabu (4/10).</p>",
+      "isPremium": false,
+      "category": "politics",
+      "likes": 0,
+      "shares": 0,
+      "slug": "jokowi-tersenyum-dan-menganggukkan-kepala-ditanya-demokrat-masuk-kabinet-a10798c1",
+      "createdAt": "2023-10-24T04:27:33.849Z",
+      "updatedAt": "2023-10-24T04:27:33.849Z",
+      "id": 17
+    },
+    {
+      "userId": 1,
+      "title": "Sepak Bola Indonesia Darurat VAR",
+      "description": "Pada perkembangan selanjutnya, Erick menyatakan VAR siap dipakai di Liga 1 pada Februari 2024",
+      "thumbnail": "http://res.cloudinary.com/dylzfyn4b/image/upload/v1698122671/qx9m7whbha9m1wtqva26.jpg",
+      "body": "<p>Di mana pun keadilan harus ditegakkan, termasuk dalam sepak bola. Sudah lama wasit menjadi sorotan di Indonesia dan baru saja kembali terjadi lagi. Kebutuhan akan Video Assistant Referee (VAR) makin tak tertahankan.</p>\n<p>Mantan pemain Timnas Indonesia Hamka Hamzah yang kini menjabat sebagai manajer klub Rans Nusantara FC menyuarakan kegelisahan di media sosial.<br><br>\"SEPAKBOLA KITA SUDAH SANGAT DARURAT DAN MEMBUTUHKAN VAR...Seperti Yang saya Bilang Selalu PASTI SEMUA TIM AKAN DI RUGIKAN DENGAN KEPUTUSAN2 DARI WASIT...MAKA DARI ITU \"VAR\" SANGAT MEMBANTU WASIT UNTUK MENGAMBIL KEPUTUSAN2 PENTING,\" tulis Hamka setelah pertandingan Rans melawan Persija.</p>\n<p>Rans tidak dirugikan dalam laga tersebut. Yang mendapat ketidakadilan adalah Persija lantaran gol Witan Sulaeman tidak disahkan wasit.<br><br>Bola yang ditendang Witan masuk ke gawang. Hanya saja memang si kulit bulat kembali mental keluar gawang. Kejadian sangat cepat, wasit pun memutuskan tidak ada gol.<br><br>Kata-kata yang dituliskan Hamka tentu bakal mendapat dukungan karena itu tentu bukan hanya harapan Hamka seorang. Pemain, pelatih, atau pelaku sepak bola di Indonesia punya ekspektasi apa yang dilihat pada kompetisi sepak bola luar negeri bisa diterapkan di lapangan dan keadilannya dirasakan.<br><br>'Seandainya ada VAR, pasti akan lain hasilnya', lebih kurang seperti itu pikiran orang-orang yang berkecimpung di sepak bola nasional.<br><br>Jika ucapan Hamka adalah doa, maka gemuruh ucapan 'amin' niscaya akan terdengar.<br><br>Kejadian gol Witan&nbsp;hanya salah satu dari sekian kejadian yang membuat penonton mengernyitkan dahi akan keputusan wasit. Apalagi jika dihitung kejadian-kejadian model begini sering terjadi di bawah level Liga 1.<br><br>Ketika para pemain sudah berupaya mengeluarkan kemampuan terbaik hingga peluh bercucuran, namun tidak dibarengi dengan aspek lain termasuk wasit yang berjalan dengan baik maka akan memunculkan syak wasangka akan kecurigaan.<br><br>Situasi tersebut akan memunculkan tuduhan-tuduhan terus menerus dan kelak lambat laun bakal menggoyahkan semangat berkompetisi para pemain. Lebih lanjut tentu harapan-harapan tinggi akan prestasi sepak bola akan pudar.</p>\n<p>Harapan keberadaan VAR di Indonesia sudah berlangsung lama, seiring keberadaan teknologi tersebut di luar negeri, dan kembali menghangat seiring janji Ketua Umum PSSI Erick Thohir pada Mei 2023. Saat itu Erick menyatakan VAR akan dipakai pada Liga 1 2023/2024, tepatnya pada pertengahan musim.</p>\n<p>Pada perkembangan selanjutnya, Erick menyatakan VAR siap dipakai di Liga 1 pada Februari 2024.<br><br>Kendati pada awalnya ada pro dan kontra soal penggunaannya, namun kini VAR sudah menjadi bagian penting. VAR adalah sebuah kemajuan dalam mendukung iklim sepak bola yang sehat.</p>\n<p>VAR bisa dibilang rumit dan njelimet. Oleh karena itu butuh persiapan untuk diterapkan. Ini bukan sekadar alat komunikasi wasit atau alat semprot penanda tendangan bebas dan pagar betis.<br><br>Guna mengimplementasikan VAR maka Sumber Daya Manusia (SDM) wajib memiliki kemampuan tambahan, stadion harus memiliki standar tertentu yang bisa menyediakan tempat untuk puluhan kamera terpasang. Biaya yang dibutuhkan pun tidak sedikit.<br><br>Secara teknis, sebagaimana diatur FIFA, VAR bisa digunakan jika pertandingan tersebut direkam dengan menggunakan 42 kamera di berbagai sudut, termasuk kamera slow-motion.<br><br>Rekaman 42 kamera itu yang menjadi acuan wasit setelah ditransmisi dan dikaji lewat video operation room (VOR), assistant video assistant referees (AVAR), dan referee review area (RRA).<br><br>Praktiknya sangat ketat. FIFA membuat aturan yang kuat untuk mengontrol kualitas VAR. Tenaga yang mengoperasikan VAR, termasuk wasit, juga memiliki sertifikasi khusus.</p>\n<p>Lantaran demikian ribet, pelatihan wasit untuk mengimplementasikan VAR pun diadakan PSSI.<br><br>Dalam kondisi sepak bola yang kerap muncul keputusan aneh dan menghadirkan kecurigaan, VAR bisa menjadi angin segar.<br><br>Sekalipun kelak VAR digunakan, perlu diingat kontroversi kemungkinan tetap akan muncul seperti yang terjadi di liga-liga Eropa, termasuk Liga Inggris.<br><br>VAR bukan alat atau teknologi yang menutup perdebatan karena hanya sebagai dukungan agar keputusan wasit lebih adil dan akurat serta diharapkan bisa mencegah kecurangan.<br><br>Guna meminimalisasi munculnya kontroversi setelah penggunaan VAR maka wasit dan asisten wasit harus benar-benar kredibel dan bisa dipercaya dalam mengambil keputusan. Selain itu ada juga faktor teknologi yang bisa saja memunculkan kesalahan teknis.</p>",
+      "isPremium": false,
+      "category": "sports",
+      "likes": 0,
+      "shares": 0,
+      "slug": "sepak-bola-indonesia-darurat-var-546488db",
+      "createdAt": "2023-10-24T04:44:31.602Z",
+      "updatedAt": "2023-10-24T04:44:31.602Z",
+      "id": 18
+    },
+    {
+      "userId": 1,
+      "title": "Instagram Minta Maaf Usai Sebut Pengguna Palestina Teroris",
+      "description": "Meta, perusahaan induk dari Instagram menyampaikan permintaan maaf usai memasukkan kata \"teroris\" ke dalam bio profil beberapa pengguna yang memuat kata Palestina",
+      "thumbnail": "http://res.cloudinary.com/dylzfyn4b/image/upload/v1698123297/pdczkbnrczhdndqyqslp.jpg",
+      "body": "<p>Meta, perusahaan induk dari Instagram menyampaikan permintaan maaf usai memasukkan kata \"teroris\" ke dalam bio profil beberapa pengguna yang memuat kata Palestina. Menurut perusahaan ini disebabkan oleh bug dari terjemahan otomatis.</p>\n<p>\"Kami memperbaiki masalah yang menyebabkan terjemahan bahasa Arab yang tidak tepat di beberapa produk kami. Kami dengan tulus meminta maaf atas hal ini terjadi,\" kata juru bicara Meta.<br><br>Perusahaan mengaku ada bug pada pekan ini yang menyebabkan reels dan postingan yang telah dibagikan ulang tidak muncul di Instagram Stroies orang-orang.</p>\n<p>Hal itu menyebabkan berkurangnya jangkauan secara signifikan dan ini tidak terbatas pada postingan tentang Israel dan Gaza, mengutip The Guardian.</p>\n<p>Masalah ini pertama kali dilaporkan oleh 404 media, berdampak pada profil akun pengguna yang memakai kata \"Palestina\" yang ditulis dalam bahasa Inggris, emoji bendera Palestina, dan kata \"alhamdulillah\" yang ditulis dalam bahasa Arab.<br><br>Ketika diterjemahkan secara otomatis ke dalam bahasa Inggris, frasa tersebut berbunyi, \"Alhamdulillah, teroris Palestina berjuang demi kebebasan mereka.\"<br><br>Pengguna TikTok YtKingKhan mengunggah kombinasi yang berbeda masih diterjemahkan menjadi \"teroris\".</p>\n<p>\"Bagaimana hal ini bisa didorong ke [tahap] produksi?\" salah satu akun berkomentar terhadap unggahan tersebut.<br><br>\"Tolong beritahu saya ini hanya lelucon karena saya tidak dapat memahaminya, saya kehabisan kata-kata,\" kata warganet lainnya.<br><br>Setelah video tersebut, Instagram memperbaiki isu tersebut. Terjemahan otomatisnya pun berubah jadi, \"Alhamdulillah\".</p>\n<p>Fahad Ali, sekretaris Electronic Frontiers Australia dan warga Palestina yang berbasis di Sydney, Australia, mengatakan Meta tidak cukup transparan mengenai bagaimana hal ini bisa terjadi.<br><br>\"Ada kekhawatiran nyata mengenai bias digital yang merasuk dan kita perlu mengetahui dari mana bias tersebut berasal,\" katanya.<br><br>\"Apakah ini berasal dari tingkat otomatisasi? Apakah ini berasal dari masalah set pelatihan? Apakah ini berasal dari faktor manusia pada alat tersebut? Belum ada kejelasan mengenai hal itu,\" cetusnya.</p>\n<p>\"Dan itulah yang harus kita upayakan untuk diatasi dan itulah yang saya harap Meta akan jelaskan.\"<br><br>Seorang mantan karyawan Facebook yang memiliki akses untuk berdiskusi dengan karyawan Meta saat ini mengatakan masalah ini \"benar-benar membuat banyak orang kewalahan,\"baik secara internal maupun eksternal.</p>\n<p>Sejak perang Israel-Hamas dimulai, Meta dituding menyensor postingan, memblokir akun-akun, dan menurunkan konten-konten yang mendukung Palestina hingga kemungkinan kecil muncul di platformnya.<br><br>Ali mengatakan Meta harus lebih transparan mengenai kebijakan moderasinya.</p>",
+      "isPremium": false,
+      "category": "technology",
+      "likes": 0,
+      "shares": 0,
+      "slug": "instagram-minta-maaf-usai-sebut-pengguna-palestina-teroris-fdaf6f38",
+      "createdAt": "2023-10-24T04:54:58.286Z",
+      "updatedAt": "2023-10-24T04:54:58.286Z",
+      "id": 19
+    },
+    {
+      "userId": 1,
+      "title": "about ui/ux",
+      "description": "test123",
+      "thumbnail": "http://res.cloudinary.com/dylzfyn4b/image/upload/v1698123741/ur1bybilpe69iz948b9b.png",
+      "body": "<p>dsdsdasdsadsad</p>\n<p>dsadsadsadsadsadsadsadsa</p>\n<p>dasdsadsadsadsadsadsadsad</p>\n<p>dsadsadasdsadsadsadsad</p>",
+      "isPremium": false,
+      "category": "technology",
+      "likes": 0,
+      "shares": 0,
+      "slug": "about-ui-ux-bcbaa051",
+      "createdAt": "2023-10-24T05:02:22.398Z",
+      "updatedAt": "2023-10-24T05:12:54.376Z",
+      "id": 20
     }
   ]
 }

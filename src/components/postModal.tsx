@@ -27,7 +27,7 @@ const PostModal = ({ onClose, onSuccess, type, initialData }: IPostModalProps) =
     const [uniqueId, _] = useState(initialData ? initialData.slug.split("-")[initialData.slug.split("-").length - 1] : crypto.randomUUID().split("-")[0])
 
     const slugHandler = (text: string) => {
-        let processedText = text.toLowerCase().split(" ")
+        let processedText = text.toLowerCase().replace(/[^\w]|_/gi, "-").split(" ")
         processedText[processedText.length] = uniqueId
         return setSlug(processedText.join("-"))
     }
@@ -100,7 +100,7 @@ const PostModal = ({ onClose, onSuccess, type, initialData }: IPostModalProps) =
 
 
     return (
-        <dialog open className='w-full h-full bg-slate-500/50 justify-center items-center flex'>
+        <dialog open className='w-full h-full bg-slate-500/50 justify-center items-center flex z-50'>
             <div className='bg-white w-[60%] h-[90%] rounded-md p-16 relative overflow-auto'>
                 <button onClick={() => onClose()} className='absolute right-5 top-3'>X</button>
                 <h1 className='text-3xl font-bold'>{type === "create" ? "Create new post" : "Edit post"}</h1>
@@ -137,7 +137,7 @@ const PostModal = ({ onClose, onSuccess, type, initialData }: IPostModalProps) =
                         </div>
                         {
                             image && <div>
-                                <Image src={typeof image === "string" ? image : URL.createObjectURL(image)} className='h-52' alt="" />
+                                <Image src={typeof image === "string" ? image : URL.createObjectURL(image)} className='h-52 w-fit' width={200} height={100} alt="" />
                             </div>
                         }
 
