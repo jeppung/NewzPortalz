@@ -17,7 +17,7 @@ export function middleware(req: NextRequest) {
     if (req.nextUrl.pathname.startsWith("/login") || req.nextUrl.pathname.startsWith("/register")) {
         if (userData !== undefined) {
             const user: IUser = JSON.parse(userData.value)
-            return user.isAdmin ? NextResponse.redirect(new URL("/admin", req.url)) : NextResponse.redirect(new URL("/", req.url))
+            return user.isAdmin ? NextResponse.redirect(new URL("/admin/posts", req.url)) : NextResponse.redirect(new URL("/", req.url))
         } else {
             return NextResponse.next()
         }
