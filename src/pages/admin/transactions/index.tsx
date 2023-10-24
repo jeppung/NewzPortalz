@@ -56,7 +56,7 @@ const AdminTransaction = () => {
           }
         })
 
-        const params = new URLSearchParams(url)
+        const params = new URL(url).searchParams
 
         setPagination({
           _limit: parseInt(params.get("_limit")!),

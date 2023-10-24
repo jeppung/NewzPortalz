@@ -87,7 +87,8 @@ const AdminPosts = () => {
                     }
                 })
 
-                const params = new URLSearchParams(url)
+                const params = new URL(url).searchParams
+                console.log(new URL(url).searchParams.get("_limit"))
 
                 setPagination({
                     _page: parseInt(params.get("_page")!),
