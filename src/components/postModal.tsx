@@ -25,6 +25,7 @@ const PostModal = ({ onClose, onSuccess, type, initialData }: IPostModalProps) =
     const [category, setCategory] = useState<PostCategory>(initialData ? initialData.category : "technology")
     const [image, setImage] = useState<File | string | undefined>(initialData && initialData.thumbnail)
     const [uniqueId, _] = useState(initialData ? initialData.slug.split("-")[initialData.slug.split("-").length - 1] : crypto.randomUUID().split("-")[0])
+    const [isLoading, setIsLoading] = useState(false)
 
     const slugHandler = (text: string) => {
         let processedText = text.toLowerCase().replace(/[^\w]|_/gi, "-").split(" ")
@@ -53,6 +54,8 @@ const PostModal = ({ onClose, onSuccess, type, initialData }: IPostModalProps) =
 
     const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
+        setIsLoading(true)
+
         let thumbnailUrl = ""
 
         try {
@@ -88,8 +91,10 @@ const PostModal = ({ onClose, onSuccess, type, initialData }: IPostModalProps) =
             })
             if (!res.ok) return alert("An error has occured")
 
+            setIsLoading(false)
             onSuccess(data)
         } catch (e) {
+            setIsLoading(false)
             return alert("An error has occured")
         }
     }
@@ -164,7 +169,7 @@ const PostModal = ({ onClose, onSuccess, type, initialData }: IPostModalProps) =
                             }}
                         />
                     </div>
-                    <button type='submit' className='bg-blue-500 rounded-md py-2 text-white'>Submit</button>
+                    <button type='submit' className='bg-blue-500 rounded-md py-2 text-white'>{isLoading ? "Loading..." : "Submit"}</button>
                 </form>
             </div>
         </dialog>

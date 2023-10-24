@@ -152,6 +152,10 @@ const AdminPosts = () => {
             </Head>
             {
                 modal.isModal && <PostModal type={modal.type} onClose={() => setModal({ ...modal, isModal: false })} onSuccess={() => {
+                    toast.success(`${modal.type} post success!`, {
+                        toastId: customToastId,
+                        autoClose: 1500
+                    })
                     setModal({ ...modal, isModal: false })
                     getPostsData(`${BASE_DB_URL}/posts?_expand=user&_page=${pagination?._page}&_limit=${pagination?._limit}`)
                 }} initialData={modal.initialData} />
