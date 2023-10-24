@@ -226,7 +226,7 @@
           "isLike": true,
           "isShare": true,
           "createdAt": "2023-10-18T14:43:17.662Z",
-          "updatedAt": "2023-10-24T06:18:22.736Z"
+          "updatedAt": "2023-10-24T13:25:32.341Z"
         },
         {
           "id": 2,
@@ -706,10 +706,10 @@
       "category": "others",
       "isPremium": true,
       "likes": 16,
-      "shares": 7,
+      "shares": 8,
       "slug": "crazy-little-thing-called-love-ce7wk12d",
       "createdAt": "2023-10-13T04:06:53.299Z",
-      "updatedAt": "2023-10-24T03:49:18.932Z",
+      "updatedAt": "2023-10-24T12:10:05.502Z",
       "id": 2
     },
     {
