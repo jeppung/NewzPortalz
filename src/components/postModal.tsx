@@ -164,7 +164,7 @@ const PostModal = ({ onClose, onSuccess, type, initialData }: IPostModalProps) =
                             }}
                         />
                     </div>
-                    <button type='submit' onClick={() => console.log(body)} className='bg-blue-500 rounded-md py-2 text-white'>Submit</button>
+                    <button type='submit' className='bg-blue-500 rounded-md py-2 text-white'>Submit</button>
                 </form>
             </div>
         </dialog>

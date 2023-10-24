@@ -382,8 +382,8 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
                 recommendedPosts = tempArr
 
             } catch (e) {
-                console.log(`Error fetch recommended posts data - ${e}`)
                 recommendedPosts = []
+                return alert(`Error fetch recommended posts data - ${e}`)
             }
         }
 

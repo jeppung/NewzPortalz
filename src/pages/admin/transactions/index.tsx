@@ -70,7 +70,7 @@ const AdminTransaction = () => {
       const data = res.data as ISubsTransaction[]
       setTransactions(data)
     } catch (e) {
-      console.log(e)
+      return alert(`Error ${e}`)
     }
   }
 
@@ -92,7 +92,6 @@ const AdminTransaction = () => {
         return alert(`An error occured while updating user data ${res.statusText}`)
       }
       const data = await res.json()
-      console.log(data, "success")
     } catch (e) {
       return alert("An error occured while updating user data")
     }
