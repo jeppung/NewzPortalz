@@ -12,6 +12,8 @@ import axios from "axios";
 import Head from "next/head"
 import Footer from "@/components/footer";
 import { BASE_DB_URL } from "@/constants/url";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 type PostFilterOrder = "desc" | "asc"
 
@@ -26,6 +28,8 @@ interface IPostsFilter {
     endDate: Date
   }
 }
+
+export const customToastId = "yes"
 
 export default function Home() {
   const initialFilter: IPostsFilter = {
@@ -50,6 +54,7 @@ export default function Home() {
   const endDateRef = useRef<HTMLInputElement>(null)
   const userData = getCookie("userData")
   const router = useRouter()
+
 
   const startDateFocusHandler = () => {
     startDateRef.current?.showPicker()
@@ -149,6 +154,15 @@ export default function Home() {
     }
   }, [])
 
+  useEffect(() => {
+    if (router.query.isLogin !== undefined || router.query.isRegister !== undefined) {
+      toast.success(router.query.isLogin ? "Login Success" : "Register Success", {
+        toastId: customToastId,
+        autoClose: 1000
+      })
+    }
+  }, [])
+
   return (
     <>
       <Head>
@@ -158,6 +172,7 @@ export default function Home() {
       </Head>
       <Navbar onRefresh={() => router.reload()} />
       <main>
+        <ToastContainer />
         <section className="bg-[#112D4E] w-full pt-[50px] pb-[80px]">
           <div className="max-w-7xl mx-auto flex px-5 md:px-0 md:justify-around">
             <Image className="hidden md:flex" src="/hero.png" width={380} height={380} alt="Hero" />
