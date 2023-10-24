@@ -12,6 +12,10 @@ const nextConfig = {
         hostname: "res.cloudinary.com"
       }
     ]
+  },
+  env: {
+    BASE_DB_URL: process.env.BASE_DB_URL,
+    BASE_URL: process.env.BASE_URL
   }
 }
 
