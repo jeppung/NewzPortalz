@@ -255,6 +255,8 @@ const PostDetail = ({ recommendedPosts, userData }: InferGetServerSidePropsType<
         <>
             <Head>
                 <title>{post?.title}</title>
+                <meta property='og:description' content={`${router.query.slug}`} />
+                <meta property="og:title" content={`NewzPortal Post`} />
             </Head>
             <Navbar />
             <main className='max-w-7xl mx-auto py-10 px-5 md:px-0'>
