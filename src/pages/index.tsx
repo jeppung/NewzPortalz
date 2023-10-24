@@ -245,7 +245,6 @@ export default function Home() {
                 {
                   pagination?.data.find((data) => data.status === "next") && <button onClick={() => {
                     const url = pagination?.data.find((data) => data.status === "next")?.link
-                    console.log(url)
                     return getPostsData(url!.trim())
                   }} className='py-1 bg-white border-2 rounded-md px-2'>Next</button>
                 }
