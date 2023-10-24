@@ -152,6 +152,8 @@ export default function Home() {
     <>
       <Head>
         <title>Newz Portalz</title>
+        <meta property="og:title" content="NewzPortalz" />
+        <meta property="og:description" content="Let's read some news!" />
       </Head>
       <Navbar onRefresh={() => router.reload()} />
       <main>
@@ -250,7 +252,7 @@ export default function Home() {
           </div>
         </section>
       </main>
-      <Footer/>
+      <Footer />
     </>
   )
 }
