@@ -20,7 +20,7 @@ const AdminSubscription = () => {
                 const link = res.headers.link.split(",").map((data: string) => {
                     let data2 = data.split(";")
                     return {
-                        link: data2[0].replace("<", "").replace(">", ""),
+                        link: data2[0].replace("<", "").replace(">", "").replace("http", "https"),
                         status: data2[1].match(/last|next|first|prev/g)?.[0]
                     }
                 })
