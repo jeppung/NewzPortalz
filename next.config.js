@@ -14,8 +14,8 @@ const nextConfig = {
     ]
   },
   env: {
-    BASE_DB_URL: "https://newz-portalz-db.vercel.app/",
-    BASE_URL: "https://newz-portalz.vercel.app/"
+    BASE_DB_URL: "https://newz-portalz-db.vercel.app",
+    BASE_URL: "https://newz-portalz.vercel.app"
   }
 }
 
