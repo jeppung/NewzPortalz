@@ -5,7 +5,6 @@ import React, { useEffect, useState } from 'react'
 import parse from 'html-react-parser';
 import moment from 'moment';
 import { AiFillHeart, AiOutlineHeart, AiOutlineShareAlt } from "react-icons/ai"
-import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { setCookie } from 'cookies-next';
 import { IReadHistory, IUser, PostCategory } from '@/pages/login';
 import PostCard from '@/components/postCard';
@@ -274,12 +273,13 @@ const PostDetail = ({ recommendedPosts, userData }: InferGetServerSidePropsType<
                                 <p>{likesCounter}</p>
                                 <button onClick={likeHandler}>{isLike ? <AiFillHeart color="red" /> : <AiOutlineHeart />}</button>
                             </div>
-                            <CopyToClipboard text={`http://localhost:3000/posts/${router.query.slug}`} onCopy={() => alert("Link copied")}>
-                                <div className='flex gap-x-1'>
-                                    <p>{sharesCounter}</p>
-                                    <button onClick={shareHandler}><AiOutlineShareAlt /></button>
-                                </div>
-                            </CopyToClipboard>
+                            <div className='flex gap-x-1'>
+                                <p>{sharesCounter}</p>
+                                <button onClick={() => {
+                                    navigator.clipboard.writeText(`http://localhost:3000/posts/${post?.slug}`)
+                                    shareHandler()
+                                }}><AiOutlineShareAlt /></button>
+                            </div>
                         </div>
                     </div>
                 </section>
