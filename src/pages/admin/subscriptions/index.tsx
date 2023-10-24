@@ -16,7 +16,8 @@ const AdminSubscription = () => {
         try {
             const res = await axios.get(url)
 
-            if (res.headers.link !== "") {
+            if (res.headers.link !== undefined) {
+                console.log(res.headers.link)
                 const link = res.headers.link.split(",").map((data: string) => {
                     let data2 = data.split(";")
                     return {
